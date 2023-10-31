@@ -1,0 +1,3320 @@
+---------------------------------------------------------------
+[ 2023-10-31T15:20:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.055004s] [吞吐率：18.18req/s] [内存消耗：1,779.02kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:28+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:38+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:48+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:21:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:28+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.028001s] [吞吐率：35.71req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:38+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.032001s] [吞吐率：31.25req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:48+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:22:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:28+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:38+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:48+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:23:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:28+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.036002s] [吞吐率：27.78req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:38+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:48+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.029002s] [吞吐率：34.48req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:24:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.037003s] [吞吐率：27.02req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.043002s] [吞吐率：23.25req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.036002s] [吞吐率：27.78req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:28+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:38+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:48+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:25:58+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.029002s] [吞吐率：34.48req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:26:08+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:26:18+08:00 ] 127.0.0.1 POST shuali.net/buy/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,779.00kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'buy',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/buy/money/withdrawal/hnav/3/nav/1.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\buy\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\buy\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:26:24+08:00 ] 127.0.0.1 GET shuali.net/seller/
+[运行时间：0.076004s] [吞吐率：13.16req/s] [内存消耗：2,990.96kb] [文件加载：55]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Index->index[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Index.php ]
+[ info ] [ VIEW ] D:\phpstudy\WWW\zhan\shua_li\pubic/../application/seller\view\index\index.html [ array (
+  0 => 'sellerinfo',
+  1 => 'menu',
+  2 => 'ejang',
+  3 => 'num',
+  4 => 'num_day',
+  5 => 'seller',
+  6 => 'info',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_users` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `tfkz_users` WHERE  `tjuser` = '1111'  AND `tjuser_state` = '2' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `tfkz_seller` WHERE  `tjuser` = '1111'  AND `tjuser_state` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `tfkz_users` WHERE  `tjuser` = '1111'  AND `tjuser_state` = '2'  AND `create_time` > 1698681600 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `tfkz_seller` WHERE  `tjuser` = '1111'  AND `tjuser_state` = 2  AND `create_time` > 1698681600 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller_reward_recharge` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT SUM(price) AS tp_sum FROM `tfkz_seller_reward_recharge` WHERE  `uid` = 1622  AND `type` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:25+08:00 ] 127.0.0.1 POST shuali.net/seller/index/msg.html
+[运行时间：0.065004s] [吞吐率：15.38req/s] [内存消耗：2,960.27kb] [文件加载：56]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'index',
+    2 => 'msg',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'content-length' => '6',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Index->msg[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_message` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1  AND `look` = 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1 ORDER BY `id` DESC LIMIT 0,5 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:25+08:00 ] 127.0.0.1 POST shuali.net/seller/task/shop.html
+[运行时间：0.059003s] [吞吐率：16.95req/s] [内存消耗：2,932.21kb] [文件加载：52]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'task',
+    2 => 'shop',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Task->shop[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Task.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_shop` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `id`,`shop_name` FROM `tfkz_shop` WHERE  `state` = 1  AND `seller_id` = 1622 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:26+08:00 ] 127.0.0.1 POST shuali.net/seller/task/getdata.html
+[运行时间：0.076004s] [吞吐率：13.16req/s] [内存消耗：3,292.42kb] [文件加载：56]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'task',
+    2 => 'getdata',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'content-length' => '118',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+  'shop_id' => '',
+  'task_type' => '',
+  'searchTime' => '',
+  'terminal' => '',
+  'order_number' => '',
+  'search' => '',
+  'min_price' => '',
+  'max_price' => '',
+  'size' => '10',
+  'page' => '1',
+  'is_day' => '0',
+  'status' => '0',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Task->getData[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Task.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller_task` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `tfkz_seller_task` WHERE  `seller_id` = 1622  AND `step` = 2 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_seller_task` WHERE  `seller_id` = 1622  AND `step` = 2 ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:27+08:00 ] 127.0.0.1 POST shuali.net/seller/index/lookmsg.html
+[运行时间：0.057003s] [吞吐率：17.54req/s] [内存消耗：2,668.23kb] [文件加载：51]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'index',
+    2 => 'lookmsg',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Index->lookMsg[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:33+08:00 ] 127.0.0.1 GET shuali.net/seller/index/info.html
+[运行时间：0.053003s] [吞吐率：18.87req/s] [内存消耗：2,972.23kb] [文件加载：54]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'index',
+    2 => 'info',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Index->info[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Index.php ]
+[ info ] [ VIEW ] D:\phpstudy\WWW\zhan\shua_li\pubic/../application/seller\view\index\info.html [ array (
+  0 => 'sellerinfo',
+  1 => 'menu',
+  2 => 'seller',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:34+08:00 ] 127.0.0.1 POST shuali.net/seller/index/msg.html
+[运行时间：0.061003s] [吞吐率：16.39req/s] [内存消耗：2,960.47kb] [文件加载：56]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'index',
+    2 => 'msg',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'content-length' => '6',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ RUN ] app\seller\controller\Index->msg[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=li;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_seller` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`seller_name`,`invite_code`,`mobile`,`tjuser`,`tjuser_state`,`qq`,`vip`,`vip_time`,`last_time`,`balance`,`reward`,`arrears`,`tj_award`,`tj_award_day`,`head_img`,`logins_ip`,`state`,`create_time`,`update_time`,`delete_time`,`note`,`msg_type`,`look_time`,`wechat`,`province`,`city` FROM `tfkz_seller` WHERE  `id` = 1622 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_system` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_system` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tfkz_message` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1  AND `look` = 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `tfkz_message` WHERE  `type` = 2  AND `user_id` = 1622  AND `state` = 1 ORDER BY `id` DESC LIMIT 0,5 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2023-10-31T15:26:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:26:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.034002s] [吞吐率：29.41req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:27:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.034002s] [吞吐率：29.41req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031001s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026001s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031001s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:28:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.029002s] [吞吐率：34.48req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:29:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026001s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:30:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026001s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:31:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.028002s] [吞吐率：35.71req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:32:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.055003s] [吞吐率：18.18req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:14+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.028002s] [吞吐率：35.71req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:24+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:34+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.031002s] [吞吐率：32.26req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:44+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.026002s] [吞吐率：38.46req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:33:54+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2023-10-31T15:34:04+08:00 ] 127.0.0.1 POST shuali.net/seller/login/getsession.html
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,788.14kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpstudy\WWW\zhan\shua_li\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'seller',
+    1 => 'login',
+    2 => 'getsession',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=4fop61866ut1ro3n2mv199v03v',
+  'referer' => 'http://shuali.net/seller/index/info.html',
+  'connection' => 'close',
+  'origin' => 'http://shuali.net',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'host' => 'shuali.net',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\seller\controller\Login->getSession[ D:\phpstudy\WWW\zhan\shua_li\application\seller\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'expire' => 86400,
+)
+[ info ] [ LOG ] INIT File

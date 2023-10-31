@@ -1,0 +1,270 @@
+{
+	"contentManagement": [
+		{
+			"title": "公告管理",
+			"icon": "&#xe645;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "买家公告",
+					"href": "/index.php/admin/notice/buyerbulletin.html",
+					"spread": false
+				},
+				{
+					"title": "买家常见问题",
+					"href": "/index.php/admin/notice/buyerproblem.html",
+					"spread": false
+				},
+				{
+					"title": "商家公告",
+					"href": "/index.php/admin/notice/businessbulletin.html",
+					"spread": false
+				},
+				{
+					"title": "商家常见问题",
+					"href": "/index.php/admin/notice/businessproblems.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "财务管理",
+			"icon": "&#xe65e;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "提现审核",
+					"href": "/index.php/admin/finance/PresentationAudit.html",
+					"spread": false
+				},
+				{
+					"title": "余额记录",
+					"href": "/index.php/admin/finance/BalanceRecord.html",
+					"spread": false
+				},
+				{
+					"title": "银锭记录",
+					"href": "/index.php/admin/finance/SilverIngotRecord.html",
+					"spread": false
+				},
+				{
+					"title": "财务统计",
+					"href": "/index.php/admin/finance/FinancialStatistics.html",
+					"spread": false
+				},
+				{
+					"title": "会员记录",
+					"href": "/index.php/admin/finance/MembershipRecords.html",
+					"spread": false
+				},
+				{
+					"title": "银行卡审核",
+					"href": "/index.php/admin/finance/BankCardAudit.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "买家管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "买家列表",
+					"href": "/index.php/admin/buyer/BuyerList.html",
+					"spread": false
+				},
+				{
+					"title": "买号列表",
+					"href": "/index.php/admin/buyer/BuyNumberList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "商家管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "商家列表",
+					"href": "/index.php/admin/seller/BuyerList.html",
+					"spread": false
+				},
+				{
+					"title": "店铺列表",
+					"href": "/index.php/admin/seller/BuyNumberList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "买家购买管理",
+			"icon": "icon-text",
+			"href": "/index.php/admin/task/PlatformCounterpayment.html",
+			"spread": false
+		},
+		{
+			"title": "平台返款管理",
+			"icon": "icon-text",
+			"href": "/index.php/admin/task/platformReturn.html",
+			"spread": false
+		},
+		{
+			"title": "售后服务",
+			"icon": "icon-text",
+			"href": "page/afterSale/afterSale.html",
+			"spread": false
+		},
+		{
+			"title": "淘宝任务管理",
+			"icon": "icon-text",
+			"href": "/index.php/admin/task/task.html",
+			"spread": false
+		},
+		{
+			"title": "系统设置",
+			"icon": "&#xe614;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "角色管理",
+					"href": "/index.php/admin/system/basicParameter.html",
+					"spread": false
+				},{
+					"title": "系统配置",
+					"href": "/index.php/admin/system/system.html",
+					"spread": false
+				},{
+					"title": "管理用户",
+					"href": "/index.php/admin/system/adUser.html",
+					"spread": false
+				},{
+					"title": "用户记录",
+					"href": "/index.php/admin/system/userRecord.html",
+					"spread": false
+				},
+				{
+					"title": "佣金比例",
+					"href": "/index.php/admin/system/commissionRate.html",
+					"spread": false
+				},{
+					"title": "菜单管理",
+					"href": "/index.php/admin/system/menu.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "其他页面",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "404页面",
+					"icon": "&#xe61c;",
+					"href": "page/404.html",
+					"spread": false
+				},
+				{
+					"title": "登录",
+					"icon": "&#xe609;",
+					"href": "page/login/login.html",
+					"spread": false,
+					"target": "_blank"
+				}
+			]
+		}
+	],
+	"memberCenter": [
+		{
+			"title": "买家公告",
+			"href": "page/Notice/BuyerBulletin/BuyerBulletin.html",
+			"spread": false
+		},
+		{
+			"title": "买家常见问题",
+			"href": "page/Notice/BuyerProblem/BuyerProblem.html",
+			"spread": false
+		},
+		{
+			"title": "商家公告",
+			"href": "page/Notice/BusinessBulletin/BusinessBulletin.html",
+			"spread": false
+		},
+		{
+			"title": "商家常见问题",
+			"href": "page/Notice/BusinessProblems/BusinessProblems.html",
+			"spread": false
+		}
+	],
+	"systemeSttings": [
+		{
+			"title": "角色管理",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		},{
+			"title": "系统配置",
+			"icon": "icon-log",
+			"href": "page/systemSetting/system.html",
+			"spread": false
+		},{
+			"title": "管理用户",
+			"href": "page/systemSetting/adUser/adUser.html",
+			"spread": false
+		},{
+			"title": "用户记录",
+			"href": "page/systemSetting/userRecord/userRecord.html",
+			"spread": false
+		},
+		{
+			"title": "佣金比例",
+			"href": "page/systemSetting/commissionRate/commissionRate.html",
+			"spread": false
+		},{
+			"title": "菜单管理",
+			"href": "page/systemSetting/menu/menu.html",
+			"spread": false
+		}
+	],
+	"seraphApi": [
+		{
+			"title": "提现审核",
+			"href": "page/Finance/PresentationAudit/PresentationAudit.html",
+			"spread": false
+		},
+		{
+			"title": "余额记录",
+			"href": "page/Finance/BalanceRecord/BalanceRecord.html",
+			"spread": false
+		},
+		{
+			"title": "银锭记录",
+			"href": "page/Finance/SilverIngotRecord/SilverIngotRecord.html",
+			"spread": false
+		},
+		{
+			"title": "财务统计",
+			"href": "page/Finance/FinancialStatistics/FinancialStatistics.html",
+			"spread": false
+		},
+		{
+			"title": "会员记录",
+			"href": "page/Finance/MembershipRecords/MembershipRecords.html",
+			"spread": false
+		},
+		{
+			"title": "银行卡审核",
+			"href": "page/Finance/BankCardAudit/BankCardAudit.html",
+			"spread": false
+		}
+	]
+}
+
+
