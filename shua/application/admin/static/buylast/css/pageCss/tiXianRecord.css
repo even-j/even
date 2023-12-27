@@ -1,0 +1,129 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 让表格对齐 */
+body .el-table th.gutter {
+	display: table-cell !important;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 基本信息标题 */
+.msg_title {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 30px 0;
+}
+
+.msg_title p {
+	font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+	color: rgb(63, 142, 219);
+}
+
+.user_content {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+
+}
+
+/* 本金提现 */
+.web_gonggao {
+	padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.web_gonggao .gonggao_top {
+	padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+/* 本金提现部分 */
+.shuju_table, .shuju_table2 {
+	padding: 0 20px 20px;
+}
+
+/* 起止日期 */
+.shuju_table .benjin_search,
+.shuju_table2 .benjin_search {
+	padding-bottom: 20px;
+}
+
+.shuju_table .el_date, .shuju_table2 .el_date {
+	width: 340px;
+	margin-right: 20px;
+}
+
+.shuju_table .el-range-separator, .shuju_table2 .el-range-separator {
+	z-index: 1;
+}
+
+/* 分页 */
+.shuju_table .fenye, .shuju_table2 .fenye2 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding-top: 20px;
+}

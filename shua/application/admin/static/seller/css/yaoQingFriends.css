@@ -1,0 +1,199 @@
+* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			width: 100%;
+		}
+		.left{
+					width: 280px;
+					}
+				.right{
+					width: 910px;
+				}
+
+		
+
+		/* 让表格对齐 */
+		body .el-table th.gutter {
+			display: table-cell !important;
+		}
+
+		
+
+		.user_content {
+			width: 910px;
+			padding: 20px;
+			background: #fff;
+			margin: 0 0 30px 0;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		/* 银锭充值 */
+		.web_gonggao {
+			padding: 20px;
+		}
+
+		.web_gonggao .gonggao_row {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			border-bottom: 1px solid #EEEEEE;
+		}
+
+		.web_gonggao .gonggao_top {
+			padding-bottom: 10px;
+		}
+
+		.web_gonggao .gonggao_top a {
+			text-decoration: none;
+			padding: 8px 20px;
+			font-size: 14px;
+			margin-right: 10px;
+			font-weight: 600;
+			color: #999;
+			border-top: 2px solid #fff;
+		}
+
+		.web_gonggao .gonggao_top .select_on {
+			border-top: 2px solid #3f8edb;
+			color: #3f8edb;
+		}
+
+		/* 邀请好友 */
+		.yaoqing_friend {
+			padding: 0 20px;
+		}
+
+		.yaoqing_friend .yaoqing_txt {
+			font-size: 12px;
+			color: #333;
+			display: flex;
+		}
+
+		.yaoqing_friend .yaoqing_txt span {
+			color: red;
+		}
+
+		.yaoqing_friend .yaoqing_link {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding-top: 20px;
+		}
+
+		.yaoqing_friend .yaoqing_link p {
+			font-size: 16px;
+			color: #666;
+			margin-right: 20px;
+			display: flex;
+			width:110px ;
+		}
+
+		.yaoqing_friend .yaoqing_link p span {
+			color: red;
+		}
+
+		.yaoqing_friend .yaoqing_link .yaoqing_link_input {
+			width: 600px;
+		}
+
+		/* 修改el-input的颜色和字体大小 */
+		.el-input__inner {
+			color: red !important;
+			font-size: 16px !important;
+		}
+
+		.yaoqing_friend .yaoqing_link .copy_link_btn {
+			margin-left: 20px;
+		}
+
+		/* 请注意 */
+		.alert {
+			background-color: #fdf6ec;
+			color: #E6A23C;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			margin: 20px auto;
+		}
+
+		.alert .alert_title {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			font-size: 18px;
+			margin: 20px;
+		}
+
+		.alert .alert_txt {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 10px;
+			color: red;
+			font-size: 14px;
+			
+		}
+
+		.alert .alert_txt p {
+			width: 90%;
+			margin: 0 auto 10px;
+		}
+
+		/* 邀请奖励部分 */
+		.yaoqing_jiangli {
+			padding: 0 20px;
+		}
+
+		.yaoqing_jiangli .yaoqing_jiangli_txt {
+			font-size: 12px;
+			color: #333;
+			display: flex;
+		}
+
+		.yaoqing_jiangli .yaoqing_jiangli_txt span {
+			color: red;
+		}
+
+		.yaoqing_jiangli .yaoqing_table {
+			width: 100%;
+			margin: 20px 0;
+			height: 70px;
+			display: flex;
+			flex-direction: row;
+			border: 1px solid #CCCCCC;
+		}
+
+		.yaoqing_jiangli .yaoqing_table .yaoqing_table_left {
+			flex: 1;
+			height: 70px;
+			border-right: 1px solid #cccccc;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.yaoqing_jiangli .yaoqing_table .yaoqing_table_right {
+			flex: 3;
+			height: 70px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+		}
+
+		.yaoqing_jiangli .yaoqing_table .yaoqing_table_right p {
+			font-size: 12px;
+			color: #999;
+			margin: 10px 0 10px 20px;
+			display: flex;
+		}
+
+		.yaoqing_jiangli .yaoqing_table .yaoqing_table_right p span {
+			color: red;
+		}

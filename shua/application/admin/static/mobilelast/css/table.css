@@ -1,0 +1,259 @@
+/* 公共的卡片 */
+.TaskManagement {
+  width: 100%;
+  margin: 0.5333333333rem 0;
+  padding: 0 0.2666666667rem;
+}
+
+.TaskManagement .Task-management {
+  font-size: 0.3733333333rem;
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.5333333333rem;
+  color: #ffffff;
+  border-radius: 0.4rem;
+  background: -webkit-gradient(linear, left top, right top, from(#107ff8), to(#10c2ec));
+  background: -webkit-linear-gradient(left, #107ff8, #10c2ec);
+  background: linear-gradient(to right, #107ff8, #10c2ec);
+  -webkit-box-shadow: 0 0 0.2666666667rem 0.1333333333rem #f3f3f3;
+  box-shadow: 0 0 0.2666666667rem 0.1333333333rem #f3f3f3;
+}
+
+.TaskManagement .Task-management .TaskTop {
+  position: relative;
+  width: 100%;
+  padding: 0.2666666667rem 0.4rem;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.1066666667rem;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng p:first-child {
+  white-space: nowrap;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .taskmanagement-img-box {
+  width: 2.6666666667rem;
+  height: 2.6666666667rem;
+  margin-left: 0.2666666667rem;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .taskmanagement-img-box img {
+  display: block;
+  width: 2.6666666667rem;
+  height: 2.6666666667rem;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input-title {
+  line-height: 0.9333333333rem;
+  height: 0.9333333333rem;
+  margin-bottom: 0.2666666667rem;
+  white-space: nowrap;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input {
+  font-size: 0.3733333333rem;
+  line-height: 0.9333333333rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 0.9333333333rem;
+  margin-bottom: 0.2666666667rem;
+  border-radius: 0.1333333333rem 0 0 0.1333333333rem;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input input {
+  font-size: 0.3733333333rem;
+  line-height: 0.9333333333rem;
+  display: block;
+  width: 3.4666666667rem;
+  height: 0.9333333333rem;
+  padding-left: 0.2666666667rem;
+  border: 1px solid #dddddd;
+  border-radius: 0.1333333333rem 0 0 0.1333333333rem;
+  outline: none;
+  background: none;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input b {
+  font-size: 0.3733333333rem;
+  font-weight: normal;
+  line-height: 0.9333333333rem;
+  display: block;
+  width: 1.3333333333rem;
+  height: 0.9333333333rem;
+  text-align: center;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-radius: 0 0.1333333333rem 0.1333333333rem 0;
+  background-color: #eeeeee;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input b .bb-btn {
+  font-size: 0.5333333333rem;
+  line-height: 0.9333333333rem;
+  display: block;
+  height: 0.9333333333rem;
+  color: #333333;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .task-manage-input input:focus {
+  border: 1px solid blue;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .Heng-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  width: 50%;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .Heng-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  width: 50%;
+  margin-left: 0.6666666667rem;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .management-bianhao {
+  width: 100%;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng .management-bianhao p:last-child {
+  width: 100%;
+  text-align: right;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng b {
+  color: #ff0000;
+}
+
+.TaskManagement .Task-management .TaskTop .managementHeng:last-child {
+  margin-bottom: 0;
+}
+
+.TaskManagement .Task-management .TaskBottom {
+  position: relative;
+  width: 100%;
+}
+
+.TaskManagement .Task-management .TaskBottom img {
+  width: 100%;
+  height: 1.8666666667rem;
+  border-radius: 0 0 0.2666666667rem 0.2666666667rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition {
+  font-size: 0.3733333333rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  padding: 0 0.5333333333rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 0.1333333333rem;
+  white-space: nowrap;
+  color: #585858;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p b {
+  font-size: 0.3733333333rem;
+  font-weight: normal;
+  margin-left: 3.2rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p b .task-bottom-btn {
+  font-size: 0.3733333333rem;
+  line-height: 0.9066666667rem;
+  display: block;
+  height: 0.96rem;
+  text-align: center;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p b .task-bottom-btn span {
+  line-height: 0.9066666667rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p .task-bottom-a-box {
+  font-size: 0.3733333333rem;
+  font-weight: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin-left: 4rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p .task-bottom-a-box a:first-child {
+  margin-right: 0.2666666667rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p .task-bottom-single-box {
+  font-size: 0.3733333333rem;
+  font-weight: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin-left: 5.3333333333rem;
+}
+
+.TaskManagement .Task-management .TaskBottom .TaskBottomPosition p span {
+  font-size: 0.3466666667rem;
+  line-height: normal;
+  display: inline;
+  white-space: pre-line;
+}
+
+.TaskManagement .Task-management:nth-child(2n) {
+  background: -webkit-gradient(linear, left top, right top, from(#ec6010), to(#f8af10));
+  background: -webkit-linear-gradient(left, #ec6010, #f8af10);
+  background: linear-gradient(to right, #ec6010, #f8af10);
+}

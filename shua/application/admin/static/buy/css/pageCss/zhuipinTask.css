@@ -1,0 +1,279 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  min-width: 1200px;
+  margin: 0 auto;
+  background: #eeeeee;
+}
+
+/* 中间部分 */
+.center_box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 280px);
+}
+
+/* 下拉菜单 */
+.select_box {
+  width: 240px;
+  margin: 30px 20px 30px 0;
+}
+
+/* 右边盒子部分 */
+.right_box {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 基本信息标题 */
+.msg_title {
+  width: 940px;
+  margin: 30px 0;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.msg_title p {
+  font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+  color: rgb(63, 142, 219);
+}
+
+.user_content {
+  width: 940px;
+  margin: 0 0 30px 0;
+  padding: 20px;
+  background: #ffffff;
+}
+
+/* 银锭充值 */
+.web_gonggao {
+  padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.web_gonggao .gonggao_top {
+  padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+  padding: 8px 20px;
+  text-decoration: none;
+  color: #999999;
+  border-top: 2px solid #ffffff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+  color: #3f8edb;
+  border-top: 2px solid #3f8edb;
+}
+
+/* 暂无数据 */
+.swell {
+  padding-top: 10px;
+}
+
+.sample {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  background: #f8f8f8;
+}
+
+.sample-top {
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 37px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.sample-top p {
+  font-size: 12px;
+  margin: 0 20px;
+  color: #333333;
+}
+
+.sample-top p:first-child {
+  margin: 0;
+}
+
+.sample-top p b {
+  font-size: 11px;
+  font-weight: normal;
+  display: inline;
+}
+
+.sample-top p a {
+  font-size: 11px;
+  display: inherit;
+  color: #63b9ee;
+}
+
+.sample-top p strong {
+  font-weight: normal;
+  color: #ff0000;
+}
+
+.sample-center {
+  font-size: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.sample-center .sample-title {
+  width: 200px;
+  margin-right: 20px;
+  text-align: justify;
+  word-break: break-all;
+}
+
+.sample-center .sample-content {
+  width: 500px;
+}
+
+.sample-center .sample-content p {
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: justify;
+  word-break: break-all;
+  color: red;
+}
+
+.sample-center .sample-content p:last-child {
+  margin-bottom: 0;
+}
+
+.sample-center .sample-content p span {
+  font-size: 12px;
+  color: #333333;
+}
+
+.sample-center .sample-btn .el-button {
+  margin-left: 50px;
+}
+
+.sample-img {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.sample-img span {
+  font-size: 14px;
+  color: red;
+}
+
+.sample-img img {
+  width: 130px;
+  height: 130px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sample-video {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.sample-video span {
+  font-size: 14px;
+  color: red;
+}
+
+.sample-video video {
+  width: 200px;
+  height: 150px;
+}
+
+.sample-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.sample-bottom .sample-bottom-left {
+  display: flex;
+  align-items: center;
+}
+
+.sample-bottom p {
+  font-size: 12px;
+  margin-right: 16px;
+}
+
+.sample-bottom p b {
+  font-weight: normal;
+  color: #ff0000;
+}
+
+.sample-bottom .sample-bottom-right p {
+  margin-right: 0;
+}
+
+/* 请注意 */
+.alert {
+  background-color: #fdf6ec;
+  color: #e6a23c;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.alert .alert_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 18px;
+  margin: 20px;
+}
+
+.alert .alert_txt {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  color: red;
+  font-size: 14px;
+}
+
+.alert .alert_txt p {
+  width: 90%;
+  margin: 0 auto 10px;
+}

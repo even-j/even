@@ -1,0 +1,128 @@
+* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			width: 100%;
+		}
+		.left{
+			width: 280px;
+			}
+		.right{
+			width: 910px;
+		}
+
+		.user_content {
+			width: 910px;
+			padding: 20px;
+			background: #fff;
+			margin: 0 0 30px 0;
+		}
+
+		/* 提现账户管理 */
+		.web_gonggao {
+			padding: 20px;
+		}
+
+		.web_gonggao .gonggao_row {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			border-bottom: 1px solid #EEEEEE;
+		}
+
+		.web_gonggao .gonggao_top {
+			padding-bottom: 10px;
+		}
+
+		.web_gonggao .gonggao_top a {
+			text-decoration: none;
+			padding: 8px 20px;
+			font-size: 14px;
+			margin-right: 10px;
+			font-weight: 600;
+			color: #999;
+			border-top: 2px solid #fff;
+		}
+
+		.web_gonggao .gonggao_top .select_on {
+			border-top: 2px solid #3f8edb;
+			color: #3f8edb;
+		}
+
+		/* 暂无银行卡 */
+		.yinhangka {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			background: #EEEEEE;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		.yinhangka p {
+			margin-bottom: 10px;
+		}
+
+		/* 嵌套表单 */
+		.right .form_box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.right .el_form .el_form_item {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 20px;
+			border-bottom: 1px solid #EEEEEE;
+		}
+
+		.right .el_form .el_form_item p {
+			width: 130px;
+		}
+
+		.right .el_form .el_form_item .el_form_width {
+			width: 300px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.right .el_form .el_form_item .el_select:nth-of-type(1) {
+			margin-right: 30px;
+		}
+
+		/* 上传图片 */
+		.upload_pic {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 20px;
+			border-bottom: 1px solid #EEEEEE;
+		}
+
+		.upload_pic:last-child {
+			border-bottom: none;
+		}
+
+		.upload_pic p {
+			width: 130px;
+		}
+
+		.el_pic_upload {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.el-dialog {
+			min-width: 700px !important;
+		}

@@ -1,0 +1,21 @@
+/* 底部 */
+ .commonFooter {
+   width: 100%;
+   background: #303437;
+   height: 190px;
+ }
+
+ .commonFooter .contents {
+   height: 190px;
+   color: #fff;
+   margin: auto;
+   text-align: center;
+   line-height: 190px;
+   font-size: 18px;
+   font-weight: 600;
+ }
+
+ .commonFooter .contents a {
+   text-decoration: none;
+   color: #fff;
+ }

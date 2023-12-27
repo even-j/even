@@ -1,0 +1,104 @@
+.left {
+    width: 280px;
+}
+
+.right {
+    width: 910px;
+}
+
+.user_content {
+    width: 910px;
+    padding: 20px;
+    background: #fff;
+    margin: 0 0 30px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.user_content_top {
+    width: 100%;
+}
+
+/* 表格 */
+.topHeader_s {
+    width: 100%;
+    height: 40px;
+    background: #f9f9f9;
+    line-height: 40px;
+    margin-bottom: 10px;
+
+}
+
+.topHeader_s div {
+    float: left;
+    text-align: center;
+    font-size: 14px;
+}
+
+.goodsCommon {
+    background: #f9f9f9;
+    width: 100%;
+}
+
+.goodsCommon tr {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.goodsCommon tr:first-child td {
+    border-bottom: 1px solid #eee;
+    width: 85%;
+    height: 20px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.goodsCommon tr:first-child td strong {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+.goodsPicture {
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-right: 8px;
+}
+
+.titles {
+    float: left;
+    font-size: 11px;
+    color: #666;
+}
+
+.td-one {
+    width: 240px !important;
+    padding: 15px 0 15px 20px !important;
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #f00;
+    margin: 30px 0;
+}
+
+.dangerous {
+    padding: 10px 15px !important;
+}
+
+.hang {
+    display: flex;
+    justify-content: center;
+}

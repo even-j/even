@@ -1,0 +1,135 @@
+* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			width: 100%;
+		}
+		.left{
+			width: 280px;
+			}
+		.right{
+			width: 910px;
+		}
+		.user_touxiang{
+			width: 130px;
+			height: 130px;
+		}
+		/* 用户内容展示 */
+		.user_content {
+			width: 910px;
+			padding:40px 20px;
+			background: #fff;
+			margin: 0 0 30px 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.user_content .user_name {
+			font-size: 16px;
+			padding: 10px;
+			margin-bottom:30px ;
+			font-weight: bold;
+		}
+
+		.user_info {
+			display: inline-block;
+			width: 100%;
+			margin-bottom:10px ;
+		}
+
+		.user_left,
+		.user_right {
+			display: inline-block;
+			width: 49%;
+			vertical-align: top;
+		}
+
+		.user_left .user_detail,
+		.user_right .user_detail {
+			height: 50px;
+			width: 80%;
+			margin: auto;
+			border-bottom: 1px solid #eee;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.user_left .user_detail div,
+		.user_right .user_detail div {
+			display: inline-block;
+			font-size: 16px;
+		}
+
+		.user_left .user_detail div:nth-of-type(1) {
+			width: 25%;
+			font-weight: 600;
+			color: #666;
+			text-align: right;
+			margin-right: 10px;
+		}
+
+		.user_right .user_detail div:nth-of-type(1) {
+			width: 25%;
+			font-weight: 600;
+			color: #666;
+			text-align: right;
+			margin-right: 10px;
+		}
+
+		.user_left .user_detail .user_blue,
+		.user_right .user_detail .user_blue {
+			color: #3f8edb;
+			width: 60%;
+			text-decoration: none;
+			font-weight: normal;
+		}
+		.user_right .user_detail  .yanshi{
+			font-size: 14px;
+			width: 100%;
+		}
+
+		.user_left .user_detail .user_gray,
+		.user_right .user_detail .user_gray {
+			color: #999999;
+			width: 60%;
+			font-weight: normal;
+		}
+
+		/* 嵌套表单 */
+		.right .form_box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.right .el_form .el_form_item {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 10px;
+		}
+
+		.right .el_form .el_form_item p {
+			width: 100px;
+			white-space: nowrap;
+			font-size: 16px;
+		}
+
+		.right .el_form .el_form_item .el_form_width {
+			width: 300px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.el-dialog {
+			width: 600px !important;
+			min-width: 600px !important;
+		}

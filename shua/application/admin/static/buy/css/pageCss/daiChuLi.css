@@ -1,0 +1,267 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 让表格对齐 */
+body .el-table th.gutter {
+	display: table-cell !important;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 基本信息标题 */
+.msg_title {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 30px 0;
+}
+
+.msg_title p {
+	font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+	color: rgb(63, 142, 219);
+}
+
+.user_content {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+}
+
+/* 银锭充值 */
+.web_gonggao {
+	padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.web_gonggao .gonggao_top {
+	padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+/* 待处理数据 */
+.swell {
+	padding-top: 10px;
+}
+
+.sample {
+	width: 100%;
+	height: 153px;
+	background: #f9f9f9;
+	margin-bottom: 20px;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+
+.sample-top {
+	width: 100%;
+	height: 37px;
+	line-height: 37px;
+	border-bottom: 1px solid #eee;
+	display: flex;
+	justify-content: space-between;
+}
+
+.sample-top-left {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+}
+
+.sample-top-left img {
+	width: 15px;
+	height: 15px;
+	margin-right: 4px;
+}
+
+.sample-top-left .el-checkbox {
+	margin-right: 16px !important;
+}
+
+.sample-top-right p {
+	float: left;
+	font-size: 12px;
+	color: #333;
+	margin-left: 20px;
+}
+
+.sample-top-right p b {
+	font-weight: normal;
+	font-size: 11px;
+	display: inline;
+}
+
+.sample-top-right p a {
+	font-size: 11px;
+	color: #63b9ee;
+	display: inherit;
+}
+
+.sample-top-right p strong {
+	color: #f00;
+	font-weight: normal;
+}
+
+.sample-center {
+	padding: 5px 0;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	font-size: 12px;
+	position: relative;
+	width: 100%;
+}
+
+.sample-center img {
+	width: 70px;
+	height: 70px;
+	margin-right: 22px;
+}
+
+.sample-center .el-button {
+	position: absolute;
+	right: 0;
+	top: 20px;
+}
+
+.sample-bottm {
+	display: flex;
+	justify-content: space-between;
+}
+
+.sample-bottm p {
+	float: left;
+	font-size: 12px;
+	margin-right: 16px;
+	margin-top: 7px;
+}
+
+.sample-bottm p b {
+	font-weight: normal;
+	color: #f00;
+}
+
+.sample-bottm p:last-child {
+	margin-right: 0;
+}
+
+/* 数据展示 */
+.task_row {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+}
+
+.task_row2 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+}
+
+.task_row2 p:nth-of-type(1) {
+	flex: 1;
+	text-align: center;
+}
+
+.task_row2 p:nth-of-type(2) {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+}
+
+.task_row:nth-of-type(1) {
+	background: #f5f7fa;
+}
+
+.task_row:hover, .task_row2:hover {
+	background: #f5f7fa;
+}
+
+.task_row h4 {
+	flex: 1;
+	color: #909399;
+}
+
+.task_row span {
+	flex: 1;
+}
+
+.task_row .span .el-button {
+	font-size: 16px;
+}
+
+.el-dialog {
+	width: 900px;
+}

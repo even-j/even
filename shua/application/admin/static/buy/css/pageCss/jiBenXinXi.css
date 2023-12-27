@@ -1,0 +1,166 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 基本信息标题 */
+.msg_title {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 30px 0;
+}
+
+.msg_title p {
+	font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+	color: rgb(63, 142, 219);
+}
+
+/* 用户内容展示 */
+.user_content {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user_content .user_name {
+	font-size: 18px;
+	padding: 10px;
+}
+
+.user_info {
+	display: inline-block;
+	width: 90%;
+}
+
+.user_left,
+.user_right {
+	display: inline-block;
+	width: 49%;
+	vertical-align: top;
+}
+
+.user_left .user_detail,
+.user_right .user_detail {
+	height: 50px;
+	width: 80%;
+	margin: auto;
+	border-bottom: 1px solid #eee;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.user_left .user_detail div,
+.user_right .user_detail div {
+	display: inline-block;
+	font-size: 16px;
+}
+
+.user_left .user_detail div:nth-of-type(1) {
+	width: 25%;
+	font-weight: 600;
+	color: #666;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.user_right .user_detail div:nth-of-type(1) {
+	width: 25%;
+	font-weight: 600;
+	color: #666;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.user_left .user_detail .user_blue,
+.user_right .user_detail .user_blue {
+	color: #3f8edb;
+	width: 60%;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.user_left .user_detail .user_gray,
+.user_right .user_detail .user_gray {
+	color: #999999;
+	width: 60%;
+	font-weight: normal;
+}
+
+/* 嵌套表单 */
+.right_box .form_box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.right_box .el_form .el_form_item {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px;
+}
+
+.right_box .el_form .el_form_item p {
+	width: 100px;
+	white-space: nowrap;
+	font-size: 16px;
+}
+
+.right_box .el_form .el_form_item .el_form_width {
+	width: 300px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.el-dialog {
+	width: 600px !important;
+	min-width: 600px !important;
+}
