@@ -64,6 +64,27 @@
                     <td>
                         <input type="text"  class="recommender form-control" name="recommender" lay-verify="recommender" placeholder="推荐人"  readonly></td>
                 </tr>
+
+                <tr>
+                    <td>微信号</td>
+                    <td>
+                        <input type="text" class="wechat form-control" name="wechat" lay-verify="wechat" placeholder="wechat"></td>
+                    <td>城市</td>
+                    <td>
+                        <div class="layui-inline">
+                            <select name="province" id="province" lay-verify="" lay-search
+                                    lay-filter="province">
+                                <option value="" class="province">省份</option>
+                            </select>
+                        </div>
+                        <div class="layui-inline">
+                            <select name="city" id="city" lay-verify="" lay-search lay-filter="city">
+                                <option value="" class="city">地级市</option>
+                            </select>
+                        </div>
+
+                    </td>
+                </tr>
                 <tr>
                     <td>本金</td>
                     <td>
@@ -75,6 +96,17 @@
                             <!--                                        <option value="1">是</option>-->
                             <!--                                        <option value="0" >不是</option>-->
                         </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>一级返佣</td>
+                    <td>
+                        <input type="text" class="rebate1 form-control" name="rebate1" lay-verify="rebate1" placeholder="rebate1"></td>
+                    <td>二级返佣</td>
+                    <td>
+                        <input type="text" class="rebate2 form-control" name="rebate2" lay-verify="rebate2" placeholder="rebate2">
+
                     </td>
                 </tr>
                 <tr >
@@ -97,6 +129,11 @@
 <!-- 提示 -->
 <script src="/admin_style/assets/plugins/jquery-toast/dist/jquery.toast.min.js" ></script>
 <script src="/admin_style/assets/plugins/jquery-toast/dist/toast.js" ></script>
+
+<script src="/admin_style/js/area.js" type="text/javascript"></script>
+<script src="/admin_style/js/select.js" type="text/javascript"></script>
+<script src="/admin_style/js/select1.js" type="text/javascript"></script>
+
 <script>
     layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         var form = layui.form,
@@ -130,6 +167,14 @@
                     $('.time').val(data.data.vip_time)//vip到期时间
                     $('.silverIngot').val(data.data.reward)//银锭
                     $('.qq').val(data.data.qq)//qq
+                    $('.wechat').val(data.data.wechat)//qq
+                    $('.rebate1').val(data.data.rebate1)//qq
+                    $('.rebate2').val(data.data.rebate2)//qq
+                    $('.province').html(data.data.province)//收货地址省
+                    $('.city').html(data.data.city)//收货地址市
+                   // $('#province').val(data.data.province)//收货地址省
+                   // $('#city').val(data.data.city)//收货地址市
+
                     $('.recommender').val(data.data.tjuser)//推荐人
                     $('.principal').val(data.data.balance)//本金
                     var optionStr = '<option value="0" '+selected1+'>否</option><option value="1" '+selected2+'>是</option>';
@@ -180,6 +225,10 @@
             var principal = field.principal;  //本金
             var silverIngot = field.silverIngot;  //银锭
             var qq = field.qq;  //qq
+                var wechat = field.wechat;  //qq
+                var province =$("#province").val(); //省$('.province').html();//
+                var city =$("#city").val(); //市 $('.city').html();//
+                var rebate1 = field.rebate1;  var rebate2 = field.rebate2;  //qq
             var recommender = field.recommender;  //推荐人
             var vip = field.vip;  //VIP
             var time = field.time;  //到期时间
@@ -197,9 +246,9 @@
                     'mobile':phone,
                     'balance':principal,
                     'reward':silverIngot,
-                    'qq':qq,
+                    'qq':qq,     'city':city,     'province':province,     'wechat':wechat,
                     'tjuser':recommender,
-                    'vip':vip,
+                    'vip':vip,'rebate1':rebate1,'rebate2':rebate2,
                     'vip_time':timestamp2,
                     'note':remarks
                 },
@@ -217,6 +266,9 @@
                             var account = $("input[name=account]").val(); //账户
                             var username = $("input[name=username]").val(); //用户名
                             var qq = $("input[name=qq]").val(); //QQ号
+
+
+
                             var tjuser = $("input[name=tjuser]").val(); //来源id
                             parent.layui.table.reload('userListTable', {
                                 method: 'post'

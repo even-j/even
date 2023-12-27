@@ -39,12 +39,15 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'seller_name', title: '用户名', minWidth: 50, width: 110, align: "center" },
             { field: 'mobile', title: '手机号', minWidth: 55, width: 110, align: "center" },
             { field: 'qq', title: 'QQ', minWidth: 50, width: 110, align: "center" },
+            { field: 'wechat', title: '微信号', minWidth: 50, width: 110, align: "center" },
+            { field: 'city', title: '城市', minWidth: 50, width: 110, align: "center" },
             { field: 'balance/reward', title: '押金/银锭', minWidth: 50, width: 110, height:100, align: "center",templet: balance},
             { field: 'create_time', title: '注册时间', minWidth: 50, width: 110, align: "center"},
             { field: 'vip', title: '是否VIP', minWidth: 50, width: 110, align: "center",templet: vip },
             { field: 'vip_time', title: 'VIP到期时间', minWidth: 50, width: 160,sort: true, align: "center" },
             { field: 'tjuser', title: '来源用户ID', minWidth: 50, width: 110, align: "center" },
             { field: 'note', title: '违规备注', minWidth: 50, width: 110, align: "center" },
+            { field: 'invite_code', title: '邀请码', minWidth: 50, width: 110, align: "center" },
             { title: '操作', minWidth: 100, width: 500, templet: '#userListBar', fixed: "right", align: "center" }
         ]]
     });

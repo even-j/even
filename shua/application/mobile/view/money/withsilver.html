@@ -2,16 +2,18 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>银锭充值</title>
+    <title>充值</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="/static/mobile/css/plugin.css" type="text/css">
     <link rel="stylesheet" href="/static/mobile/css/iconfont/iconfont.css" type="text/css">
     <link rel="stylesheet" href="/static/mobile/css/public.css" type="text/css">
     <link rel="stylesheet" href="/static/mobile/css/page.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <script src="/static/mobile/js/all.js" type="text/javascript" charset="UTF-8"></script>
     <script src="/static/mobile/js/jquery-1.12.4.min.js" type="text/javascript" charset="UTF-8"></script>
     <script src="/static/mobile/js/vue-2.6.10.min.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/buy/element-ui/lib/index.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/mobile/js/vant.min.js" type="text/javascript" charset="UTF-8"></script>
     <script src="/static/mobile/js/muse-ui.js" type="text/javascript" charset="UTF-8"></script>
     <script src="/static/mobile/js/public.js" type="text/javascript" charset="UTF-8"></script>
@@ -28,19 +30,35 @@
                         ],
                         //支付方式
                         paylist:[
-                            {name:"支付宝",pic:"/static/mobile/img/zhifubao.png"},{name:"本金支付",pic:"/static/mobile/img/yuanbao2.png"}
+                            {name:"支付宝",pic:"/static/buy/img/zhifubao.png"},
+                            {name:"银行卡"}
+                        ],
+                        paylist2:[
+                            {name:"支付宝",pic:"/static/buy/img/zhifubao.png"},
+                           // {name:"本金支付",pic:"/static/buy/img/yuanbao2.png"},
+                            {name:"银行卡"}
                         ],
                         //支付方式下标
                         curIndex: 0,
                         // 选择金额下标
-                        curIndex2:0,
+                        curIndex2:1,
                         //金额
                         curPrice: 10,
                         // 默认分页
                         currentPage: 1,
                         // 表格数据
                         list: [],
+                        list2: [],
                         total:0,
+                        total2:0,
+                        alipay: '123',
+                        alipay_url: '',
+                        bank_name: '123',
+                        bank_zhihang: '',
+                        bank_num: '',
+                        bank_user: '',
+                        pic_url: '',
+                        state:1,
                     };
                 },
                 // 调用混入
@@ -48,6 +66,7 @@
                 mounted: function () {
                     publicFunction();
                     this.getData();
+                    this.getData2();
                     {notempty name="show"}
                         this.isShow=false;
                         this.showType=1;
@@ -61,6 +80,27 @@
                             {/notempty}
                 },
                 methods: {
+                    /* 判断上传文件类型和大小 */
+                    beforeUpload: function (file) {
+                        var isJPG = file.type === "image/jpeg";
+                        var isPng = file.type === "image/png";
+                        var picSize = file.size / 1024 / 1024 < 2;
+
+                        if (!(isJPG || isPng)) {
+                            this.$message.error("上传头像图片只能是 JPG和PNG 格式");
+                        }
+                        if (!picSize) {
+                            this.$message.error("上传图片大小不能超过 2MB");
+                        }
+                        return (isJPG && picSize) || (isPng && picSize);
+                    },
+                    imgSuccress2:function(res){
+                        if(res.code==1){
+                            this.pic_url = res.data
+                        }else{
+                            layer.alert(res.msg);
+                        }
+                    },
                     // 选择金额
                     getPrice(index) {
                         this.curIndex = index;
@@ -69,66 +109,66 @@
                     },
                     //支付方式
                     paychoose(index) {
-                        this.curIndex2 = index;
+                        console.log(index, 'index');
+                        console.log(this.state, 'state');
+                        if ( this.state === 1 ) {
+                            if ( index === 1 ) {
+                                this.curIndex2 = 3
+                            } else {
+                                this.curIndex2 = 1
+                            }
+                        } else {
+                            //this.curIndex2 = index + 1
+                            if ( index === 1 ) {
+                                this.curIndex2 = 3
+                            } else {
+                                this.curIndex2 = 1
+                            }
+                        }
                     },
                     //确认支付
                     agreeZhiFu: function () {
+                        if ( this.pic_url == '' && this.curIndex2 != 2 ) {
+                            alertError('请先上传转账截图',{icon:2,time:2000})
+                            return
+                        }
+                        if ( this.curIndex2 == 2 ) this.pic_url = ''
                         var that = this;
                         that.$dialog.confirm({
                             title: "温馨提示",
                             message: "您确定要支付吗？"
                         }).then(function () {
-                            if(that.curIndex2 == 0){
-                                $.ajax({
-                                    type : 'POST',
-                                    url : "{:url('mobile/money/creat_order')}",
-                                    async : true,
-                                    data : {
-                                        "user_type":2,
-                                        "recharge_type":2,
-                                        "type":1,
-                                        "price":that.curPrice,
-                                    },
-                                    success : function(data){
-                                        if(data.code==1){
-                                            alertSuccess(data.msg);
-                                            setTimeout(function(){
-                                                return location.href=data.url;
-                                            },3000)
+                            $.ajax({
+                                type : 'POST',
+                                url : "{:url('mobile/money/creat_order')}",
+                                async : true,
+                                data : {
+                                    pay_type:that.curIndex2,
+                                    price:that.curPrice,
+                                    type:that.state,
+                                    alipay: that.alipay,
+                                    alipay_url: that.alipay_url,
+                                    bank_name: that.bank_name,
+                                    bank_zhihang: that.bank_zhihang,
+                                    bank_num: that.bank_num,
+                                    bank_user: that.bank_user,
+                                    pic_url: that.pic_url
+                                },
+                                success : function(data){
+                                    if(data.code==1){
+                                        alertSuccess(data.msg);
+                                        setTimeout(function(){
+                                            return location.href=data.url;
+                                        },3000)
 
-                                        }else{
-                                            return alertError(data.msg);
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert(XMLHttpRequest.status + "," + textStatus);
+                                    }else{
+                                        return alertError(data.msg);
                                     }
-                                });
-                            }else{
-                                $.ajax({
-                                    type : 'POST',
-                                    url : "{:url('mobile/money/principal')}",
-                                    async : true,
-                                    data : {
-                                        "type":2,//账号充值
-                                        "price":that.curPrice,
-                                    },
-                                    success : function(data){
-                                        if(data.code==1){
-                                            alertSuccess(data.msg);
-                                            setTimeout(function(){
-                                                return location.href=data.url;
-                                            },3000)
-
-                                        }else{
-                                            return alertError(data.msg);
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert(XMLHttpRequest.status + "," + textStatus);
-                                    }
-                                });
-                            }
+                                },
+                                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                                    alert(XMLHttpRequest.status + "," + textStatus);
+                                }
+                            });
                             // that.$message({
                             //     type: "success",
                             //     message: "恭喜您,支付成功"
@@ -151,6 +191,22 @@
                             }
                         })
                     },
+                    getData2:function(){
+                        var that = this;
+                        $.post("{:url('money/withdrawal')}",{
+                            page:that.currentPage2,
+                            datetime1:that.defaultDatebj,
+                            datetime2:that.defaultDate2bj
+                        },function (res) {
+                            console.log(res);
+                            if(res.code==1){
+                                that.list2 = res.data.list;
+                                that.total2 = res.data.total;
+                            }else{
+                                alertError(res.msg);
+                            }
+                        })
+                    },
                     // 修改表格样式
                     filterColor(val) {
                         if (val > 0) {
@@ -158,6 +214,16 @@
                         } else {
                             return "red";
                         }
+                    },
+                    handleChange: function(flag){
+                        if (flag == 'benjin') {
+                            this.state=1
+                            this.curIndex2=1
+                        } else {
+                            this.state=2
+                            this.curIndex2=1
+                        }
+                        $('.payway .recharge-way-big .recharge-way').eq(0).addClass("recharge-ways").siblings().removeClass("recharge-ways");
                     },
                     // 分页事件
                     pageChange: function (val) {
@@ -179,8 +245,36 @@
                         this.currentPage = 1;
                         this.getData();
                     },
+                    // 分页事件
+                    pageChange2: function (val) {
+                        this.currentPage2 = val;
+                        this.getData2();
+                    },
+                    // 日期事件
+                    dateChangebj: function (val) {
+                        // 转换标准时间为时间戳
+                        this.defaultDatebj = val.getTime();
+                        console.log(this.defaultDatebj);
+                    },
+                    dateChange2bj: function (val) {
+                        // 转换标准时间为时间戳
+                        this.defaultDate2bj = val.getTime();
+                        console.log(this.defaultDate2bj);
+                    },
+                    search2:function(){
+                        this.currentPage2 = 1;
+                        this.getData2();
+                    },
                 }
             });
+
+            /* 初始化jQuery */
+            $(function () {
+                /* 点击切换支付方式 */
+                $(".recharge-pay .recharge-way-big .recharge-way").click(function () {
+                    $(this).addClass("recharge-ways").siblings().removeClass("recharge-ways");
+                });
+            })
         });
     </script>
 </head>
@@ -192,7 +286,7 @@
         <div class="arrow-left" onclick="javascript:history.back(-1);">
             <van-icon class="arrow-left-item" name="arrow-left" />
         </div>
-        <div class="page-title">银锭充值</div>
+        <div class="page-title">充值</div>
         <div class="menu-box" onclick="slideBarClick()">
             <van-icon class="menu-box-item" name="bars" />
         </div>
@@ -206,14 +300,15 @@
 
         <!-- 公用tab标签 -->
         <div class="public-tab-title">
-            <span :class="{active:showType===0}" data-type="0" @click="setTabColor">银锭充值</span>
-            <span :class="{active:showType===1}" data-type="1" @click="setTabColor">银锭记录</span>
+            <span :class="{active:showType===0}" data-type="0" @click="showType = 0">充值</span>
+            <span :class="{active:showType===1}" data-type="1" @click="showType = 1">银锭记录</span>
+            <span :class="{active:showType===2}" data-type="2" @click="showType = 2">本金记录</span>
         </div>
 
         <div class="recharge">
 
             <!-- 银锭充值 -->
-            <div class="recharge-one" v-show="isShow">
+            <div class="recharge-one" v-show="showType === 0">
                 <div class="recharge-balance">
                     <p class="recharge-title">账户余额：</p>
                     <div class="">
@@ -228,38 +323,75 @@
 							</span>
                     </div>
                 </div>
-                <div class="recharge-choose">
-                    <p class="recharge-title">选择金额：</p>
-                    <div class="recharge-radio">
-                        <div class="recharge-selct"
-                             v-for="(item,index) in priceList"
-                             :class="index === curIndex ? 'recharge-selcts':'recharge-selct'"
-                             @click="getPrice(index)">{{item.price}}元
+                <div class="recharge-pay">
+                    <p class="recharge-title">充值方式：</p>
+                    <div class="recharge-way-big">
+                        <div class="recharge-way" :class="state==1 ?'recharge-ways':'recharge-way'"
+                             @click="handleChange('benjin')">
+                             本金充值
+                        </div>
+                        <div class="recharge-way" :class="state==2 ?'recharge-ways':'recharge-way'"
+                             @click="handleChange('yinding')">
+                             银锭充值
                         </div>
                     </div>
                 </div>
-                <div class="recharge-pay">
+                <div class="recharge-pay payway">
                     <p class="recharge-title">支付方式：</p>
-                    <div class="recharge-way-big">
+                    <div class="recharge-way-big" v-if="state==1">
                         <div class="recharge-way"
                              v-for="(item,index) in paylist"
-                             :class="index===curIndex2?'recharge-ways':'recharge-way'"
+                             :class="index + 1===curIndex2?'recharge-ways':'recharge-way'"
                              @click="paychoose(index)">
-                            <img :src="item.pic" alt="" />{{item.name}}
+                            <img v-if="item.pic" :src="item.pic" alt="" />{{item.name}}
                         </div>
+                    </div>
+                    <div class="recharge-way-big" v-else>
+                        <div class="recharge-way"
+                             v-for="(item,index) in paylist2"
+                             :class="index + 1===curIndex2?'recharge-ways':'recharge-way'"
+                             @click="paychoose(index)">
+                            <img v-if="item.pic" :src="item.pic" alt="" />{{item.name}}
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div v-if="alipay != '' || alipay_url != ''" :style="{display:curIndex2==1 ? 'block' : 'none'}">
+                        <div><label class="zhifu_price_txt">支付宝账号:</label>&nbsp;&nbsp;&nbsp;&nbsp; {$systemInfo.alipay}</div>
+                        <br>
+                        <div style="display: flex;"><label class="zhifu_price_txt">支付宝二维码:</label>&nbsp;&nbsp;&nbsp;&nbsp;<img style="width: 200px;height: auto;" src="{$systemInfo.alipay_url}" alt=""></div>
+                        <br>
+                    </div>
+                    <div v-if="bank_name !='' || bank_zhihang !='' || bank_num !='' ||bank_user !='' " :style="{display: curIndex2==3 ? 'block' : 'none'}">
+                        <div><label class="zhifu_price_txt">银行名称:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$systemInfo.bank_name}</div><br>
+                        <div><label class="zhifu_price_txt">支行名称:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$systemInfo.bank_zhihang}</div><br>
+                        <div><label class="zhifu_price_txt">银行卡号:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$systemInfo.bank_num}</div><br>
+                        <div><label class="zhifu_price_txt">银行卡姓名:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$systemInfo.bank_user}</div><br>
                     </div>
                 </div>
                 <div class="recharge-money">
-                    <p class="recharge-title">支付金额：<img src="/static/mobile/img/vip_money.png" alt=""><b>{{curPrice}} 元</b></p>
+                    <p class="recharge-title">支付金额：<img src="/static/mobile/img/vip_money.png" alt=""><span class="zhifu_price_count"> &nbsp;<input style="outline: none;height: 34px;text-align: center;" type="number" name="" min="0" id="" v-model="curPrice"> &nbsp;<span style="line-height: 56px;">元</span></span></p>
                 </div>
-                <div class="recharge-money">
-                    <p class="recharge-title">您已选择购买<b>{{curPrice}} 银锭包</b></p>
+                <!-- 转账截图 -->
+                <div v-if="curIndex2 != 2" class="recharge-money">
+                    <span class="recharge-title">转账截图:</span>&nbsp;&nbsp;
+                    <div class="el_pic_upload">
+                        <el-upload ref="unload" 
+                        action="{:url('seller/goods/goodsImg')}" 
+                        :on-success="imgSuccress2"
+                        list-type="picture-card" 
+                        :before-upload="beforeUpload"
+                        :show-file-list="false">
+                        <img style="width: 100%;height: 100%;" v-if="pic_url" :src="pic_url" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </div>
                 </div>
                 <van-button style="display: block;margin-bottom: 0.5rem;" type="info" @click="agreeZhiFu">确认支付</van-button>
             </div>
 
             <!-- 银锭记录 -->
-            <div class="benjin-record" v-show="!isShow">
+            <div class="benjin-record" v-show="showType === 1">
                 <div class="select-date">
                     <!-- 选择日期 -->
                     <div class="span-date">
@@ -332,6 +464,79 @@
                 </div>
             </div>
 
+            <!-- 本金记录 -->
+            <div class="benjin-record" v-show="showType === 2">
+                <div class="select-date">
+                    <!-- 选择日期 -->
+                    <div class="span-date">
+                        <mu-date-input
+                                @change="dateChangebj"
+                                class="span-date-item"
+                                v-model="defaultDate"
+                                label="请选择开始日期"
+                                label-float></mu-date-input>
+                        <mu-date-input
+                                @change="dateChange2bj"
+                                class="span-date-item"
+                                v-model="defaultDate2"
+                                label="请选择结束日期"
+                                label-float></mu-date-input>
+                    </div>
+                    <!-- 按钮 -->
+                    <div class="date-btn" style="justify-content: flex-start">
+                        <van-button id="benjin-date-btn-item" class="date-btn-item" @click="search" icon="search" type="info">搜索</van-button>
+<!--                        <van-button class="date-btn-item" icon="certificate" type="info">导出</van-button>-->
+                    </div>
+
+                    <!-- 卡片 -->
+                    <div class="TaskManagement">
+                        <div class="Task-management" v-for="(item,index) in list2" :key="index">
+                            <div class="TaskTop">
+                                <div class="managementHeng">
+                                    <p>收支明细：</p>
+                                    <p :style="{color:filterColor(item.price)}">
+                                        {{Number(item.price).toFixed(2)}}
+                                    </p>
+                                </div>
+                                <div class="managementHeng">
+                                    <p>结余：</p>
+                                    <p>{{Number(item.yprice).toFixed(2)}}</p>
+                                </div>
+                                <div class="managementHeng">
+                                    <p>日期：</p>
+                                    <p>{{item.creata_time}}</p>
+                                </div>
+                            </div>
+                            <div class="TaskBottom">
+                                <img src="/static/mobile/img/bolang.png" alt="" />
+                                <div class="TaskBottomPosition">
+                                    <p>备注：<span>{{item.memo}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Task-management" v-if="list.length===0">
+                            <div class="TaskTop" style="text-align: center">暂无内容</div>
+                            <div class="TaskBottom">
+                                <img src="/static/mobile/img/bolang.png" alt="" />
+                                <div class="TaskBottomPosition"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分页 -->
+                    <div class="public-page">
+                        <span class="public-page-total">共 {{total2}} 条</span>
+                        <van-pagination
+                                class="public-page-item"
+                                @change="pageChange"
+                                v-model="currentPage"
+                                :items-per-page="10"
+                                :total-items="total"
+                                :show-page-size="2"
+                                force-ellipses></van-pagination>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

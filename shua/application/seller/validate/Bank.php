@@ -15,7 +15,7 @@ class Bank extends Validate
         'bank_seller'  =>  'require',
         'branch_name'=>'require',
         'mobile'  =>  'require|max:11|/^1[3-9]{1}[0-9]{9}$/|unique:seller_bank',
-        'idcard'  =>  'require|max:18',
+        //'idcard'  =>  'require|max:18',
         'bank_number'  =>  'require|number|max:21|min:13',
         'bank_id'  =>  'require|number',
         'province'  =>  'require',

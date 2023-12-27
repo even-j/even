@@ -34,6 +34,7 @@ class Register extends Controller
      * @param Request $request
      */
     public function registerDo(Request $request){
+        return $this->error('注册已关闭,请联系客服');
         $data = $request->param();
         $result = $this->validate($data,'Register');
         if(true !== $result){
@@ -44,8 +45,8 @@ class Register extends Controller
             session('code',null);
             session('code_time',null);
         }
-        if($data['code']!= session('code'))return $this->error('验证码错误');
-        if($data['mobile'] != session('mobile'))return $this->error('手机号码不正确！');
+        //if($data['code']!= session('code'))return $this->error('验证码错误');
+        //if($data['mobile'] != session('mobile'))return $this->error('手机号码不正确！');
         $db = '';
         if($data['type']==1){
             $db = 'users';

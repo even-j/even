@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/benJinTiXian.css"/>
@@ -21,7 +21,8 @@
                 data: function () {
                     return {
                         list:[],
-                        radio: "1",
+                        radio: "2",
+                        radio2: "2",
                         /* 输入框数量默认值5 */
                         tiXianNum: {$admin_limit.user_min_money},
                         /* 提现密码的值 */
@@ -137,7 +138,8 @@
                                 data : {
                                     "price":that.tiXianNum,
                                     "password":that.tiXianPassWordValue,
-                                    "radio":that.radio
+                                    "radio":that.radio,
+                                    "pay_type":that.radio2,
                                 },
                                 success : function(data){
                                     if(data.code==1){
@@ -299,7 +301,14 @@
                     <!-- 打款方式 -->
                     <div class="dakuan">
                         <p class="dakuan_title" style="align-self: flex-start;margin-top: 2px;">打款方式:</p>
-                        <div class="dakuan_col">
+                        <div class="radio">
+                            <el-radio-group v-model="radio2" @change="labelChange">
+                                <el-radio label="1">银行卡</el-radio>
+                                <el-radio label="2">支付宝</el-radio>
+                            </el-radio-group>
+                        </div>
+                        <br>
+                        <!-- <div class="dakuan_col">
                             <div class="dakuan_box1">
                                 <span>银行卡转账</span>
                                 <a href="{:url('my/withdrawal')}" class="dakuan_view">查看提现账户</a>
@@ -307,7 +316,7 @@
                             <div class="dakuan_box2">
                                 <p>提示: <span>提现账户只能绑定一张银行卡</span></p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- 提现金额 -->
                     <div class="dakuan">

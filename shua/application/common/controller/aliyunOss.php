@@ -80,6 +80,23 @@ class aliyunOss extends Controller
 
     static public function uploadVideo($file,$up_dir= 'uploads/')
     {
+
+        $uploadFolder = '/' . $up_dir . '/'; // 上传文件路径
+        $rule         = ['size' => 104857600, 'ext' =>array('mp3','mp4','gif','mov')];
+        $checkFile = $file->check($rule);
+        if ($checkFile !== true) {
+            return array('status' => 0, 'mess' => $file->getError());
+        }
+
+        $info = $file->move(ROOT_PATH . 'pubic' . $uploadFolder);
+        if ($info) {
+            $url = $uploadFolder . $info->getSaveName();
+            return ['code'=>1,'data'=>$url];
+        } else {
+            return ['code'=>0,'msg'=>$file->getMessage()];
+        }
+
+
         $img_path = $up_dir.date('Y/m/d').'/';
         import('alioss.autoload',EXTEND_PATH,'.php');
         // 尝试执行
@@ -115,11 +132,27 @@ class aliyunOss extends Controller
 		try {
 			if (preg_match('/^(data:\s*image\/(\w+);base64,)/',$object,$result)) {
 				$ext = $result[2];
+
+                $new_file = 'uploads' . DS . 'goods' . DS.date('Ymd').'/';;
+
+                //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                if(!file_exists($new_file)){
+                    mkdir($new_file, 0700);
+                }
+                //组合图片地址(图片存放地址+图片名+图片后缀)
+                $new_file =  $new_file.time().rand(0,9999).".$ext";
+                //保存图片
+                if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $object)))){
+                    //返回图片地址路径
+                    return '/'.$new_file;
+                }
+
+                /*
 				$name = sha1(date('YmdHis', time()) . uniqid());
 				$filurl = $filename."{$name}.{$ext}";
 				$content = base64_decode(str_replace($result[1], '', $object));
 				$res = $ossClient->putObject($config['Bucket'], $filurl,$content);
-				$filurl = '/'.$filurl;
+				$filurl = '/'.$filurl;*/
 			}else{
 				throw new Exception('请上传正确base64');
 			}
@@ -127,7 +160,7 @@ class aliyunOss extends Controller
 		} catch (OssException $e) {
 			return false;
 		}
-		return $filurl;
+		return $new_file;
 	}
 	
 	  static public function uploadPic($file,$mkdirname='')

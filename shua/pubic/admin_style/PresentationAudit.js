@@ -7,9 +7,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         laydate = layui.laydate;
     var num2 = function (d) {
         console.log(d.uid.type)
+        if(d.pay_type==1)
         return `<div class="">银行:<span class="yinhang">`+d.bank_name+`</span></div>
         <div class="text-warning">银行卡号:<span>`+d.bank_number+`</span></div>
         <div class="text-info">姓名:<span>`+d.bank_seller+`</span></div>`;
+        if(d.pay_type==2)
+            return `<div class="">支付宝:<span class="yinhang">`+d.zfb+`</span></div>`;
+
     };
     var num3 = function (d) {
         return `<div class="text-success">申请金额:<span>`+d.price+`元</span></div>
@@ -47,6 +51,9 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
     var user_type = function (d) {
         return `<div class="">`+d.uid.type+`</div>`;
     }
+    var tjuser = function (d) {
+        return `<div class="">`+d.uid.tjuser+`</div>`;
+    }
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
@@ -72,6 +79,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'type', title: '类型', align: "center" ,width:80},
             { field: 'user_type', title: '用户类型',align: "center", templet:user_type,width:100},
             { field: 'phone', title: '用户名/手机号',align: "center", templet:phone,width:100},
+            { field: 'tjuser', title: '来源ID',align: "center", templet:tjuser,width:100},
             { field: 'create_time', title: '时间',align: "center" ,width:100},
             // { field: 'price', title: '收款',align: "center" ,width:150},
             { field: 'collectionNumber', title: '收款账号', align: "center", templet:num2 ,width:300},

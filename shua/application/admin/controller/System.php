@@ -29,6 +29,102 @@ class System extends Base
         $this->dbname = 'cs';// database 名称 请自行解决
         $this->check_path();
     }
+    
+    
+    
+    public function import()
+    {
+        if (request()->isPost()) {
+           $file = request()->file('filedata');
+            $info = $file->validate(['size'=>3145728000,'ext'=>'xls,xlsx'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel');
+            if (!$info) {
+                return json(array('status' => 0, 'mess' => '导入失败2'));
+            }
+            $getSaveName = str_replace("\\","/",$info->getSaveName());
+            $filepath = 'uploads/goods_excel/'.$getSaveName;
+            $path = ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel/' . $info->getSaveName();
+            //加载PHPExcel类
+            vendor("PHPExcel.PHPExcel");
+            //实例化PHPExcel类（注意：实例化的时候前面需要加'\'）
+            if ($info->getExtension() =='xlsx') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel2007();
+            } else if ($info->getExtension() =='xls') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel5();
+            }
+            $objPHPExcel = $objReader->load($path,$encode='utf-8'); //获取excel文件
+            $sheet = $objPHPExcel->getSheet(0);                     //激活当前的表
+            $highestRow = $sheet->getHighestRow();                  //取得总行数
+            $highestColumn = $sheet->getHighestColumn();            //取得总列数
+            $add_vip_time=365*24*3600*3+time();
+            $list = array();
+            $tjuser = trim($objPHPExcel->getActiveSheet()->getCell("B2")->getValue());
+
+            for ($i = 2; $i <= $highestRow; $i++) {
+               $tel =  trim($objPHPExcel->getActiveSheet()->getCell("A".$i)->getValue());
+               $qq =  trim($objPHPExcel->getActiveSheet()->getCell("C".$i)->getValue());
+                $qq = $qq?$qq:$tel;
+                array_push($list,[
+                    'username' => $tel,
+                    'mobile' => $tel,
+                    'login_pwd' => MD5(123456),
+                    'qq' => $tel,
+                    'create_time' => time(),
+                    'reward' => 0,
+                    'vip' => 1,
+                    'invite_code' => md5(time() . rand(0, 99999)),
+                    'vip_time' => $add_vip_time,
+                    'state' => 1,
+                    'tjuser' =>$tjuser,
+                    'tjuser_state'=>1
+                ]);
+            }
+            $i =0;
+            
+            //print_r($list);
+            
+            
+            foreach ($list as $data) {
+
+                if(!$data['username']){
+                    continue;
+                }
+
+                $hava_seller_name=Db::name('users')->where('username',$data['username'])->count();
+                if($hava_seller_name >= 1){
+                    continue;
+                }
+
+                $hava_qq=Db::name('users')->where('qq',$data['qq'])->count();
+                if($hava_qq >= 1){
+                    continue;
+                }
+                $user_insert = db::name('users')->insertGetId($data);
+                if ($user_insert) {
+                    $user_insert = Db::name('users')->where('id', $user_insert)->find();
+                    $bill = [
+                        'uid' => $user_insert['id'],
+                        'utype' => 2,
+                        'user_name' => $user_insert['username'],
+                        'price' => 0,
+                        'create_time' => time(),
+                        'expire_time' => $user_insert['vip_time'],
+                        'remarks' => "注册成功，免费赠送三年会员",
+                    ];
+                    $vip_record = Db::name('vip_record')->insertGetId($bill);
+                }
+                $i++;
+            }
+            echo '导入成功，本次导入数据'.$i.'条,密码为 123456';
+        }
+        return view();
+    }
+    
 
 
     /**
@@ -234,6 +330,8 @@ class System extends Base
         }else{
             $data['data']['switch']=0;
         }
+
+        //print_r($data['data']);die;
         $res = db('system')->where('id', 1)->update($data['data']);
         if ($res) {
             $res1=admin_log("系统参数修改", "管理员{$this->admin_info['user_name']}操作:系统参数修改");
@@ -243,6 +341,84 @@ class System extends Base
             $this->success('修改成功!');
         } else {
             $this->error('修改失败！');
+        }
+    }
+
+    public function adBank()
+    {
+        if (request()->isPost()) {
+            $date = input();
+            $page = $date['page'];//页数
+            $limit = $date['limit'];//每页条数
+            $count = db('bank')->count('id');
+            $notice_list =db('bank')->limit(($page - 1) * $limit, $limit)->order('id asc')->select()->toArray();
+            return json(['code' => 0, 'count' => $count, 'msg' => '获取数据成功', 'data' => $notice_list]);
+        }
+        return view();
+    }
+
+    /**
+     * 添加用户
+     */
+    public function addBank()
+    {
+        $data = input();
+        $user_data = [
+            'id' => '',
+            'user_name' => '',
+            'name' => '',
+            'role_id' => '',
+            'state' => '',
+        ];
+        if ($data['id'] && $data['id'] != 0) {
+            $user_data = db('bank')->where('id', $data['id'])->find();
+
+        }
+        $this->assign('user_data', $user_data);
+
+        return view();
+    }
+
+    public function set_bank()
+    {
+        $data = input();
+        $data=$data['field'];
+        if (!$data['name']) {
+            $this->error('请填写银行名！');
+        }
+
+        $admin_data['name'] = $data['name'];
+        if ($data['id']) {
+            $res = db('bank')->where('id', $data['id'])->update($admin_data);
+            $msg = "修改";
+        } else {
+            $res = db('bank')->insert($admin_data);
+            $msg = "添加";
+        }
+        if ($res) {
+            $this->success("{$msg}成功！");
+        } else {
+            $this->success("{$msg}失败！");
+        }
+    }
+
+
+    /**
+     * 删除用户
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public function delete_bank()
+    {
+        $data = input();
+        if (!$data['id']) {
+            $this->error('参数错误！');
+        }
+        $res = db('bank')->where('id', $data['id'])->delete();
+        if ($res) {
+            $this->success('删除成功!');
+        } else {
+            $this->error('删除失败！');
         }
     }
 
@@ -767,7 +943,6 @@ class System extends Base
         return view();
     }
 
-
     /**
      * 修改添加佣金
      */
@@ -840,6 +1015,159 @@ class System extends Base
         } else {
             $this->error('删除失败！');
         }
+    }
+
+
+    public function hei()
+    {
+        if (request()->isPost()) {
+            $date = input();
+            $page = $date['page'];//页数
+            $limit = $date['limit'];//每页条数
+            $where=[];
+            if(isset($date['name']) && $date['name']){
+                $where['name'] = $date['name'];
+            }
+
+
+            $count = db('hei')->WHERE($where)->limit(($page - 1) * $limit, $limit)->count('id');
+            $notice_list = db('hei')->WHERE($where)->order('id','desc')->limit(($page - 1) * $limit, $limit)->select()->toArray();
+            $arr =['1'=>'手机号','2'=>'旺旺号','3'=>'QQ','4'=>'身份证号','5'=>'姓名','0'=>''];
+            foreach ($notice_list as &$item){
+                $item['type'] = $arr[$item['type']];
+
+            }
+            return json(['code' => 0, 'count' => $count, 'msg' => '获取数据成功', 'data' => $notice_list]);
+        }
+        return view();
+    }
+
+    public function addHei()
+    {
+        $data = input();
+        $commission_data = [
+            'id' => '',
+            'name' => '',
+            'type' => '','remark'=>''
+        ];
+        if ($data['id'] && $data['id'] != 0) {
+            $commission_data = db('hei')->where('id', $data['id'])->find();
+
+        }
+        $this->assign('commission_data',$commission_data);
+        return view();
+    }
+
+    public function set_hei()
+    {
+        $data = input();
+        $data=$data['field'];
+        if (!$data['name']) {
+            $this->error('请填写内容！');
+        }
+
+//        if (!$data['remarks']) {
+//            $this->error('请填写说明！');
+//        }
+        $commission_rate_data['name'] = $data['name'];
+        $commission_rate_data['type'] = $data['type'];
+        $commission_rate_data['create_time'] = time();
+        $commission_rate_data['remark'] = $data['remark'];
+
+        if ($data['id']) {
+            $res = db('hei')->where('id', $data['id'])->update($commission_rate_data);
+            $msg = "修改";
+        } else {
+            $res = db('hei')->insert($commission_rate_data);
+            $msg = "添加";
+        }
+        if ($res) {
+            $this->success("{$msg}成功！");
+        } else {
+            $this->success("{$msg}失败！");
+        }
+    }
+
+    public function delete_hei()
+    {
+        $data = input();
+        if (!$data['id']) {
+            $this->error('参数错误！');
+        }
+        $res = db('hei')->where('id', $data['id'])->delete();
+        if ($res) {
+            $this->success('删除成功!');
+        } else {
+            $this->error('删除失败！');
+        }
+    }
+
+
+    public function import_hei()
+    {
+        if (request()->isPost()) {
+            $file = request()->file('filedata');
+            $info = $file->validate(['size'=>3145728000,'ext'=>'xls,xlsx'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel');
+            if (!$info) {
+                return json(array('status' => 0, 'mess' => '导入失败2'));
+            }
+            $getSaveName = str_replace("\\","/",$info->getSaveName());
+            $filepath = 'uploads/goods_excel/'.$getSaveName;
+            $path = ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel/' . $info->getSaveName();
+            //加载PHPExcel类
+            vendor("PHPExcel.PHPExcel");
+            //实例化PHPExcel类（注意：实例化的时候前面需要加'\'）
+            if ($info->getExtension() =='xlsx') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel2007();
+            } else if ($info->getExtension() =='xls') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel5();
+            }
+            $objPHPExcel = $objReader->load($path,$encode='utf-8'); //获取excel文件
+            $sheet = $objPHPExcel->getSheet(0);                     //激活当前的表
+            $highestRow = $sheet->getHighestRow();                  //取得总行数
+            $highestColumn = $sheet->getHighestColumn();            //取得总列数
+            $list = array();
+            for ($i = 2; $i <= $highestRow; $i++) {
+                $tel =  trim($objPHPExcel->getActiveSheet()->getCell("A".$i)->getValue());
+                $qq =  trim($objPHPExcel->getActiveSheet()->getCell("C".$i)->getValue());
+                $ww =  trim($objPHPExcel->getActiveSheet()->getCell("B".$i)->getValue());
+                $sf =  trim($objPHPExcel->getActiveSheet()->getCell("D".$i)->getValue());
+                $xm=  trim($objPHPExcel->getActiveSheet()->getCell("E".$i)->getValue());
+                $remark=  trim($objPHPExcel->getActiveSheet()->getCell("F".$i)->getValue());
+                if($tel){
+                    $list[]=['type'=>1,'name'=>$tel,'remark'=>$remark,'create_time'=>time()];
+                }
+
+                if($qq){
+                    $list[]=['type'=>3,'name'=>$qq,'remark'=>$remark,'create_time'=>time()];
+                }
+
+                if($ww){
+                    $list[]=['type'=>2,'name'=>$ww,'remark'=>$remark,'create_time'=>time()];
+                }
+
+                if($sf){
+                    $list[]=['type'=>4,'name'=>$sf,'remark'=>$remark,'create_time'=>time()];
+                }
+                if($xm){
+                    $list[]=['type'=>5,'name'=>$xm,'remark'=>$remark,'create_time'=>time()];
+                }
+            }
+            $i =0;
+           // print_r($list);
+            foreach ($list as $data) {
+                db::name('hei')->insertGetId($data);
+                $i++;
+            }
+            echo '导入成功，本次导入数据'.$i.'条';
+        }
+        return view();
     }
 
 }

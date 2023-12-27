@@ -12,11 +12,11 @@ class Goods extends Validate
      * @var array
      */
     protected $rule = [
-        'name'  =>  'require',
+        //'name'  =>  'require',
         'shop_id'=>'require',
         'link'  =>  'require',
-        'pc_img'  =>  'require',
-        'show_price'  =>  'require|number',
+        //'pc_img'  =>  'require',
+        //'show_price'  =>  'require|number',
     ];
     /**验证提示语
      * @var array

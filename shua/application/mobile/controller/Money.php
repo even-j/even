@@ -5,6 +5,7 @@ use think\Controller;
 use think\Db;
 use app\common\model\Sms; //引入手机验证码
 use app\common\controller\Img;
+use think\Exception;
 use think\Request;
 use think\Session;
 use app\common\model\UserDepositRecharge;
@@ -39,6 +40,10 @@ class Money extends Base
         }
         $topnav=3;
         $this->assign('topnav',$topnav);//头部导航
+        $systemInfo = Db::name('system')->find();
+        $this->assign('systemInfo',$systemInfo);
+
+
         return view();
     }
     public function drawal_record(Request $request){
@@ -142,20 +147,82 @@ class Money extends Base
         if(time()-$info['create_time']<360){
             return $this->error('对不起,上一单未支付请等待6分钟再次充值！');
         }
-        $number='2'.$this->id.$id;
-        $order=[
-            'uid'=>$this->id,
-            'number'=>$number,
-            'user_type'=>$data['user_type'],
-            'recharge_type'=>$data['recharge_type'],
-            'type'=>$data['type'],
-            'price'=>$data['price'],
-            'state'=>0,
-            'create_time'=>time(),
-        ];
-        Db::name('recharge')->insertGetId($order);
-        //return $this->success('正在跳转支付',url('Money/pay',['title'=>$number,'price'=>$order['price']]));
-        return $this->success('正在跳转到支付宝支付页面',url('pay/codepay',['money'=>$order['price'],'data'=>$number]));
+        if($data['type'] == 1){//支付宝支付充值押金
+            try{
+                Db::startTrans();
+                $add['uid'] = $this->id;
+                $add['number'] = '2'.$this->id.$id;
+                $add['user_type'] = 2;
+                $add['type'] = 1;
+                $add['pay_type'] = $data['pay_type'];
+                $add['pic_url'] = isset($data['pic_url'])?$data['pic_url']:'';
+                $add['price'] = $data['price'];
+                $add['create_time'] = time();
+                Db::name('recharge')->insert($add);
+                Db::commit();
+            }catch (Exception $e){
+                Db::rollback();
+                return $this->error($e->getMessage());
+            }
+            return $this->success('提交成功');
+        }
+        if($data['type'] == 2){
+            if(!isset($data['pay_type']) || !in_array($data['pay_type'],[1,2,3]))return $this->error('参数错误2');
+            if($data['pay_type'] == 1|| $data['pay_type'] == 3){//支付宝支付充值银锭
+                try{
+                    Db::startTrans();
+
+                    $add['uid'] = $this->id;
+                    $add['number'] = '2'.$this->id.$id;
+                    $add['user_type'] = 2;
+                    $add['type'] = 1;
+                    $add['recharge_type'] = 2;
+                    $add['pay_type'] = $data['pay_type'];
+                    $add['pic_url'] = isset($data['pic_url'])?$data['pic_url']:'';
+                    $add['price'] = $data['price'];
+                    $add['create_time'] = time();
+                    Db::name('recharge')->insert($add);
+                    Db::commit();
+                }catch (Exception $e){
+                    Db::rollback();
+                    return $this->error($e->getMessage());
+                }
+                return $this->success('提交成功');
+
+            }
+            if($data['pay_type'] == 2){//押金支付
+                try{
+                    Db::startTrans();
+
+                    $userInfo = Db::name('users')->where('id',$this->id)->find();
+                    if($userInfo['balance'] < $data['price'])throw new Exception('本金余额不足');
+                    $update['balance'] = $userInfo['balance'] - $data['price'];
+                    $update['reward'] = $userInfo['reward'] + $data['price'];
+                    Db::name('users')->where(['id'=>$this->id])->update($update);
+
+                    $add['uid'] = $this->id;
+                    $add['number'] = '2'.$this->id.$id;
+                    $add['user_type'] = 2;
+                    $add['type'] = 1;
+                    $add['pay_type'] = $data['pay_type'];
+                    $add['pic_url'] = isset($data['pic_url'])?$data['pic_url']:'';
+                    $add['price'] = $data['price'];
+                    $add['create_time'] = time();
+                    $add['recharge_type'] = 2;
+                    $add['state'] = 1;
+
+                    Db::name('recharge')->insert($add);
+
+                    if(!finance($this->id,2,-$data['price'],1,2,"使用本金充值银锭扣除本金{$data['price']}元！"))throw new Exception('押金写入财务失败！');
+                    if(!finance($this->id,2,$data['price'],2,2,"使用本金充值银锭新增银锭{$data['price']}银锭！"))throw new Exception('银锭写入财务失败！');
+                    Db::commit();
+                }catch (Exception $e){
+                    Db::rollback();
+                    return $this->error($e->getMessage());
+                }
+                return $this->success('提交成功');
+            }
+        }
     }
     //本金支付
     public function principal(){
@@ -215,6 +282,7 @@ class Money extends Base
         if(request()->isAjax()) {
             $data = $request->param();
             $where['uid'] = $this->id;
+            $data['page'] = isset($data['page'])?$data['page']:1;
             if (!empty($data['datetime1']) || !empty($data['datetime2'])) {
                 $datetime1=$data['datetime1']/1000;
                 $datetime2=$data['datetime2']/1000;
@@ -258,6 +326,10 @@ class Money extends Base
         $bank=Db::name('bank')->where('id',$user_bank['bank_id'])->find();
         if(!$user_bank){
             return $this->error('请先绑定银行卡！','my/withdrawal');
+        }
+
+        if($data['price']<=0){
+            return $this->error('请输入金额！');
         }
         if($user_bank['state']==0){
             return $this->error('银行卡正在审核中，无法提现！');
@@ -304,11 +376,12 @@ class Money extends Base
                 'state'=>0,
                 'create_time'=>time(),
                 'poundage'=>$poundage,
-                'toaccount'=>$toaccount,
+                'toaccount'=>$toaccount,'zfb'=>$user_bank['zfb'],
                 'bank_number'=>$user_bank['bank_no'],
                 'bank_name'=>$bank['name'],
                 'bank_seller'=>$user_bank['bank_user'],
-                'mobile'=>$user_bank['mobile']
+                'mobile'=>$user_bank['mobile'],
+                'pay_type' => isset($data['pay_type'])?$data['pay_type']:1
             ];
             Db::name('user_cash')->insertGetId($cash);
             finance($this->id, 2, -$data['price'], 1,3,"{$user['username']} 取现{$data['price']}元，手续费{$poundage}元");
@@ -330,10 +403,11 @@ class Money extends Base
                 'create_time'=>time(),
                 'poundage'=>$poundage,
                 'toaccount'=>$money_really,
-                'bank_number'=>$user_bank['bank_no'],
+                'bank_number'=>$user_bank['bank_no'],'zfb'=>$user_bank['zfb'],
                 'bank_name'=>$bank['name'],
                 'bank_seller'=>$user_bank['bank_user'],
-                'mobile'=>$user_bank['mobile']
+                'mobile'=>$user_bank['mobile'],
+                'pay_type' => isset($data['pay_type'])?$data['pay_type']:1
             ];
             Db::name('user_cash')->insertGetId($cash);
             finance($this->id, 2, -$data['price'], 2,3,"{$user['username']} 提取银锭{$data['price']}银锭，即现金{$money_really}元");
@@ -366,7 +440,7 @@ class Money extends Base
         $list = UserDepositRecharge::where($where)->field('price,type,yprice,memo,create_time')->select();
         if($list)$list = $list->toArray();
         $title = ['金额','财务类型','当前账户余额','财务描述','财务写入时间'];
-        Phpexcel::exportExcel($title,$list,'押金财务导出表');
+        Phpexcel::exportExcel($title,$list,'本金财务导出表');
     }
 
     /**

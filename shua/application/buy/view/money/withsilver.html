@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/yinDingChongZhi.css"/>
@@ -22,26 +22,44 @@
                     return {
                         /* 起止日期value值 */
                         dateValue: "",
+                        dateValue2: "",
                         /* 搜索框value值 */
                         searchInput: "",
+                        searchInput2: "",
                         /* 表格数据 */
                         list:[],
+                        list2:[],
                         /* 默认选中第一页 */
                         currentPage: 1,
+                        currentPage2: 1,
                         total:0,
+                        total2:0,
                         size:10,
+                        size2:10,
                         sizes:[10,20,30,40,50],
                         priceList:[
-                            // {price:0.01},
                             {price:10},{price:20},{price:30},{price:50},{price:100},{price:300},
                         ],
                         paylist:[
-                            {name:"支付宝",pic:"/static/buy/img/zhifubao.png"},{name:"本金支付",pic:"/static/buy/img/yuanbao2.png"}
+                            {name:"支付宝",pic:"/static/buy/img/zhifubao.png"},
+                            {name:"银行卡"}
+                        ],
+                        paylist2:[
+                            {name:"支付宝",pic:"/static/buy/img/zhifubao.png"},
+                          // {name:"本金支付",pic:"/static/buy/img/yuanbao2.png"},
+                            {name:"银行卡"}
                         ],
                         curPrice:10,
                         curIndex:0,
-                        curIndex2:0
-
+                        curIndex2:1,
+                        alipay: '{$info.alipay}',
+                        alipay_url: '{$info.alipay_url}',
+                        bank_name: '{$info.bank_name}',
+                        bank_zhihang: '{$info.bank_zhihang}',
+                        bank_num: '{$info.bank_num}',
+                        bank_user: '{$info.bank_user}',
+                        pic_url: '',
+                        state:1,
                     }
                 },
                 created: function () {
@@ -49,16 +67,30 @@
                 },
                 mounted:function(){
                     $(".shuju_table").hide();
-                    {notempty name="editpass"}
-                    {if condition="$editpass ==1"}
-                    $(".user_content .web_gonggao .gonggao_row .gonggao_top").eq(1).children().addClass("select_on").end().siblings().children().removeClass("select_on");
-                    $(".shuju_table").show();
-                    $(".yingding_chongzhi").hide();
-                    {else}
-                    {/if}
-                        {/notempty}
+                    $(".shuju_table_benjin").hide();
                 },
                 methods: {
+                    /* 判断上传文件类型和大小 */
+                    beforeUpload: function (file) {
+                        var isJPG = file.type === "image/jpeg";
+                        var isPng = file.type === "image/png";
+                        var picSize = file.size / 1024 / 1024 < 2;
+
+                        if (!(isJPG || isPng)) {
+                            this.$message.error("上传头像图片只能是 JPG和PNG 格式");
+                        }
+                        if (!picSize) {
+                            this.$message.error("上传图片大小不能超过 2MB");
+                        }
+                        return (isJPG && picSize) || (isPng && picSize);
+                    },
+                    imgSuccress2:function(res){
+                        if(res.code==1){
+                            this.pic_url = res.data
+                        }else{
+                            layer.alert(res.msg);
+                        }
+                    },
                     /* 下拉菜单事件 */
                     handleOpen: function (key, keyPath) {
                         // console.log(key, keyPath);
@@ -82,6 +114,11 @@
                         });
                     },
                     agreeZhiFu: function () {
+                        if ( this.pic_url == '' && this.curIndex2 != 2 ) {
+                            this.alertError('请先上传转账截图',{icon:2,time:2000})
+                            return
+                        }
+                        if ( this.curIndex2 == 2 ) this.pic_url = ''
                         var that = this;
                         that.$confirm("您确定要支付吗?", "温馨提示", {
                             confirmButtonText: "确定",
@@ -89,16 +126,21 @@
                             type: "warning"
                         }).then(function () {
                             console.log(that.curIndex2);
-                            if(that.curIndex2 == 0){
                             $.ajax({
                                 type : 'POST',
                                 url : "{:url('buy/money/creat_order')}",
                                 async : true,
                                 data : {
-                                     "user_type":2,
-                                     "recharge_type":2,
-                                     "type":1,
-                                     "price":that.curPrice,
+                                    pay_type:that.curIndex2,
+                                    price:that.curPrice,
+                                    type:that.state,
+                                    alipay: that.alipay,
+                                    alipay_url: that.alipay_url,
+                                    bank_name: that.bank_name,
+                                    bank_zhihang: that.bank_zhihang,
+                                    bank_num: that.bank_num,
+                                    bank_user: that.bank_user,
+                                    pic_url: that.pic_url
                                 },
                                 success : function(data){
                                     if(data.code==1){
@@ -115,35 +157,6 @@
                                     alert(XMLHttpRequest.status + "," + textStatus);
                                 }
                             });
-                            }else{
-                                $.ajax({
-                                    type : 'POST',
-                                    url : "{:url('buy/money/principal')}",
-                                    async : true,
-                                    data : {
-                                        "type":2,//账号充值
-                                        "price":that.curPrice,
-                                    },
-                                    success : function(data){
-                                        if(data.code==1){
-                                            that.alertSuccess(data.msg);
-                                            setTimeout(function(){
-                                                return location.href=data.url;
-                                            },3000)
-
-                                        }else{
-                                            return that.alertError(data.msg);
-                                        }
-                                    },
-                                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert(XMLHttpRequest.status + "," + textStatus);
-                                    }
-                                });
-                            }
-                            // that.$message({
-                            //     type: "success",
-                            //     message: "恭喜您,支付成功"
-                            // });
                         }).catch(function () {
                             that.$message({
                                 type: "info",
@@ -176,9 +189,25 @@
                             }
                         })
                     },
+                    getData2:function(){
+                        var that = this;
+                        $.post("{:url('money/withdrawal')}",{page:this.currentPage2,inputcontent:this.searchInput2,datetime:this.dateValue2,size:this.size2},function (res) {
+                            console.log(res);
+                            if(res.code==1){
+                                that.list2 = res.data.list;
+                                that.total2 = res.data.total;
+                            }else{
+                                vm.alertError(res.msg);
+                            }
+                        })
+                    },
                     search:function(){
                         this.currentPage = 1;
                         this.getData();
+                    },
+                    search2:function(){
+                        this.currentPage2 = 1;
+                        this.getData2();
                     },
                     handleSizeChange(val) {
                         this.size = val;
@@ -188,15 +217,33 @@
                     handleCurrentChange(val) {
                         this.currentPage = val;
                         this.getData();
+                        this.getData2();
                     },
-                    getPrice:function(index){
-                        var price=Number(this.priceList[index].price);
-                        this.curPrice=price.toFixed(2);
-                        this.curIndex=index;
-                        console.log(this.curPrice);
+                    handleSizeChange2(val) {
+                        this.size2 = val;
+                        this.currentPage2 = 1;
+                        this.getData2();
+                    },
+                    handleCurrentChange2(val) {
+                        this.currentPage2 = val;
+                        this.getData2();
                     },
                     paychoose:function(index){
-                        this.curIndex2=index;
+                        console.log(index, 'index');
+                        if ( this.state === 1 ) {
+                            if ( index === 1 ) {
+                                this.curIndex2 = 3
+                            } else {
+                                this.curIndex2 = 1
+                            }
+                        } else {
+                            if ( index === 1 ) {
+                                this.curIndex2 = 3
+                            } else {
+                                this.curIndex2 = 1
+                            }
+                           // this.curIndex2 = index + 1
+                        }
                     },
                     excelReward:function () {
                         var start = "";
@@ -207,14 +254,26 @@
                         }
                         window.open("{:url('Money/excelReward','','',false)}/start/"+start+"/end/"+end);
                     },
-
+                    excelReward2:function () {
+                        var start = "";
+                        var end = "";
+                        if(this.dateValue2){
+                            start = this.dateValue[0];
+                            end = this.dateValue[1];
+                        }
+                        window.open("{:url('Money/excelReward','','',false)}/start/"+start+"/end/"+end);
+                    },
+                    handleChange: function(flag){
+                        if (flag == 'benjin') {
+                            this.state=1
+                            this.curIndex2=1
+                        } else {
+                            this.state=2
+                            this.curIndex2=1
+                        }
+                        $('.payway .zhifubao_row .zhifubao_item').eq(0).addClass("zhifubao_color").siblings().removeClass("zhifubao_color");
+                    }
                 },
-                // created:function () {
-                //     this.curPrice=this.curPrice.toFixed(2);
-                //     for (var i =0;i<this.priceList.length;i++){
-                //         this.priceList[i].price=(this.priceList[i].price).toFixed(2);
-                //     }
-                // }
             });
 
             /* 初始化jQuery */
@@ -235,11 +294,20 @@
                     $(this).children().addClass("select_on").end().siblings().children().removeClass("select_on");
                     var index = $(this).index();
                     if (index === 0) {
-                        $(".shuju_table").hide().siblings(".yingding_chongzhi").show();
-                        $(".msg_title_txt").text("银锭充值");
-                    } else {
-                        $(".shuju_table").show().siblings(".yingding_chongzhi").hide();
+                        $(".yingding_chongzhi").show();
+                        $(".shuju_table").hide() 
+                        $(".shuju_table_benjin").hide() 
+                        $(".msg_title_txt").text("充值");
+                    } else if( index === 1 ) {
+                        $(".shuju_table").show()
+                        $(".shuju_table_benjin").hide()
+                        $(".yingding_chongzhi").hide()
                         $(".msg_title_txt").text("银锭记录");
+                    } else {
+                        $(".shuju_table_benjin").show()
+                        $(".shuju_table").hide()
+                        $(".yingding_chongzhi").hide()
+                        $(".msg_title_txt").text("本金记录");
                     }
                 });
 
@@ -263,7 +331,7 @@
         <div class="right_box">
             <!-- 基本信息标题 -->
             <div class="msg_title">
-                <p>个人中心&nbsp;/&nbsp;账号信息&nbsp;/&nbsp;<span class="msg_title_txt">银锭充值</span></p>
+                <p>个人中心&nbsp;/&nbsp;账号信息&nbsp;/&nbsp;<span class="msg_title_txt">充值</span></p>
             </div>
             <div class="user_content">
 
@@ -271,15 +339,18 @@
                 <div class="web_gonggao">
                     <div class="gonggao_row">
                         <div class="gonggao_top">
-                            <a href="javascript:" class="select_on">银锭充值</a>
+                            <a href="javascript:" class="select_on">充值</a>
                         </div>
                         <div class="gonggao_top">
                             <a href="javascript:">银锭记录</a>
                         </div>
+                        <div class="gonggao_top">
+                            <a href="javascript:">本金记录</a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 银锭充值部分 -->
+                <!-- 充值部分 -->
                 <div class="yingding_chongzhi">
                     <!-- 账户余额 -->
                     <div class="zhanghu_yue">
@@ -297,34 +368,68 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 选择金额 -->
-                    <div class="select_jine">
-                        <p>选择金额:</p>
-                        <div class="select_jine_row">
-                            <div class="select_jine_item" :class="index===curIndex?'select_jine_item_bg':''" v-for="(item,index) in  priceList" @click="getPrice(index)">
-                                <span>{{item.price}}</span>
-                                <span>元</span>
-                            </div>
+                    <!-- 充值方式 -->
+                    <div class="zhifubao">
+                        <p class="zhifubao_title">充值方式:</p>
+                        <div class="zhifubao_row">
+                            <span class="zhifubao_item" @click="handleChange('benjin')" :class="state==1 ? 'zhifubao_color' : ''">
+                                <span class="zhifubao_name">本金充值</span>
+                            </span>
+                            <span class="zhifubao_item" @click="handleChange('yinding')">
+                                <span class="zhifubao_name" :class="state==2 ? 'zhifubao_color' : ''">银锭充值</span>
+                            </span>
                         </div>
                     </div>
                     <!-- 支付方式 -->
-                    <div class="zhifubao">
+                    <div class="zhifubao payway">
                         <p class="zhifubao_title">支付方式:</p>
-                        <div class="zhifubao_row">
-                  <span class="zhifubao_item" v-for="(item,index) in paylist" :class="index===curIndex2?'zhifubao_color':''" :key="index" @click="paychoose(index)">
-                    <img class="zhifubao_img" :src="item.pic" alt=""/>
-                    <span class="zhifubao_name">{{item.name}}</span>
-                  </span>
+                        <div class="zhifubao_row" v-if="state==1">
+                            <span class="zhifubao_item" v-for="(item,index) in paylist" :class="index + 1===curIndex2?'zhifubao_color':''"  @click="paychoose(index)">
+                                <img v-if="item.pic" class="zhifubao_img" :src="item.pic" alt=""/>
+                                <span class="zhifubao_name">{{item.name}}</span>
+                            </span>
+                        </div>
+                        <div class="zhifubao_row" v-else>
+                            <span class="zhifubao_item" v-for="(item,index) in paylist2" :class="index + 1===curIndex2?'zhifubao_color':''" @click="paychoose(index)">
+                                <img v-if="item.pic" class="zhifubao_img" :src="item.pic" alt=""/>
+                                <span class="zhifubao_name">{{item.name}}</span>
+                            </span>
+                        </div>
+                        <br>
+                        <br>
+                        <div v-if="alipay != '' || alipay_url != ''" :style="{display: curIndex2==1 ? 'block' : 'none'}">
+                            <div><label class="zhifu_price_txt">支付宝账号:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$info.alipay}</div>
+                            <br>
+                            <div style="display: flex;"><label class="zhifu_price_txt">支付宝二维码:</label>&nbsp;&nbsp;&nbsp;&nbsp;<img style="width: 200px;height: auto;" src="{$info.alipay_url}" alt=""></div>
+                            <br>
+                        </div>
+                        <div v-if="bank_name !='' || bank_zhihang !='' || bank_num !='' || bank_user !='' " :style="{display: curIndex2==3 ? 'block' : 'none'}">
+                            <div><label class="zhifu_price_txt">银行名称:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$info.bank_name}</div><br>
+                            <div><label class="zhifu_price_txt">支行名称:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$info.bank_zhihang}</div><br>
+                            <div><label class="zhifu_price_txt">银行卡号:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$info.bank_num}</div><br>
+                            <div><label class="zhifu_price_txt">银行卡姓名:</label>&nbsp;&nbsp;&nbsp;&nbsp;{$info.bank_user}</div><br>
                         </div>
                     </div>
                     <!-- 支付金额 -->
                     <div class="zhifu_price">
                         <span class="zhifu_price_txt">支付金额:</span>
                         <img class="zhifu_price_img" src="/static/buy/img/vip_money.png" alt=""/>
-                        <span class="zhifu_price_count"><span>{{curPrice}}</span>元</span>
+                        <span class="zhifu_price_count"> <input style="outline: none;height: 34px;text-align: center;" type="number" name="" min="0" id="" v-model="curPrice"> &nbsp;<span style="line-height: 34px;">元</span></span>
                     </div>
-                    <div class="zhifu_price">
-                        <span class="zhifu_price_txt">你已选择购买  <span class="zhifu_price_count"><span>{{curPrice}}</span>银锭包</span></span>
+                    <!-- 转账截图 -->
+                    <div v-if="curIndex2 != 20" class="zhifu_price">
+                        <span class="zhifu_price_txt">转账截图:</span>&nbsp;&nbsp;
+                        <div class="el_pic_upload">
+                            <el-upload ref="unload" 
+                            action="{:url('seller/goods/goodsImg')}" 
+                            :on-success="imgSuccress2"
+                            list-type="picture-card" 
+                            :before-upload="beforeUpload"
+                            :show-file-list="false">
+                            <img style="width: 100%;height: 100%;" v-if="pic_url" :src="pic_url" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </div>
                     </div>
                     <!-- 支付按钮 -->
                     <div class="zhifu_btn" @click="agreeZhiFu">
@@ -366,9 +471,47 @@
                     </div>
                 </div>
 
+                <!-- 本金记录部分 -->
+                <div class="shuju_table_benjin">
+                    <!-- 搜索区域 -->
+                    <div class="benjin_search">
+                        <!--<el-input placeholder="请输入提现流水号" v-model="searchInput" clearable style="width: 200px;margin-right: 20px;"-->
+                                  <!--clearable>-->
+                        <!--</el-input>-->
+                        <el-date-picker class="el_date" v-model="dateValue2" type="daterange" range-separator="至"
+                                        start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
+                        </el-date-picker>
+                        <el-button type="primary" icon="el-icon-search" @click="search2">搜索</el-button>
+                        <el-button type="primary" icon="el-icon-download" @click="excelReward2()">导出</el-button>
+                    </div>
+                    <!-- 数据列表 -->
+                    <el-table :data="list2" border header-cell-style="background:#f5f7fa;" :cell-style="cellStyle">
+
+                        <el-table-column prop="price" label="收支明细" align="center">
+                        </el-table-column>
+                        <el-table-column prop="yprice" label="结余" align="center">
+                        </el-table-column>
+                        <el-table-column prop="create_time" label="日期" align="center">
+                        </el-table-column>
+                        <el-table-column prop="memo" label="备注" align="center">
+                        </el-table-column>
+                    </el-table>
+                    <!-- 分页 -->
+                    <div class="fenye">
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage2" :page-sizes=sizes :page-size=size2
+                                       layout="total, sizes, prev, pager, next, jumper" :total=total2
+                                       background>
+                        </el-pagination>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+            -webkit-appearance: none !important;            
+        }
+    </style>
     <!-- 底部 -->
     {include file="public/footer" /}

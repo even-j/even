@@ -16,12 +16,12 @@
     </div>
     <!-- 导航栏 -->
     <div class="nav">
-        <a href="javascript:"><img class="logo" src="/static/buy/img/logo.png" alt="小白兔"/></a>
+        <a href="javascript:"><img class="logo" src="/static/buy/img/logo.png" alt="安巨"/></a>
         <div class="title">
             <a href="{:url('my/index')}" {notempty name="topnav" } {if condition="$topnav == 1" }class="add_color" {/if}{/notempty}>
             个人中心</a>
             <a href="{:url('helpcenter/index')}" {notempty name="topnav" } {if condition="$topnav == 2"
-               }class="add_color" {/if}{/notempty}> 帮助中心</a>
+               }class="add_color" {/if}{/notempty}> 重要通知</a>
             <a href="{:url('money/withsilver',['hnav'=>'3','nav'=>'2'])}" {notempty name="topnav" } {if condition="$topnav == 3"
                }class="add_color" {/if}{/notempty}> 银锭充值</a>
             <a href="{:url('money/withdrawal',['hnav'=>'3','nav'=>'1'])}" {notempty name="topnav" } {if condition="$topnav == 4"
@@ -29,6 +29,8 @@
             <a href="{:url('task/index',['hnav'=>'2','nav'=>'1'])}" {notempty name="topnav" } {if condition="$topnav == 5" }class="add_color" {/if}{/notempty}>
             任务大厅</a>
         </div>
+
+
         <div class="bell_btn">
             <button type="button" class="el-button el-button--default el-button--small is-circle"
                     @click="dialogVisible = true">
@@ -54,10 +56,12 @@
                          @click="handleClickTable(index)"
                          class="left_table_item"
                          v-for="(item,index) in tableList">
+
                         <div class="txt">
                             <span :class="item.look==1?'type_color':''"></span>
                             <p v-html="item.title"></p>
                         </div>
+
                         <div class="time">
                             <i class="el-icon-time"></i>
                             <span v-html="item.create_time"></span>
@@ -77,9 +81,12 @@
             <!-- 右边盒子部分 -->
             <div class="right_box1">
                 <h1 v-html="title" style="margin-bottom: 20px;"></h1>
+
+                <a href="{:url('helpcenter/index')}" style="text-decoration:none; " >
                 <div>
                     <p style="text-indent: 2em" v-html="content">
                 </div>
+                </a>
                 <div style="display: flex;flex-direction: column;align-self: flex-end;justify-content: flex-end; margin-top: 20px">
                     <p v-html="admin"></p>
                     <p v-html="datetime"></p>

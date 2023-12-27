@@ -4,7 +4,7 @@
 		<div class="right">
 			<!-- 基本信息标题 -->
 			<div class="right-top">
-				<b>个人中心 / 账号信息 /<strong> 账号提现 </strong></b>
+				<b>个人中心 / 账号信息 /<strong> 商家认证 </strong></b>
 			</div>
 			<div class="user_content">
 
@@ -12,7 +12,7 @@
 				<div class="web_gonggao">
 					<div class="gonggao_row">
 						<div class="gonggao_top">
-							<a href="javascript:" class="select_on">提现账户管理</a>
+							<a href="javascript:" class="select_on">商家认证管理</a>
 						</div>
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 							</el-table-column>
 							<el-table-column label="操作" align="center">
 								<template slot-scope="scope">
-									<el-button type="warning" size="small" :disabled="seller_bank[scope.$index].state==0" @click="editBank()">更换银行卡</el-button>
+									<el-button type="warning" size="small" :disabled="seller_bank[scope.$index].state==0" @click="editBank()">更换商家认证</el-button>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -94,25 +94,46 @@
 									<p>支付宝账号:</p>
 									<el-input v-model="form.zfb" placeholder="请输入支付宝账号" class="el_form_width"></el-input>
 								</div>
-								<div class="el_form_item">
-									<p>身份证号码:</p>
-									<el-input v-model="form.idcard" placeholder="请输入身份证号" class="el_form_width"></el-input>
-								</div>
+
 								<div class="el_form_item">
 									<p>手机号码:</p>
 									<el-input v-model="form.mobile" placeholder="请输入手机号" class="el_form_width" maxlength="11" @change="getMobile()"></el-input>
 								</div>
 
-								<!-- 头像上传 -->
+								<!-- 头像上传
+								<div class="el_form_item">
+									<p>身份证号码:</p>
+									<el-input v-model="form.idcard" placeholder="请输入身份证号" class="el_form_width"></el-input>
+								</div>
 								<div class="upload_pic">
 									<p>身份证上传(正面):</p>
 									<div class="el_pic_upload">
-										<el-upload ref="unload" action="string" list-type="picture-card" :on-remove="handleRemove"
-															 :before-upload="beforeUpload" :on-change="handleChange" :limit="1" :auto-upload="false" :file-list="img">
-											<i class="el-icon-plus"></i>
+										<el-upload ref="unload" 
+										action="{:url('goods/goodsImg')}" list-type="picture-card" :on-remove="handleRemove"
+										:on-success="imgSuccress"
+										:before-upload="beforeUpload"
+										:show-file-list="false">
+										<img style="width: 100%;height: 100%;" v-if="form.idcard_img" :src="form.idcard_img" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 										</el-upload>
 									</div>
 								</div>
+								<div class="upload_pic">
+									<p>身份证上传(反面):</p>
+									<div class="el_pic_upload">
+										<el-upload ref="unload" 
+										action="{:url('goods/goodsImg')}" list-type="picture-card" :on-remove="handleRemove"
+										:on-success="imgSuccress2"
+										:before-upload="beforeUpload"
+										:show-file-list="false">
+										<img style="width: 100%;height: 100%;" v-if="form.idcard_img1" :src="form.idcard_img1" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+										</el-upload>
+									</div>
+								</div>
+								 -->
+
+
 							</el-form>
 						</div>
 						<!-- 确定取消按钮 -->
@@ -149,7 +170,9 @@
 							city:"",
 							mobile: "",
 							idcard:"",
+							zfb:'',
 							idcard_img:"",
+							idcard_img1:"",
 						},
 						/* 省市常用登陆地 */
 						mapJson: "/static/seller/json/map.json",
@@ -163,12 +186,23 @@
 						newBlock2: [],
 						/* 默认只能选择一张图片 */
 						picNum: 1,
-						/* 变量保存图片 */
-						localFile: "",
-						localFile2: ""
 					}
 				},
 				methods: {
+					imgSuccress2:function(res){
+						if(res.code==1){
+							this.form.idcard_img1 = res.data
+						}else{
+							layer.alert(res.msg);
+						}
+					},
+					imgSuccress:function(res){
+						if(res.code==1){
+							this.form.idcard_img = res.data
+						}else{
+							layer.alert(res.msg);
+						}
+					},
 					getData:function(){
 						var loadingFlag;
 						loadingFlag= layer.msg('正在读取数据，请稍候……', { icon: 16, shade: 0.5,shadeClose:false,time:6000 });
@@ -214,7 +248,9 @@
 						this.form.city="";
 						this.form.mobile= "";
 						this.form.idcard="";
+						this.form.zfb="";
 						this.form.idcard_img="";
+						this.form.idcard_img1="";
 						this.is_edit=0;
 					},
 					editBank:function(){
@@ -223,21 +259,7 @@
 						this.form = this.seller_bank[0];
 						this.provinceValue2 = this.form.province;
 						this.cityValue2 = this.form.city;
-						this.img = [
-							{'url':this.url+this.form.idcard_img}
-										];
 						this.is_edit=1;
-					},
-					/* 获取图片的base64路径 */
-					handleChange: function (e) {
-						var that = this;
-						var reader = new FileReader();
-						reader.readAsDataURL(e.raw);
-						reader.onload = function () {
-							// console.log(reader.result);
-							that.localFile = reader.result;
-							that.form.idcard_img = reader.result;
-						}
 					},
 					/* 判断上传文件类型和大小 */
 					beforeUpload: function (file) {

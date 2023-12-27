@@ -95,6 +95,8 @@ class Task extends Base
                 if ($userbuyno['star'] == 0) {
                     $panduanstar = 3;
                 }
+                $star_price = 20000;
+                $panduanstar = 2;
                 if ($panduanstar == 1) {
                     $total = SellerTask::where($where)
                         ->where('publish_time', '<', $now)//查找发布时间<现在的时间
@@ -174,6 +176,16 @@ class Task extends Base
                 $yinc_mobile = substr_replace($shop_name['mobile'],'****',3,5);
                 $v['mobile']=$yinc_mobile;
                 $v['seller_name']=$shop_name['seller_name'];
+                $length =mb_strlen($v['seller_name'] );
+                if($length>2){
+                    $str1 = mb_substr($v['seller_name'] ,0,1,'utf-8');
+                    $str2 = mb_substr($v['seller_name'] ,$length-1,1,'utf-8');
+                    $v['seller_name'] = $str1.'**'.$str2;
+                }else{
+                     $str1 = mb_substr($v['seller_name'] ,0,1,'utf-8');
+                     $v['seller_name'] = $str1.'*';
+                    
+                }
             }
             $res['list'] = $list;
             $res['total'] = $total;
@@ -212,18 +224,31 @@ class Task extends Base
     {
         $data = $request->param();
         if (!$data['buyno_id']) return $this->error('买号不能为空，请选择买号');
-        if (!$data['terminal']) return $this->error('请先选择终端');
+        $user_bank_info =Db::name('user_bank')->where(['user_id'=>$this->id])->find();
+        if(!isset($user_bank_info)){
+            return $this->error('请先实名认证!');
+        }
+        if($user_bank_info['state']!='1'){
+            return $this->error('请先实名认证!');
+        }
+        if($data['total_price']<0.01 || $data['commission']<0.01){
+            return $this->error('佣金和本金不能为空!');
+        }
+        //if (!$data['terminal']) return $this->error('请先选择终端');
         $now = time();
         $user = Db::name('users')->where('id', $this->id)->find();
-        if ($user['vip_time'] < $now || $user['vip'] != 1) return $this->error('您还不是VIP,无法接单!');
-        if ($user['reward'] < 1) return $this->error('银锭不足,请充值!');
+        //if ($user['vip_time'] < $now || $user['vip'] != 1) return $this->error('您还不是VIP,无法接单!');
+        //if ($user['reward'] < 1) return $this->error('银锭不足,请充值!');
         $this->redis->rpush($data['task_number'], $this->id);
         $this->redis->expire($data['task_number'], 5);
         $res = $this->paiDui($data['task_number'], time());
         if (!$res) return $this->error('任务领取失败！');
         $seller_task = Db::name('seller_task')->where(['task_number' => $data['task_number']])->find();
         $user_task_number = Db::name('user_task')->where('user_id', $user['id'])->where('state', 1)->count();
-
+        if($seller_task['is_hour_publish']){
+            $hour_msg = json_decode($seller_task['hour_msg']);
+            $seller_task['num'] =array_sum($hour_msg);
+        }
         if ($seller_task['incomplete_num'] == 0) {
             $this->redis->lrem($data['task_number'], $this->id, 0);
             return $this->error('此任务已全部被领取！');
@@ -249,7 +274,7 @@ class Task extends Base
             $this->redis->lrem($data['task_number'], $this->id, 0);
             return $this->error($res['msg']);
         }
-        if ($buyno['star'] == 1 && $seller_task['goods_price'] > 100) {
+      /*  if ($buyno['star'] == 1 && $seller_task['goods_price'] > 100) {
             return $this->error('买号经验值还不够！');
         }
         if ($buyno['star'] == 2 && $seller_task['goods_price'] > 500) {
@@ -260,7 +285,7 @@ class Task extends Base
         }
         if ($buyno['star'] == 4 && $seller_task['goods_price'] > 2000) {
             return $this->error('买号经验值还不够！');
-        }
+        }*/
         if($buyno['frozen_time'] ){
             if($now<$buyno['frozen_time']){
                 return $this->error('买号已被冻结！');
@@ -328,7 +353,7 @@ class Task extends Base
             'goods_num' => $seller_task['goods_num'],
             'user_buyno_id' => $buyno['id'],
             'user_buyno_wangwang' => $buyno['wwid'],
-            'principal' => $data['total_price'],
+            'principal' => $seller_task['goods_price'],//$data['total_price'],
             'commission' => $commission,
             'terminal' => $seller_task['terminal'],
             'state' => 0,
@@ -402,10 +427,12 @@ class Task extends Base
                 ];
                 $rea = Db::name('user_buyno')->where('id', $buyno['id'])->update($reward_star);
             }
+            /**
             $res = Db::name('users')->where('id', $this->id)->update($reward_change);
             if ($res) {
                 finance($this->id, 2, -1, 2, 4, "买手接任务{$task['task_number']},冻结1银锭");
-            }
+            }*/
+
             Db::name('seller_task')->where('id', $seller_task['id'])->update($selltask_change);
             $task_now_id = Db::name('user_task')->insertGetId($task);
             $return_error = Api::api($task_now_id, $task['task_number'], 1, '', $task['ending_time'], '');
@@ -491,12 +518,21 @@ class Task extends Base
         $maps['create_time'] = ['gt',strtotime(date('Y-m-d'))];
         $count = Db::name('user_task')->where($where)->where($map)->where($maps)->count();
         if($count >= 4)return ['code'=>0,'msg'=>'买号今天已接4单，达到上限！'];
-        $where['shop_id'] = $shop_id;
+
+        $list = Db::name('user_task')->where($where)->where('seller_id',$seller_id)->where($map)->where($maps)->count();
+        if ($list) return ['code' => 0, 'msg' => '买号今天已接该商家任务，请明天继续！'];
+
+        $shopInfo = Db::name('shop')->where('id',$shop_id)->find();
+        $shopIds =  Db::name('shop')->where('shop_name',$shopInfo['shop_name'])->column('id');
+        $where['shop_id'] =['in',$shopIds];
         $list = Db::name('user_task')->where($where)->where($map)->order('id desc')->find();
+
         if($list){
             $times = Db::name('seller_task')->where(['id'=>$seller_task_id])->value('cycle_time');
             $times = $times ? $times : 0;
-            $month=$times+30;
+            $shop_cycle_time = Db::name('shop')->where(['id'=>$shop_id])->value('cycle_time');
+            $shop_cycle_time = $shop_cycle_time?$shop_cycle_time:30;
+            $month = $times + $shop_cycle_time;
             if($list['create_time']+($month*24*3600) > time())return ['code'=>0,'msg'=>"该商家设置买家购物周期为{$month}天"];
         }
         $list_limit = Db::name('seller_limit')->where(['wangwang'=>$wwid,'seller_id'=>$seller_id,'status'=>1])->find();
@@ -543,8 +579,8 @@ class Task extends Base
         }
         $where['create_time'] = ['gt',strtotime(date('Y-m-d'))];
         $where['seller_id'] = $seller_id;
-        $list = Db::name('user_task')->where($where)->find();
-        if($list)return ['code'=>0,'msg'=>'今天已接该商家任务，请明天继续！'];
+        //$list = Db::name('user_task')->where($where)->find();
+        //if($list)return ['code'=>0,'msg'=>'今天已接该商家任务，请明天继续！'];
         return ['code'=>1];
     }
 
@@ -750,20 +786,22 @@ class Task extends Base
         try{
             $have_del_task=Db::name('user_task')->where('id',$user_task['id'])->update($del);
             Db::name('seller_task')->where('id',$sell_task['id'])->update($return_task);
+            /**
             if($have_del_task){
                 if($now<$begin_day_nine || $now>$begin_day_elevn){
                     $nine_return=Db::name('users')->where('id',$this->id)->update($return);
                     finance($this->id, 2, +1, 2, 13, "客服不上班期间（23点-9点）自己放弃任务{$user_task['task_number']},解除冻结1银锭");
                 }else{
-                    if ($return_task_count <2) {
+                    if ($return_task_count <200000) {
                         $return_task_count_jia=$return_task_count+1;
                         $nine_return = Db::name('users')->where('id', $this->id)->update($return);
-                        finance($this->id, 2, +1, 2, 13, "每天前2单任务自行放弃不扣银锭，第{$return_task_count_jia}单：{$user_task['task_number']}, 放弃后解除冻结1银锭 系统会自动返还");
+                        finance($this->id, 2, +1, 2, 13, "任务自行放弃不扣银锭，第{$return_task_count_jia}单：{$user_task['task_number']}, 放弃后解除冻结1银锭 系统会自动返还");
                     }else{
                         finance($this->id, 2, -1, 2, 13, "用户自行放弃任务{$user_task['task_number']},扣除冻结的1银锭");
                     }
                 }
-            }
+            }*/
+
             $praise_ids = json_decode($user_task['ids']);
             if($user_task['ids'] && $praise_ids){
                 Db::name('seller_task_praise')->where(['id'=>['in',$praise_ids]])->update(['state'=>0]);
@@ -918,9 +956,12 @@ class Task extends Base
                 $good = Db::name('goods')->where('id',$v)->find();
                 $good['pc_img'] = json_decode($good['pc_img']);
                 $good['goods_id'] = $good['id'];
-                foreach ($good['pc_img'] as &$item){
-                    $item = '/user'.$item;
-                }
+                //if($good['pc_img'] ){
+                    //foreach ($good['pc_img'] as &$item){
+                    //$item = '/user'.$item;
+                //}
+               // }
+                
                 if($num == 1){
                     $res['key_word'] = $user_task['key'];
                 }else{
@@ -960,9 +1001,9 @@ class Task extends Base
                 $goods_info[$key]['buy_price'] = $item['price'];
                 $goods_info[$key]['key_word'] = Db::name('task_word')->where(['task_id'=>$sell_task['id'],'goods_id'=>$item['goods_id'],'id'=>['in',explode(',',$user_task['key_id'])]])->value('key_word');
                 $img = json_decode(Db::name('goods')->where(['id'=>$item['goods_id']])->value('pc_img'));
-                foreach ($img as $k=>$item){
-                    $img[$k] = '/user'.$item;
-                }
+                //foreach ($img as $k=>$item){
+                    //$img[$k] = '/user'.$item;
+                //}
                 $goods_info[$key]['pc_img'] = $img;
             }
         }
@@ -1028,7 +1069,7 @@ class Task extends Base
 //        if($res2['code']==0){
 //            return $this->error('聊天截图'.$res2['data']);
 //        }
-        $link=$data['inputall'];//商品地址核对
+         $link = isset($data['inputall'])?$data['inputall']:[];//商品地址核对
         foreach ($link as $k=>$v){
             $goods=Db::name('goods')
                 ->where('id',$v['id'])
@@ -1060,24 +1101,10 @@ class Task extends Base
         }
         $admin_limit=Db::name('system')->where('id',1)->find();
         $admin_limit_switch=$admin_limit['switch'];//查询商品数字是否核对
-        if($admin_limit_switch ==1){
-            $goodsnum=$data['inputallnum'];//商品数字核对
-            foreach ($goodsnum as $k=>$v){
-                $goods=Db::name('goods')
-                    ->where('id',$v['id'])
-                    ->find();
-                if(!$v['inputnum']){
-                    return $this->error('请核对商品数字');
-                }
-                $num=$v['inputnum'];
-                if($num != $goods['number']){
-                    return $this->error('商品核对数字不正确');
-                }
-            }
-        }
+        
         $edit_user_task=[
-            'keywordimg' => 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
-            'chatimg' => 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
+            'keywordimg' => $res,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+            'chatimg' => $res2,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
             'else_link1'=>$data['dizhi1'],
             'else_link2'=>$data['dizhi2'],
             'task_step'=>3,
@@ -1191,7 +1218,7 @@ class Task extends Base
         $disparity_time=date('Y-m-d',$judge_time['create_time']);
         $disparity_time=strtotime($disparity_time);
         $disparity_time=$disparity_time+24*3600;
-        $ten_cant_time=60*10+$judge_time['create_time'];
+        $ten_cant_time=60*5+$judge_time['create_time'];
         if($judge_time['task_type'] ==2 && time()<$disparity_time){
             return $this->error('隔天任务不能在当天提交。');
         }
@@ -1200,7 +1227,7 @@ class Task extends Base
             return $this->error('定时付款任务，未达到付款时间。');
         }
         if($now<$ten_cant_time){
-            return $this->error('接单时间十分钟内不能提交');
+            return $this->error('接单时间5分钟内不能提交');
         }
         $user_task=Db::name('user_task')->where('id',$data['user_task_id'])->find();
         $user_principal_limit=$user_task['principal']+100;
@@ -1258,13 +1285,24 @@ class Task extends Base
             $edit_user=[
                 'qualified'=>$qualified,
             ];
+
+            $shopInfo = Db::name('shop')->where('id', $task_type['shop_id'])->find();
+            $flag = 0;
+            if($shopInfo && $shopInfo['flag_sign']){
+                $flag = 1;
+            }
+
             $edit_user_task=[
                 'table_order_id'=>$data['table_order_id'],
                 'user_principal'=>$data['user_principal'],
                 'seller_principal'=>$data['user_principal'],
+                'delivery'=>'自发',
+                'delivery_num'=>'999999999',
+                'state'=>'3',
+                'delivery_state'=>'1',
                 'consignee'=>$data['consignee'],
-                'order_detail_img' => 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
-                'state'=>$state,
+                'order_detail_img' => $res,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+                //'state'=>$state,
                 'task_step'=>$task_step,
                 'update_time'=>time(),
                 'address'=>$data['province'].'-'.$data['city'].'-'.$data['block'].'-'.$data['inputstreet'],
@@ -1272,7 +1310,7 @@ class Task extends Base
                 'addressphone'=>$data['addressphone'],
                 'upload_order_time'=>time(),
                 'update_time'=>time(),
-                'qualified_state'=>1,
+                'qualified_state'=>1,'flag'=>$flag
             ];
 //            $edit_seller_task=[
 //                'receipt_time'=>time(),
@@ -1284,16 +1322,26 @@ class Task extends Base
         }else{
             $task_type = Db::name('user_task')->where('id', $data['user_task_id'])->find();
             $task_type_seller = Db::name('seller_task')->where('id', $task_type['seller_task_id'])->find();
+            $shopInfo = Db::name('shop')->where('id', $task_type['shop_id'])->find();
+            $flag = 0;
+            if($shopInfo && $shopInfo['flag_sign']){
+                $flag = 1;
+            }
+
             $edit_user_task=[
                 'table_order_id'=>$data['table_order_id'],
                 'user_principal'=>$data['user_principal'],
                 'seller_principal'=>$data['user_principal'],
+                'delivery'=>'自发',
+                'delivery_num'=>'999999999',
+                'state'=>'3',
+                'delivery_state'=>'1',
                 'consignee'=>$data['consignee'],
-                'order_detail_img'=>$res['data'],
-                'state' => $state,
+                'order_detail_img'=>$res,//$res['data'],
+                //'state' => $state,
                 'task_step'=>$task_step,
                 'upload_order_time'=>time(),
-                'update_time'=>time()
+                'update_time'=>time(),'flag'=>$flag
             ];
 //            $edit_seller_task=[
 //                'receipt_time'=>time(),
@@ -1330,7 +1378,7 @@ class Task extends Base
         $list['create_time']=date('Y-m-d H:i:s',$list['create_time']);
         $list['update_time']=date('Y-m-d H:i:s',$list['update_time']);
         $terminal_type=array(
-            '1'=>"电脑",
+           // '1'=>"电脑",
             '2'=>"手机"
         );
         $list['terminal']=$terminal_type[$list['terminal']];
@@ -1399,7 +1447,7 @@ class Task extends Base
 //            return $this->error('尾款截图'.$res['data']);
 //        }
         $take_delivery=[
-            'wk_praise_img'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+            'wk_praise_img'=>$res,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
             'state'=>3,
             'update_time'=>time(),
             'wk_praise_time'=>time(),
@@ -1471,35 +1519,59 @@ class Task extends Base
                 $tjuser = Db::name('seller')->where(['seller_name' => $user['tjuser']])->find();
             }
             if ($tjuser) {
-                $price = 0.5;
-                $str = '';
+                $price = $task_id['commission'] * $tjuser['rebate1'] ;// 0.5;
+                $str = '一级返佣';
                 $user_update['reward'] = $tjuser['reward'] + $price;
                 $user_update['tj_award'] = $tjuser['tj_award'] + $price;
                 $user_update['tj_award_day'] = $tjuser['tj_award_day'] + $price;
                 if ($user['tjuser_state'] == 1) {
-                    $prices = Db::name('user_reward_recharge')->where(['uid' => $tjuser['id'], 'fromuser' => $user['id'], 'type' => 6])->sum('price');
+                    /**$prices = Db::name('user_reward_recharge')->where(['uid' => $tjuser['id'], 'fromuser' => $user['id'], 'type' => 6])->sum('price');
+
                     if ($prices >= 1000) return false;
                     if($prices==0){
-                        $price = 5;
-                        $str = '首单';
-                        $user_update['reward'] = $tjuser['reward'] + $price;
-                        $user_update['tj_award'] = $tjuser['tj_award'] + $price;
-                        $user_update['tj_award_day'] = $tjuser['tj_award_day'] + $price;
-                    }
+                    $price = 5;
+                    $str = '首单';
+                    $user_update['reward'] = $tjuser['reward'] + $price;
+                    $user_update['tj_award'] = $tjuser['tj_award'] + $price;
+                    $user_update['tj_award_day'] = $tjuser['tj_award_day'] + $price;
+                    }**/
+
                     Db::name('users')->where(['id' => $tjuser['id']])->update($user_update);
                     if (!finance($tjuser['id'], 2, $price, 2, 6, "推广买家({$user['username']})任务{$task_id['task_number']}已完成,{$str}奖励{$price}银锭", 1, $user_id)) throw new Exception('财务写入失败！');
                 } else {
+                    /**
                     $prices = Db::name('seller_reward_recharge')->where(['uid' => $tjuser['id'], 'fromuser' => $user['id'], 'type' => 6])->sum('price');
                     if ($prices >= 1000) return false;
                     if($prices==0){
-                        $price = 5;
-                        $str = '首单';
-                        $user_update['reward'] = $tjuser['reward'] + $price;
-                        $user_update['tj_award'] = $tjuser['tj_award'] + $price;
-                        $user_update['tj_award_day'] = $tjuser['tj_award_day'] + $price;
+                    $price = 5;
+                    $str = '首单';
+                    $user_update['reward'] = $tjuser['reward'] + $price;
+                    $user_update['tj_award'] = $tjuser['tj_award'] + $price;
+                    $user_update['tj_award_day'] = $tjuser['tj_award_day'] + $price;
+                    }*/
+                   // Db::name('seller')->where(['id' => $tjuser['id']])->update($user_update);
+                   // if (!finance($tjuser['id'], 1, $price, 2, 6, "推广买家({$user['username']})任务{$task_id['task_number']}已完成,{$str}奖励{$price}银锭", 1, $user_id)) throw new Exception('财务写入失败！');
+                }
+
+                //二级返佣
+                if ($tjuser['tjuser_state'] == 1) {
+                    $tjuser2 = Db::name('users')->where(['username' => $tjuser['tjuser']])->find();
+                } else {
+                    $tjuser2 = Db::name('seller')->where(['seller_name' => $tjuser['tjuser']])->find();
+                }
+                if ($tjuser2) {
+                    $price = $task_id['commission'] * $tjuser2['rebate2'] ;// 0.5;
+                    $str = '二级返佣';
+                    $user_update['reward'] = $tjuser2['reward'] + $price;
+                    $user_update['tj_award'] = $tjuser2['tj_award'] + $price;
+                    $user_update['tj_award_day'] = $tjuser2['tj_award_day'] + $price;
+                    if ($tjuser['tjuser_state'] == 1) {
+                        Db::name('users')->where(['id' => $tjuser2['id']])->update($user_update);
+                        if (!finance($tjuser2['id'], 2, $price, 2, 6, "推广买家({$user['username']})任务{$task_id['task_number']}已完成,{$str}奖励{$price}银锭", 1, $user_id)) throw new Exception('财务写入失败！');
+                    } else {
+                        //Db::name('seller')->where(['id' => $tjuser2['id']])->update($user_update);
+                       // if (!finance($tjuser2['id'], 1, $price, 2, 6, "推广买家({$user['username']})任务{$task_id['task_number']}已完成,{$str}奖励{$price}银锭", 1, $user_id)) throw new Exception('财务写入失败！');
                     }
-                    Db::name('seller')->where(['id' => $tjuser['id']])->update($user_update);
-                    if (!finance($tjuser['id'], 1, $price, 2, 6, "推广买家({$user['username']})任务{$task_id['task_number']}已完成,{$str}奖励{$price}银锭", 1, $user_id)) throw new Exception('财务写入失败！');
                 }
             }
         }
@@ -1517,7 +1589,7 @@ class Task extends Base
      * @throws \think\exception\PDOException
      */
     public function sellerTjjAng($seller_id,$user_task_id){
-        $user_task = Db::name('user_task')->where(['id'=>$user_task_id])->field('seller_task_id,task_number')->find();
+        $user_task = Db::name('user_task')->where(['id'=>$user_task_id])->field('seller_task_id,task_number,commission')->find();
         $seller_task_id = $user_task['seller_task_id'];
         $num = Db::name('user_task')->where(['seller_task_id'=>$seller_task_id,'state'=>1])->count('id');
         if($num != 1)return false;
@@ -1529,22 +1601,46 @@ class Task extends Base
                 $tjseller = Db::name('seller')->where(['seller_name'=>$seller['tjuser']])->find();
             }
             if($tjseller){
-                $price = 1;
+                $price = $user_task ['commission'] * $tjseller['rebate1'];//1;
                 $seller_update['reward'] = $tjseller['reward'] + $price;
                 $seller_update['tj_award'] = $tjseller['tj_award'] + $price;
                 $seller_update['tj_award_day'] = $tjseller['tj_award_day'] + $price;
+                $str = '一级返佣';
                 if($seller['tjuser_state']==1){
-                    $prices = Db::name('user_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
-                    if($prices >= 500)return false;
+                    //$prices = Db::name('user_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
+                    //if($prices >= 500)return false;
                     Db::name('users')->where(['id'=>$tjseller['id']])->update($seller_update);
-                    if(!finance($tjseller['id'],2,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成首单,发放推荐奖励{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
+                    if(!finance($tjseller['id'],2,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成,发放推荐奖励{$str}{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
                 }else{
-                    $prices = Db::name('seller_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
-                    if($prices >= 500)return false;
+                    //$prices = Db::name('seller_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
+                    //if($prices >= 500)return false;
                     if($seller['tjuser_state']==2)Db::name('seller')->where(['id'=>$tjseller['id']])->update($seller_update);
-                    if(!finance($tjseller['id'],1,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成首单,发放推荐奖励{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
+                    if(!finance($tjseller['id'],1,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成,发放推荐奖励{$str}{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
                 }
 
+                if($tjseller['tjuser_state']==1){
+                    $tjseller2 = Db::name('users')->where(['username'=>$tjseller['tjuser']])->find();
+                }else{
+                    $tjseller2 = Db::name('seller')->where(['seller_name'=>$tjseller['tjuser']])->find();
+                }
+                if($tjseller2){
+                    $price = $user_task ['commission'] * $tjseller2['rebate2'];//1;
+                    $seller_update['reward'] = $tjseller2['reward'] + $price;
+                    $seller_update['tj_award'] = $tjseller2['tj_award'] + $price;
+                    $seller_update['tj_award_day'] = $tjseller2['tj_award_day'] + $price;
+                    $str = '二级返佣';
+                    if($tjseller['tjuser_state']==1){
+                        //$prices = Db::name('user_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
+                        //if($prices >= 500)return false;
+                        Db::name('users')->where(['id'=>$tjseller2['id']])->update($seller_update);
+                        if(!finance($tjseller2['id'],2,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成,发放推荐奖励{$str}{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
+                    }else{
+                        //$prices = Db::name('seller_reward_recharge')->where(['uid'=>$tjseller['id'],'fromuser'=>$seller['id'],'type'=>6])->sum('price');
+                        //if($prices >= 500)return false;
+                        Db::name('seller')->where(['id'=>$tjseller2['id']])->update($seller_update);
+                        if(!finance($tjseller2['id'],1,$price,2,6,"推广商家({$seller['seller_name']})发布任务{$user_task['task_number']}完成,发放推荐奖励{$str}{$price}银锭",2,$seller_id))throw new Exception('财务写入失败！');
+                    }
+                }
             }
         }
     }
@@ -1565,9 +1661,9 @@ class Task extends Base
         if(empty($refund_task)){
             return $this->error('此订单错误，请联系客服.');
         }else{
-            $add_balance=$user['balance']+$refund_task['seller_principal'];//返款佣金 买手本身的佣金+商家确认返还的佣金
+            $add_balance=$user['balance'];//+$refund_task['seller_principal'];//返款佣金 买手本身的佣金+商家确认返还的佣金
             $detail_commission=$refund_task['commission']+$refund_task['user_divided']; //总共获得的佣金 佣金+分成佣金
-            $return_one_reward=$user['reward']+1;
+            $return_one_reward=$user['reward'];//+1;
             $add_reward=$refund_task['commission']+$refund_task['user_divided']+$return_one_reward;//返款银锭 佣金+佣金分成+买手本身的银锭+接任务时抵押的1银锭
             $refund_one_reward=[
                 'reward'=>$return_one_reward,
@@ -1577,11 +1673,18 @@ class Task extends Base
                 'balance'=>$add_balance,
                 'reward'=>$add_reward,
             ];
+
+            $res = '';
+            if(isset($data['high_praise_img'])){
+                $path = 'uploads' . DS . 'task' . DS;
+                $res = aliyunOss::uploadBase64($data['high_praise_img'],$path);
+            }
             $edit_user_task=[
-                'state'=>1,
+                'state'=>1,'high_praise_img'=>$res,
                 'complete_time'=>time(),
                 'update_time'=>time()
             ];
+            //print_r($edit_user_task);die;
             Db::startTrans();
             try {
                 Db::name('user_task')
@@ -1590,18 +1693,18 @@ class Task extends Base
                     ->update($edit_user_task);
                 $return_one_res=Db::name('users')->where('id', $this->id)->update($refund_one_reward);
                 if($return_one_res){
-                    finance($this->id, 2, +1, 2, 11, "任务{$refund_task['task_number']}已完成，退还冻结的1银锭");
+                  //  finance($this->id, 2, +1, 2, 11, "任务{$refund_task['task_number']}已完成，退还冻结的1银锭");
                 }
                 $res = Db::name('users')->where('id', $this->id)->update($refund_message);
                 if($res) {
                     finance($this->id, 2, +$detail_commission, 2, 7, "任务{$refund_task['task_number']}已完成，佣金{$detail_commission}银锭");
-                    finance($this->id, 2, +$refund_task['seller_principal'], 1, 7, "任务{$refund_task['task_number']}已完成,退还本金{$refund_task['seller_principal']}元");
+                    //finance($this->id, 2, +$refund_task['seller_principal'], 1, 7, "任务{$refund_task['task_number']}已完成,退还本金{$refund_task['seller_principal']}元");
                 }
 
                 Db::name('seller_task')->where(['id'=>$refund_task['seller_task_id']])->setInc('complete_num',1);
                 $this->userTjjAng($this->id,$refund_task);
                 $this->sellerTjjAng($refund_task['seller_id'],$refund_task['id']);
-                $this->eJiang($this->id);
+                //$this->eJiang($this->id);
                 $nums = Db::name('seller_task')->where(['id'=>$refund_task['seller_task_id']])->field('num,complete_num')->find();
                 if($nums['num']<=$nums['complete_num']){
                     Db::name('seller_task')->where(['id'=>$refund_task['seller_task_id']])->update(['status'=>6,'complete_time'=>time()]);
@@ -1679,9 +1782,9 @@ class Task extends Base
             if(empty($v)){
                 return $this->error('订单有错误，无法一键返款.');
             }else{
-                $add_balance[$k]=$user['balance']+$v['seller_principal'];
+                $add_balance[$k]=$user['balance'];//+$v['seller_principal'];
                 $detail_commission[$k]=$v['commission']+$v['user_divided'];
-                $return_one_reward[$k]=$user['reward']+1;
+                $return_one_reward[$k]=$user['reward'];//+1;
                 $add_reward[$k]=$v['commission']+$v['user_divided']+$return_one_reward[$k];
                 $refund_one_reward[$k]=[
                     'reward'=>$return_one_reward[$k],
@@ -1704,18 +1807,18 @@ class Task extends Base
                         ->update($edit_user_task[$k]);
                     $return_one_res=Db::name('users')->where('id', $this->id)->update($refund_one_reward[$k]);
                     if($return_one_res){
-                        finance($this->id, 2, +1, 2, 11, "任务{$v['task_number']}已完成，退还冻结的1银锭");
+                      //  finance($this->id, 2, +1, 2, 11, "任务{$v['task_number']}已完成，退还冻结的1银锭");
                     }
                     $res = Db::name('users')->where('id', $this->id)->update($refund_message[$k]);
                     if($res) {
                         finance($this->id, 2, +$detail_commission[$k], 2, 7, "任务{$v['task_number']}已完成，佣金{$detail_commission[$k]}银锭");
-                        finance($this->id, 2, +$v['seller_principal'], 1, 7, "任务{$v['task_number']}已完成,退还本金{$v['seller_principal']}元");
+                      //  finance($this->id, 2, +$v['seller_principal'], 1, 7, "任务{$v['task_number']}已完成,退还本金{$v['seller_principal']}元");
                     }
 
                     Db::name('seller_task')->where(['id'=>$v['seller_task_id']])->setInc('complete_num',1);
                     $this->userTjjAng($this->id,$v);
                     $this->sellerTjjAng($v['seller_id'],$v['id']);
-                    $this->eJiang($this->id);
+                    //$this->eJiang($this->id);
                     $nums[$k] = Db::name('seller_task')->where(['id'=>$v['seller_task_id']])->field('num,complete_num')->find();
                     if($nums[$k]['num']<=$nums[$k]['complete_num']){
                         Db::name('seller_task')->where(['id'=>$v['seller_task_id']])->update(['status'=>6,'complete_time'=>time()]);

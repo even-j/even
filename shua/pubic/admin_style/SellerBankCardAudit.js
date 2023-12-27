@@ -23,7 +23,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
     };
     //身份证反面照
     var tplImg2 = function (d) {
-        return '<img class="jump" src="'+d.idcard_img_b+'" style="height: 170px; width: 200px;" >';
+        return '<img class="jump" src="'+d.idcard_img1+'" style="height: 170px; width: 200px;" >';
     };
     var bank = function (d) {
         return `<div class="text-danger">银行:<span class="yinhang">`+d.bank_id+`</span>(开户城市:`+d.city+`)</div>
@@ -51,10 +51,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             // { field: 'city', title: '开户行城市', minWidth: 165, align: "center" },
             // { field: 'branch_name', title: '开户支行名称', minWidth: 100, align: "center" },
             // { field: 'bank_number', title: '银行卡号', minWidth: 250, align: "center" },
-            { field: 'idcard', title: '证件号码', minWidth: 250, align: "center" },
+
+            { field: 'zfb', title: '支付宝', minWidth: 100, width: 315, align: "center" },
+            //{ field: 'idcard', title: '证件号码', minWidth: 250, align: "center" },
             { field: 'mobile', title: '手机号码', minWidth: 100, align: "center" },
             { field: 'uid', title: 'QQ', minWidth: 100, align: "center" ,templet: qq},
-            { field: 'idcard_img_a', title: '身份证正面照', minWidth: 100, height: 315, align: "center", templet: tplImg },
+            //{ field: 'idcard_img_a', title: '身份证正面照', minWidth: 100, height: 315, align: "center", templet: tplImg },
+            //{ field: 'idcard_img_1', title: '身份证正面照', minWidth: 100, height: 315, align: "center", templet: tplImg2 },
             { field: 'state', title: '状态', minWidth: 100, fixed: "right", align: "center"},
             { title: '操作', minWidth: 100, templet: '#userListBar', fixed: "right", align: "center" }
         ]]

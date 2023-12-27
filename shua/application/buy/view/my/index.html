@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/myCenter.css"/>
@@ -168,7 +168,7 @@
                         arrchecedk:[],
                         all_seller_principal:"",
                         // 按钮文字
-                        buttonvalue:`{if condition="$value ==2"}去收货{elseif condition="$value ==4"/}确认返款{else /}查看详情{/if}`,
+                        buttonvalue:`{if condition="$value ==2"}去收货{elseif condition="$value ==4"/}确认收货返款{else /}查看详情{/if}`,
                         buttonvalue2:"去追评",
                         // 链接值
                         urlvalue:"",
@@ -220,7 +220,7 @@
                     // 默认按钮
                     defaultBtn:function(value){
                         if(value == 4){
-                            return "确认返款";
+                            return "确认收货返款";
                         } else if(value == 2){
                             return "去收货";
                         }else {
@@ -333,7 +333,7 @@
                         this.currentPage = 1;
                         this.getData();
                         if(value == 4){
-                            this.buttonvalue = "确认返款";
+                            this.buttonvalue = "确认收货返款";
                         } else if(value == 2){
                             this.buttonvalue = "去收货";
                         }else{
@@ -497,6 +497,10 @@
                         <span class="user_name_left2">绑定手机号: <span class="user_name_right2">{$users.mobile}</span></span>
                         <span class="user_name_left2">经验值: <span class="user_name_right2"><span style="color:red;">{$all_num_task}</span></span></span>
                         <span class="user_name_left2">累计赚取银锭: <span class="user_name_right2"><span style="color:red;">{$all_obtain_reward}</span>银锭</span></span>
+
+                        <span class="user_name_left2">QQ群: <span class="user_name_right2">{$systemInfo.qq}</span></span>
+
+
                     </div>
                     <div class="vip_name">
                         <span class="vip_name_left1">会员状态<span class="vip_name_right1">/
@@ -505,13 +509,27 @@
                                     {/if}
                         </span></span>
                         <span class="vip_name_left2">到期时间: <span class="vip_name_right2">{$users.vip_time|date="Y-m-d",###}</span>
-                  <a href="{:url('my/vip_recharge')}" class="vip_name_a">点击延时VIP</a>
+
+                           <!--
+                  <a href="{:url('my/vip_recharge')}" class="vip_name_a">点击延时VIP</a>-->
+
+
                 </span>
                         <span class="vip_name_left2">本月可做: <span class="vip_name_right2"><span style="color:red;">{$residue_task}</span>单任务</span></span>
                             <p></p>
                               <span class="vip_name_left2">待商家发放银锭: <span class="vip_name_right2"><span style="color:red;">{$wait_shop_issue}</span>银锭</span>
                 </span>
+                        
                     </div>
+                    <!--
+                    <div style="flex: 1;margin-right: 20px;">
+                        <span style="color: #3f8edb;
+                        font-size: 15px;">微信客服: <span class="user_name_right2">
+                            <img style="width: 130px;height: 150px;float: right;" src = "{$systemInfo.wechat_url}"> 
+                        </span>
+                        </span>
+                    </div>-->
+                    
                 </div>
             </div>
 
@@ -615,7 +633,7 @@
                 <div style="width: 300px;margin-top: 20px;float: left;margin-left: 20px;">
                     <button v-if="value1==4" type="button" @click="allfankuan" class="el-button el-button el-button--warning el-button--small">
                         <!----><!----><span><i class="el-icon-d-arrow-right"></i>
-                                确认返款
+                                确认收货返款
                             </span>
                     </button>
                 </div>
@@ -708,7 +726,7 @@
                             </div>
                             <div>
                                 <p>佣金：<b>{{item.commission}}+{{item.user_divided}}</b>银锭</p>
-                                <p>垫付资金：<b>{{item.seller_principal}}</b>元</p>
+                                <p>垫付资金：<b>{{item.user_principal}}</b>元</p>
                             </div>
                         </div>
                     </div>

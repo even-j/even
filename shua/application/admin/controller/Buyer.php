@@ -6,6 +6,7 @@ namespace app\admin\controller;
 use app\admin\model\Message;
 use app\common\model\UserBuyno;
 use app\common\model\UserDepositRecharge;
+use app\seller\controller\Phpexcel;
 use think\Controller;
 use think\Db;
 use think\Cache;
@@ -61,12 +62,100 @@ class Buyer extends Base
                 $where['username'] =['like','%'.trim($date['username']).'%'];
             }
 
-            $count=Db::name('users')->count('id');
+            $count=Db::name('users')->where($where)->count('id');
             $buy_list=Users::where($where)->limit(($page-1)*$limit,$limit)->order('id desc')->select();
             if($buy_list)$buy_list = $buy_list->toArray();
             return json(['code'=>0,'count'=>$count,'msg'=>'获取数据成功','data'=>$buy_list]);
         }
         return view();
+    }
+
+    public function export()
+    {
+
+            $date=input();
+
+            $where = [];
+            if(isset($date['registerTime'])&&$date['registerTime']){
+                $time=explode(" - ",$date['registerTime']);
+                $time1=strtotime($time[0]);
+                $time2=strtotime($time[1]);
+                $where['create_time'] = ['between',[$time1,$time2]];
+            }
+            if(isset($date['expireTime'])&&$date['expireTime']){
+                $time=explode(" - ",$date['expireTime']);
+                $time1=strtotime($time[0]);
+                $time2=strtotime($time[1]);
+                $where['vip_time'] = ['between',[$time1,$time2]];
+            }
+            if(isset($date['state'])&&$date['state']){
+                if($date['state']==1){
+                    $where['vip']=1;
+                }else if($date['state']==2){
+                    $where['vip']=0;
+                }
+            }
+            if(isset($date['phone'])&&$date['phone']){
+                $where['mobile'] =['like','%'.trim($date['phone']).'%'];
+                // $where['mobile'] = $date['phone'];
+            }
+            if(isset($date['tjuser'])&&$date['tjuser']){
+                $where['tjuser'] =['like','%'.trim($date['tjuser']).'%'];
+                // $where['mobile'] = $date['phone'];
+            }
+
+            if(isset($date['qq'])&&$date['qq']){
+                $where['qq'] =['like','%'.trim($date['qq']).'%'];
+                //$where['qq'] = $date['qq'];
+            }
+            if(isset($date['username'])&&$date['username']){
+                $where['username'] =['like','%'.trim($date['username']).'%'];
+            }
+
+
+            $buy_list=Users::where($where)->order('id desc')->select();
+            if($buy_list)$buy_list = $buy_list->toArray();
+        $dd=[];
+            foreach ($buy_list as  $value){
+                $a=[
+                    'id'=>$value['id'],
+                    'username'=>$value['username'],
+                    'mobile'=>$value['mobile'],
+                    'qq'=>$value['qq'],
+                    'wechat'=>$value['wechat'],
+                    'city'=>$value['province'].'-'.$value['city'],
+                    'create_time'=>$value['create_time'],
+                    'balance'=>'押金:'.$value['balance'].'/银锭'.$value['reward'],
+                    'tjuser'=>$value['tjuser'],
+                    'note'=>$value['note'],
+                    'mc_task_num'=>$value['mc_task_num'],
+                    'invite_code'=>$value['invite_code']
+                ];
+                $dd[]=$a;
+
+            }
+
+        $title = ['序号','用户名', '手机号','QQ','微信','居住城市','注册时间','余额/银锭','来源用户ID','违规备注','每月累计完成单数','邀请码',];
+        Phpexcel::exportExcel($title, $dd, '买家列表导出表');
+
+
+
+    }
+
+    public function del_buyuser(){
+        $date=input();
+
+        $info=Db::name('users')->where('id', $date['id'])->find();
+        $res = Db::name('users')->where('id', $date['id'])->delete();
+        if($res){
+            $res1=admin_log("删除买家", "管理员{$this->admin_info['user_name']}操作:删除买号旺旺名为{$info['id']}");
+            if(!$res1){
+                return $this->error('操作日志写入失败！');
+            }
+            return $this->success('删除成功！');
+        }else{
+            return $this->error('删除失败！');
+        }
     }
     //新增买家
     public function addbuyer(){
@@ -112,8 +201,27 @@ class Buyer extends Base
             }else{
                 $date['vip']=0;
             }
+            
+            
+            
+            if(isset($date['recommender']) && $date['recommender']){
+                $tjuser = Db::name('users')->where(['invite_code'=>$date['recommender'],'state'=>1])->value('username');
+                $tjuser_state = 1;
+                if(!$tjuser){
+                    $tjuser = Db::name('seller')->where(['invite_code'=>$date['recommender'],'state'=>1])->value('seller_name');
+                    $tjuser_state = 2;
+                }
+                if(!$tjuser)return $this->error('推荐人不存在！');
+            }else{
+                $tjuser =  '';
+                $tjuser_state = 0;
+            }
+            
+            
+            
             $adduser=[
                 'username'=>$date['name'],
+                'tjuser'=>$tjuser,'tjuser_state'=>$tjuser_state,
                 'login_pwd'=>md5($date['login_pwd']),
                 'mobile'=>$date['mobile'],
                 'qq'=>$date['qq'],
@@ -161,6 +269,10 @@ class Buyer extends Base
             }
             if(isset($date['qq'])&&$date['qq']){
                 $where['uid']=db('users')->where('qq',trim($date['qq']))->value('id');
+            }
+
+            if(isset($date['tjuser'])&&$date['tjuser']){
+                $where['uid']=['in',db('users')->where('tjuser',trim($date['tjuser']))->column('id')];
             }
 
             if(isset($date['alipayname'])&&$date['alipayname']){
@@ -451,11 +563,23 @@ class Buyer extends Base
                 'mobile'=>$date['mobile'],
                 'balance'=>$date['balance'],
                 'reward'=>$date['reward'],
-                'qq'=>$date['qq'],
+                'qq'=>$date['qq'],'wechat'=>$date['wechat'],'rebate1'=>$date['rebate1'],'rebate2'=>$date['rebate2'],
                 'vip'=>$date['vip'],
                 'vip_time'=>$date['vip_time'],
                 'mc_task_num'=>$date['mc_task_num'],
             ];
+
+            if(isset($date['city']) && $date['city']){
+                $edit_bianji['province'] = $date['province'];
+                $edit_bianji['city'] = $date['city'];
+            }
+
+            if(isset($date['city1']) && $date['city1']){
+                $edit_bianji['province1'] = $date['province1'];
+                $edit_bianji['city1'] = $date['city1'];
+            }
+
+
             if(isset($user_info['reward'])&&$user_info['reward']!=$date['reward']){ //判断管理员是否修改银锭
                 if($user_info['reward']>$date['reward']){
                     $reward=$user_info['reward']-$date['reward']; //扣除银锭

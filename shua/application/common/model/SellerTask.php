@@ -35,7 +35,7 @@ class SellerTask extends Model
         $type_array=array(
             '1'=>"包邮",
             '2'=>"不包邮",
-            '3'=>"无需物流",
+            '3'=>"无需物流",'0'=>''
         );
         return $type_array[$value];
     }

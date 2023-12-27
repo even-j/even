@@ -8,7 +8,7 @@ class Register extends Validate
     protected $rule = [
         'mobile'=>'require|max:11|/^1[3-9]{1}[0-9]{9}$/|unique:seller',
         'seller_name'=>'require|unique:seller',
-        'code'  =>  'require',
+        //'code'  =>  'require',
         'login_pwd'  =>  'require|min:6',
         'qq'  =>  'require|number',
     ];

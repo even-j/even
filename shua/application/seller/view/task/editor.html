@@ -406,7 +406,7 @@
               </el-radio-group>
             </div>
             <div class="between-right">
-              <p v-if="datainfo.is_free_shiping==2"> 无需买手联系客服。商家每单额外支出 <b>10</b> 元作为运费押金，任务完成后运费押金将退还差价给商家 </p>
+              <p v-if="datainfo.is_free_shiping==2"> 无需买手联系客服。商家每单额外支出 <b>10</b> 元作为运费本金，任务完成后运费押金将退还差价给商家 </p>
             </div>
           </div>
         </div>
@@ -648,7 +648,7 @@
           <th>合计</th>
         </tr>
         <tr>
-          <td :rowspan="rowspan">押金</td>
+          <td :rowspan="rowspan">本金</td>
           <td>
             <span :key="index" v-for="(item,index) in goods">{{item.goods_type}}<template
                     v-if="index > 0">{{index}}</template>： <b>{{(item.price * item.num).toFixed(2)}}</b> 元/单</span>
@@ -739,12 +739,12 @@
         </tr>
         <tr>
           <td class="th" colspan="5">
-            <p>总计 = 押金： <b>{{((zprice * datainfo.num) + postage).toFixed(2)}}</b> 元 + 银锭：
+            <p>总计 = 本金： <b>{{((zprice * datainfo.num) + postage).toFixed(2)}}</b> 元 + 银锭：
               <b>{{yinding}}</b> 银锭</p>
           </td>
         </tr>
       </table>
-      <h5 style="margin-top:20px ;">2.选择支付方式<p>（必选押金支付，押金可当银锭使用，银锭不可当押金使用，银锭余额不足系统自动将押金转为不足的银锭金额）</p>
+      <h5 style="margin-top:20px ;">2.选择支付方式<p>（必选本金支付，押金可当银锭使用，银锭不可当押金使用，银锭余额不足系统自动将押金转为不足的银锭金额）</p>
       </h5>
       <div class="way">
         <div class="way_top">
@@ -754,8 +754,8 @@
 									<input aria-hidden="true" class="el-checkbox__original" type="checkbox" value="">
 								</span>
             <span class="el-checkbox__label">
-									<span class="tipsText">押金支付</span>
-									<span class="vertcalSmall">&nbsp;（剩余押金：<b>{{balance}}</b> 元）</span>
+									<span class="tipsText">本金支付</span>
+									<span class="vertcalSmall">&nbsp;（剩余本金：<b>{{balance}}</b> 元）</span>
 								</span>
           </label>
           <span>
@@ -1141,8 +1141,8 @@
                     return layer.msg('请填写任务单数', {icon: 2});
                 }
                 if (that.datainfo.num > 5){
-                    this.datainfo.is_img_praise = false;
-                    return layer.msg('图片任务一次仅能发布5单任务', {icon: 2});
+                    //this.datainfo.is_img_praise = false;
+                    //return layer.msg('图片任务一次仅能发布5单任务', {icon: 2});
                 }
                 if (that.datainfo.goods_id.length > 1){
                     this.datainfo.is_img_praise = false;
@@ -1162,12 +1162,12 @@
 
             showVideo:function() {
                 if (that.datainfo.num != 1){
-                    this.datainfo.is_video_praise = false;
-                    return layer.msg('视频任务有且仅能发一单任务！', {icon: 2});
+                   // this.datainfo.is_video_praise = false;
+                   // return layer.msg('视频任务有且仅能发一单任务！', {icon: 2});
                 }
                 if (that.datainfo.goods_id.length > 1){
-                    this.datainfo.is_video_praise = false;
-                    return layer.msg('视频好评只能发布单一商品任务！', {icon: 2});
+                   // this.datainfo.is_video_praise = false;
+                  //  return layer.msg('视频好评只能发布单一商品任务！', {icon: 2});
                 }
             },
 

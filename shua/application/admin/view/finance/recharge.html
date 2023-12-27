@@ -14,6 +14,9 @@
 	<link rel="stylesheet" href="/admin_style/css/public.css" media="all" />
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_1308190_7kttvg3l5i.css" media="all" />
 	<style>
+		.layui-table-cell {
+			height:auto;
+		}
 		.text-danger{
 			color: red!important;
 		}
@@ -102,6 +105,13 @@
 			</form>
 		</blockquote>
 		<table id="userList" lay-filter="userList"></table>
+
+		<script type="text/html" id="userListBar">
+			<a class="layui-btn layui-btn-xs" lay-event="examine">审核</a>
+			<!--
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+			-->
+		</script>
 	</form>
 	<script type="text/javascript" src="/admin_style/layui/layui.js"></script>
 	<script type="text/javascript" src="/admin_style/Recharge.js"></script>

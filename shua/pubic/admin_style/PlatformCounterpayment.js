@@ -40,10 +40,22 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function ()
         if(d.state!="买家已付款，待打印快递单"){
             return `<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="setTop">查 看</a>`
         }else{
-            return `<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="setTop">查 看</a><a class="layui-btn layui-btn-xs" lay-event="operation">修改单号</a>`;
+            return `<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="setTop">查 看</a>
+            <a class="layui-btn layui-btn-xs" lay-event="operation">修改单号</a>
+            <a class="layui-btn layui-btn-xs" lay-event="operation1">修改淘宝单号</a>
+
+`;
         }
 
     }
+
+    var sellertjure = function (d) {
+        return '<p class="p2">'+d.seller_info.tjuser+'</p>';
+    };
+
+    var buytjure = function (d) {
+        return '<p class="p2">'+d.user_info.tjuser+'</p>';
+    };
 
     //用户列表
     var tableIns = table.render({
@@ -70,14 +82,19 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function ()
             // {type: 'checkbox', fixed: 'left'},
             { field: 'task_number', title: '任务编号', width: 150, align: "center" },
             { field: 'create_time', title: '领取时间', minWidth: 50, width: 100, align: "center" },
+            { field: 'table_order_id', title: '淘宝单号', minWidth: 50, width: 100, align: "center" },
             { field: 'delivery_num', title: '快递单号', minWidth: 55, width: 100, align: "center" ,templet:express },
            // { field: 'delivery', title: '快递公司', minWidth: 55, width: 100, align: "center" },
             { field: 'terminal', title: '平台终端', minWidth: 50, width: 100, align: "center" },
             { field: 'oneyInformation', title: '卖家用户名', minWidth: 50, width: 100, align: "center",templet:sellername },
+            { field: 'oneyInformation', title: '卖家来源ID', minWidth: 50, width: 100, align: "center",templet:sellertjure },
+
             { field: 'collection', title: '卖家店铺名', minWidth: 50, width: 100, align: "center",templet: shopname },
             { field: 'shop_name', title: '发货人', minWidth: 50, width: 100, align: "center" },
             // { field: 'collectionNumber', title: '卖家旺旺号', minWidth: 50, width: 100, align: "center",templet: sellerwangwang },
             { field: 'newsTime', title: '买家用户名', minWidth: 50, width: 100, align: "center",templet: buyname },
+            { field: 'newsTime', title: '买家来源ID', minWidth: 50, width: 100, align: "center",templet: buytjure },
+
             { field: 'remarks', title: '买家旺旺号', minWidth: 50, width: 100, align: "center" ,templet: buywangwang},
             { field: 'shipping_address', title: '发货地址', minWidth: 50, width: 100, align: "center" },
             { field: 'principal', title: '本金', minWidth: 50, width: 50, align: "center" },
@@ -127,6 +144,9 @@ console.log(checkStatus.isAll ) //表格是否全选
         }else if (layEvent === 'operation') { //银锭
             operation(data.id)
         }
+        else if (layEvent === 'operation1') { //银锭
+            operation1(data.id)
+        }
     });
     //申请时间1
     var date2 = laydate.render({
@@ -172,6 +192,7 @@ console.log(checkStatus.isAll ) //表格是否全选
         var time = field.time;  //接单时间
         var state = field.state; //状态
         var username = field.username; //状态
+        var table_order_id = field.table_order_id; //状态
 
         table.reload("userListTable", {//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
             page: {
@@ -183,6 +204,7 @@ console.log(checkStatus.isAll ) //表格是否全选
                 , state: state  //状态
                 , time: time  //接单时间
                 , username: username  //接单时间
+                ,table_order_id:table_order_id
             }
         })
         setTimeout(function () {
@@ -219,6 +241,26 @@ console.log(checkStatus.isAll ) //表格是否全选
             content:"/index.php/admin/task/operation/id/"+id,
             area: ['80%', '300px'],
             title: '修改单号',
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                //审核模态框中需要数据
+                //因为名字我不知道 就简单写了两个 模仿即可
+
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+    }
+
+    function operation1(id) {
+        layui.layer.open({
+            type: 2,
+            content:"/index.php/admin/task/operation1/id/"+id,
+            area: ['80%', '300px'],
+            title: '修改淘宝单号',
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 //审核模态框中需要数据

@@ -55,6 +55,19 @@
                                 </select>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>插旗验证码</td>
+                            <td>
+                                <input type="text" class="flag_sign form-control"  lay-verify="flag_sign">
+                            </td>
+                            <td>插旗备注</td>
+                            <td>
+                                <input type="text" class="flag_memo form-control"  lay-verify="flag_memo">
+
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>店铺链接</td>
                             <td>
@@ -266,6 +279,10 @@
                         $('.remarks').val(data.data.address)//详细地址
                         $('.note').val(data.data.cause)//备注
                         $('.code').val(data.data.code)//发货仓
+
+                        $('.flag_sign').val(data.data.flag_sign)//店铺链接
+                        $('.flag_memo').val(data.data.flag_memo)//店铺链接
+
                         var optionStr = '<option value="0" '+selected11+'>未审核</option><option value="1" '+selected22+'>审核通过</option><option value="2" '+selected33+'>拒绝</option>';
                         $('.examine_state').append(optionStr);
                     }
@@ -313,11 +330,13 @@
                 var sheng = $("#sheng").val(); //省
                 var shi = $("#shi").val(); //市
                 var qu = $("#qu").val(); //区
+                var flag_sign = $(".flag_sign").val(); //区
+                var flag_memo = $(".flag_memo").val(); //区
                 $.ajax({
                     type: "post",
                     url: '/index.php/admin/seller/edit_maihaobianji/id/'+dataid+'',
                     data: {
-                        'id':dataid,
+                        'id':dataid,'flag_memo':flag_memo,'flag_sign':flag_sign,
                         'shop_name':shop_name,
                         'type':type,
                         'link':link,

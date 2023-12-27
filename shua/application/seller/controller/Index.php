@@ -63,8 +63,8 @@ class Index extends Base
         $data = $request->param();
         $check = '/^1[3-9]{1}[0-9]{9}$/';
         if (!preg_match($check, $data['mobile']))return $this->error('手机号码不正确');
-        if($data['mobile'] != session('mobile'))return $this->error('手机号码必须为接受验证码的手机号');
-        if($data['code'] != session('code'))return $this->error('验证码不正确');
+        //if($data['mobile'] != session('mobile'))return $this->error('手机号码必须为接受验证码的手机号');
+       // if($data['code'] != session('code'))return $this->error('验证码不正确');
         if(!isset($data['pay_pwd']) || !$data['pay_pwd'])return $this->error('支付密码不能为空');
         if(!Db::name('seller')->where(['id'=>$this->seller['id'],'pay_pwd'=>md5($data['pay_pwd'])])->field('id')->find())return $this->error('支付密码不正确');
         if(!Db::name('seller')->where(['id'=>$this->seller['id']])->update(['mobile'=>$data['mobile']]))return $this->error('修改失败');
@@ -112,9 +112,9 @@ class Index extends Base
      */
     public function editLoginPwdDo(Request $request){
         $data = $request->param();
-        if($data['mobile'] != session('mobile'))return $this->error('手机号不正确');
+        //if($data['mobile'] != session('mobile'))return $this->error('手机号不正确');
         if(!Db::name('seller')->where(['id'=>$this->seller['id'],'mobile'=>$data['mobile']])->field('id')->find())return $this->error('手机号码不正确');
-        if($data['code'] != session('code'))return $this->error('验证码不正确');
+        //if($data['code'] != session('code'))return $this->error('验证码不正确');
         if(!isset($data['login_pwd']) || !$data['login_pwd'])return $this->error('登录密码不能为空');
         if(!Db::name('seller')->where(['id'=>$this->seller['id']])->update(['login_pwd'=>md5($data['login_pwd'])]))return $this->error('修改失败');
         session('code',null);
@@ -137,9 +137,10 @@ class Index extends Base
         $data = $request->param();
         if($data['mobile'] != session('mobile'))return $this->error('手机号不正确');
         if(!Db::name('seller')->where(['id'=>$this->seller['id'],'mobile'=>$data['mobile']])->field('id')->find())return $this->error('手机号码不正确');
-        if($data['code'] != session('code'))return $this->error('验证码不正确');
+        //if($data['code'] != session('code'))return $this->error('验证码不正确');
         if(!isset($data['pay_pwd']) || !$data['pay_pwd'])return $this->error('支付密码不能为空');
-        if(!Db::name('seller')->where(['id'=>$this->seller['id']])->update(['pay_pwd'=>md5($data['pay_pwd'])]))return $this->error('修改失败');
+        if(!Db::name('seller')->where(['id'=>$this->seller['id']])->update(['pay_pwd'=>md5($data['pay_pwd'])]))
+            return $this->error('修改失败');
         session('code',null);
         session('mobile',null);
         return $this->success('修改成功');
@@ -185,11 +186,11 @@ class Index extends Base
         }
         Db::startTrans();
         try{
-            if(!$data['idcard_img']) throw new Exception('请上传身份证正面照！');
+           // if(!$data['idcard_img']) throw new Exception('请上传身份证正面照！');
            // $path = 'uploads' . DS . 'info' . DS;
             //$res = aliyunOss::uploadBase64($data['idcard_img'],$path);
             $add['idcard_img'] = $data['idcard_img'];//$res;
-            $add['idcard_img1'] = $data['idcard_img1'];
+            $add['idcard_img1'] = isset($data['idcard_img1'])?$data['idcard_img1']:'';
             $add['bank_seller'] = $data['bank_seller'];
             $add['branch_name'] = $data['branch_name'];
             $add['mobile'] = $data['mobile'];
@@ -225,12 +226,17 @@ class Index extends Base
         }
         Db::startTrans();
         try{
+            /**
             if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data['idcard_img'], $result)){
                 if(!$data['idcard_img']) throw new Exception('请上传身份证正面照！');
                 $path = 'uploads' . DS . 'info' . DS;
                 $res = aliyunOss::uploadBase64($data['idcard_img'],$path);
                 $edit['idcard_img'] = $res;
-            }
+            }*/
+
+            $edit['idcard_img'] = $data['idcard_img'];//$res;
+            $edit['idcard_img1'] = isset($data['idcard_img1'])?$data['idcard_img1']:'';
+            $add['zfb'] = $data['zfb'];
             $edit['bank_seller'] = $data['bank_seller'];
             $edit['branch_name'] = $data['branch_name'];
             $edit['mobile'] = $data['mobile'];
@@ -241,6 +247,7 @@ class Index extends Base
             $edit['province'] = $data['province'];
             $edit['city'] = $data['city'];
             $edit['state'] = 0;
+            $edit['zfb'] = $data['zfb'];
             $edit['update_time'] = time();
             Db::name('seller_bank')->where(['id'=>$data['id']])->update($edit);
             Db::commit();

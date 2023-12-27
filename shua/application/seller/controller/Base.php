@@ -54,6 +54,10 @@ class Base extends Controller
      * @throws \think\exception\DbException
      */
     protected function checkLogin(){
+        if($this->request->pathinfo() =='seller/goods/goodsimg.html'){
+            return true;
+        }
+
         // 验证登录状态
         $ip = $this->request->ip();
         $seller = Db::name('seller')->where(['id'=>session('seller_id')])->field('login_pwd,pay_pwd',true)->find();

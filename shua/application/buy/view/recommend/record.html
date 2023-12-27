@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <script src="/static/buy/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
@@ -58,11 +58,16 @@
 
                     <!-- 选择日期 -->
                     <div class="selete_date">
+                        <el-input v-model="info.mobile" placeholder="请输入手机号" style="margin-right: 20px;width:180px;"></el-input>
                         <el-date-picker v-model="info.searchTime" type="daterange" range-separator="至" start-placeholder="开始日期"
                                         end-placeholder="结束日期" style="margin-right: 20px;width:380px;" value-format="yyyy-MM-dd">
                         </el-date-picker>
+
+
                         <el-button type="primary" @click="search()"><i class="el-icon-search"></i>搜索</el-button>
+                        <!--
                         <el-button type="warning"  @click="sort(1)"><i class="el-icon-sort"></i>会员到期排序</el-button>
+                        -->
                         <el-button type="warning"  @click="sort(2)"><i class="el-icon-sort"></i>{{strs}}</el-button>
                     </div>
 
@@ -73,7 +78,7 @@
                                       :cell-style="cellStyle">
                                 <el-table-column prop="create_time" label="日期">
                                 </el-table-column>
-                                <el-table-column prop="qq" label="用户名QQ" >
+                                <el-table-column prop="mobile" label="手机号" >
                                 </el-table-column>
                                 <el-table-column prop="num" label="完成任务数量">
                                 </el-table-column>

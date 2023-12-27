@@ -10,6 +10,8 @@ use app\seller\model\SellerTask;
 use app\seller\model\UserTask;
 use app\seller\model\SellerTaskPraise;
 use app\seller\model\TaskWord;
+use \think\Cache;
+use think\cache\driver\Redis;
 use think\Db;
 use think\Exception;
 use think\Request;
@@ -27,6 +29,83 @@ class Task extends Base
             $pics[$tip['id']] = $tip['content'];
         }
         $this->assign('pics',$pics);
+        return view();
+    }
+
+    public function import(Request $request)
+    {
+        if (request()->isPost()) {
+            $data = $request->param();
+            $file = request()->file('filedata');
+            $info = $file->validate(['size'=>3145728000,'ext'=>'xls,xlsx'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel');
+            if (!$info) {
+                return json(array('status' => 0, 'mess' => '导入失败2'));
+            }
+            $getSaveName = str_replace("\\","/",$info->getSaveName());
+            $filepath = 'uploads/goods_excel/'.$getSaveName;
+            $path = ROOT_PATH . 'public' . DS . 'uploads' . DS . 'goods_excel/' . $info->getSaveName();
+            //加载PHPExcel类
+            vendor("PHPExcel.PHPExcel");
+            //实例化PHPExcel类（注意：实例化的时候前面需要加'\'）
+            if ($info->getExtension() =='xlsx') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel2007();
+            } else if ($info->getExtension() =='xls') {
+                $cacheMethod = \PHPExcel_CachedObjectStorageFactory::cache_in_memory_serialized;
+                $cacheSettings = array();
+                \PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+                $objReader = new \PHPExcel_Reader_Excel5();
+            }
+            $objPHPExcel = $objReader->load($path,$encode='utf-8'); //获取excel文件
+            $sheet = $objPHPExcel->getSheet(0);                     //激活当前的表
+            $highestRow = $sheet->getHighestRow();                  //取得总行数
+            $highestColumn = $sheet->getHighestColumn();            //取得总列数
+            $list = array();
+            $ARR=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T'];
+
+            for ($i = 2; $i <= $highestRow; $i++) {
+                $data['shop_id'] =$_POST['shop_id'];
+                $data['task_type'] =$_POST['task_type'];
+                $data['uid'] =$this->seller['id'];
+
+                foreach ($ARR as $str){
+                    if($str=='K'){
+                        $data[$str] =gmdate('Y-m-d H:i:s', \PHPExcel_Shared_Date::ExcelToPHP( $objPHPExcel->getActiveSheet()->getCell($str.$i)->getValue()));
+                    }else{
+                        $data[$str] =trim($objPHPExcel->getActiveSheet()->getCell($str.$i)->getValue());
+                    }
+                }
+
+                array_push($list,$data);
+            }
+            $i =0;
+
+            $num = 200;//每次导入条数
+            $limit = ceil(count($list)/$num);
+            for($i=1;$i<=$limit;$i++){
+                $offset=($i-1)*$num;
+                $res=array_slice($list,$offset,$num);
+                Db::name('task_import')->insertAll($res);
+            }
+            echo "<script>alert('文件已导入，任务生成中，请稍后');location='/seller/task/import.html';</script>";
+            die;
+
+
+        }
+        $list = Db::name('seller_task')->where(['status'=>1,'seller_id'=>$this->seller['id']])->field('id,shop_id,task_type,qr_code,tao_word,terminal,channel_img,is_shengji,step')->find();
+
+        $this->assign('seller',$this->seller);
+        $this->assign('system',$this->system);
+        $setTips = Db::name('set_tips')->where(['type'=>1])->select();
+        $setTips = $setTips ? $setTips->toArray() : [];
+        $pics = [];
+        foreach ($setTips as $tip){
+            $pics[$tip['id']] = $tip['content'];
+        }
+        $this->assign('pics',$pics);
+        $this->assign('menu','2-5');
         return view();
     }
 
@@ -248,9 +327,20 @@ class Task extends Base
                 if ($data['task_type']==2 && $data['tao_word']=='') return $this->error('淘口令不能为空!');
                 if ($data['task_type']==3 && $data['qr_code']=='') return $this->error('二维码不能为空!');
                 if ($data['task_type']==5 && $data['channel_img']=='') return $this->error('请上传通道图片!');
-                Db::startTrans();
                 $shop = Db::name('shop')->where(['id'=>$data['shop_id'],'state'=>1])->find();
                 if(!$shop)throw new Exception('未查到店铺信息，请重新选择店铺');
+
+                $seller_info =Db::name('seller_bank')->where(['uid'=>$shop['seller_id']])->find();
+                if(!isset($seller_info)){
+                    return $this->error('请先商家认证!');
+                }
+                if($seller_info['state']!='1'){
+                    return $this->error('请先商家认证!');
+                }
+
+
+                Db::startTrans();
+
                 $edit['shop_id'] = $data['shop_id'];
                 $edit['step'] = 1;
                 $edit['task_type'] = $data['task_type'];
@@ -275,6 +365,13 @@ class Task extends Base
                 $edit['address'] = $shop['province'].'-'.$shop['city'].'-'.$shop['area'].'-'.$shop['address'].'-'.$shop['mobile'];
                 $edit['create_time'] = time();
                 $edit['goods_number'] = count($data['goods']);
+
+                if(isset($edit['tao_word']) && $edit['tao_word']){
+                     $edit['tao_word'] = str_replace("\n",'', $edit['tao_word']);
+                     $edit['tao_word'] = str_replace("\r", '', $edit['tao_word']);
+                }
+
+
                 Db::name('seller_task')->where(['id'=>$data['id']])->update($edit);
                 Db::name('task_goods')->where(['task_id'=>$data['id']])->delete();
                 Db::name('task_word')->where(['task_id'=>$data['id']])->delete();
@@ -317,6 +414,7 @@ class Task extends Base
                 }
                 $update['goods_more_fee'] = $this->system['goods_more_fee'] * ($num-1);
                 $update['goods_price'] = $goods_price;
+
                 Db::name('seller_task')->where(['id'=>$data['id']])->update($update);
                 Db::commit();
             }catch (Exception $e){
@@ -356,6 +454,13 @@ class Task extends Base
                 $add['address'] = $shop['province'].'-'.$shop['city'].'-'.$shop['area'].'-'.$shop['address'].'-'.$shop['mobile'];
                 $add['create_time'] = time();
                 $add['goods_number'] = count($data['goods']);
+
+                if(isset($add['tao_word']) && $add['tao_word']){
+                    $add['tao_word'] = str_replace("\n",'', $add['tao_word']);
+                    $add['tao_word'] = str_replace("\r", '', $add['tao_word']);
+                }
+
+
                 $task_id = Db::name('seller_task')->insertGetId($add);
                 $rand_num = $task_id . rand(1000,9999);
                 Db::name("seller_task")->where(['id'=>$task_id])->update(['rand_num'=>$rand_num]);
@@ -399,6 +504,7 @@ class Task extends Base
                 $update['goods_more_fee'] = $this->system['goods_more_fee'] * ($num-1);
                 $update['goods_price'] = $goods_price;
                 $update['goods_z_price'] = $goods_z_price;
+
                 Db::name('seller_task')->where(['id'=>$task_id])->update($update);
                 Db::commit();
             }catch (Exception $e){
@@ -497,6 +603,7 @@ class Task extends Base
             $praiseArr = [];
             for($i=0;$i < $list['num'];$i++){
                 foreach ($goods as $item){
+                    if(isset($praises[$item['id']][$i]))
                     $praiseArr[$i][] = $praises[$item['id']][$i];
                 }
             }
@@ -527,6 +634,34 @@ class Task extends Base
         }else{
             $list['is_video_praise'] = false;
         }
+        $list['hour_msg'] = json_decode($list['hour_msg']);
+        $list['time_0'] = isset($list['hour_msg']['0'] )?$list['hour_msg']['0']:0;
+        $list['time_1'] = isset($list['hour_msg']['1'] )?$list['hour_msg']['1']:0;
+        $list['time_2'] = isset($list['hour_msg']['2'] )?$list['hour_msg']['2']:0;
+        $list['time_3'] = isset($list['hour_msg']['3'] )?$list['hour_msg']['3']:0;
+        $list['time_4'] = isset($list['hour_msg']['4'] )?$list['hour_msg']['4']:0;
+        $list['time_5'] = isset($list['hour_msg']['5'] )?$list['hour_msg']['5']:0;
+        $list['time_6'] = isset($list['hour_msg']['6'] )?$list['hour_msg']['6']:0;
+        $list['time_7'] = isset($list['hour_msg']['7'] )?$list['hour_msg']['7']:0;
+        $list['time_8'] = isset($list['hour_msg']['8'] )?$list['hour_msg']['8']:0;
+        $list['time_9'] = isset($list['hour_msg']['9'] )?$list['hour_msg']['9']:0;
+        $list['time_10'] = isset($list['hour_msg']['10'] )?$list['hour_msg']['10']:0;
+        $list['time_11'] = isset($list['hour_msg']['11'] )?$list['hour_msg']['11']:0;
+        $list['time_12'] = isset($list['hour_msg']['12'] )?$list['hour_msg']['12']:0;
+        $list['time_13'] = isset($list['hour_msg']['13'] )?$list['hour_msg']['13']:0;
+        $list['time_14'] = isset($list['hour_msg']['14'] )?$list['hour_msg']['14']:0;
+        $list['time_15'] = isset($list['hour_msg']['15'] )?$list['hour_msg']['15']:0;
+        $list['time_16'] = isset($list['hour_msg']['16'] )?$list['hour_msg']['16']:0;
+        $list['time_17'] = isset($list['hour_msg']['17'] )?$list['hour_msg']['17']:0;
+        $list['time_18'] = isset($list['hour_msg']['18'] )?$list['hour_msg']['18']:0;
+        $list['time_19'] = isset($list['hour_msg']['19'] )?$list['hour_msg']['19']:0;
+        $list['time_20'] = isset($list['hour_msg']['20'] )?$list['hour_msg']['20']:0;
+        $list['time_21'] = isset($list['hour_msg']['21'] )?$list['hour_msg']['21']:0;
+        $list['time_22'] = isset($list['hour_msg']['22'] )?$list['hour_msg']['22']:0;
+        $list['time_23'] = isset($list['hour_msg']['23'] )?$list['hour_msg']['23']:0;
+
+
+
         return $this->success('success','',$list);
     }
 
@@ -544,10 +679,10 @@ class Task extends Base
             if(!$data['ys_time'] || $data['yf_price'] <=0 || $data['wk_price'] <=0)return $this->error('预售选项参数填写不完整！');
         }
         if($data['is_img_praise']=='true' && !$data['img'])return $this->error('请上传好评图片！');
-        if($data['is_img_praise']=='true' && ($data['num'] > 5 || count($data['goods_id']) > 1))return $this->error('图片好评任务只能发布单商品任务并且不能超过5单');
+        if($data['is_img_praise']=='true' && ($data['num'] > 5 ))return $this->error('图片好评任务只能发布单商品任务并且不能超过5单');
         if($data['is_video_praise']=='true' && !$data['video'])return $this->error('请上传好评视频！');
-        if($data['is_video_praise']=='true' && ($data['num'] > 1 || count($data['goods_id']) > 1))return $this->error('视频好评仅限单连接任务');
-        if(!$data['is_free_shiping'])return $this->error('请选择是否包邮！');
+        if($data['is_video_praise']=='true' && ($data['num'] > 1 ))return $this->error('视频好评仅限单连接任务');
+       // if(!$data['is_free_shiping'])return $this->error('请选择是否包邮！');
         $task_list = Db::name("seller_task")->where(['id'=>$data['id']])->find();
         if(!$task_list)return $this->error('未找到数据!');
         $shop = Db::name('shop')->where(['id'=>$task_list['shop_id'],'seller_id'=>$this->seller['id']])->field('shop_name,mobile,province,city,area,address,logistics')->find();
@@ -562,11 +697,50 @@ class Task extends Base
             if($data['is_free_shiping'] == 1){
                 $data['margin'] = 0; //商家保证金
             }else{
-                $data['margin'] = 10; //商家保证金
+                $data['margin'] = 0; //商家保证金
             }
         }
 
         $edit = $this->handleData($data);
+        $edit['is_hour_publish'] = 0;
+        $edit['hour_msg'] = '';
+        if(isset($data['is_hour_publish']) && $data['is_hour_publish']=='true'){
+            $edit['is_hour_publish'] = 1;
+            $hour_msg[0] = isset($data['time_0'])?$data['time_0']:0;
+            $hour_msg[1] = isset($data['time_1'])?$data['time_1']:0;
+            $hour_msg[2] = isset($data['time_2'])?$data['time_2']:0;
+            $hour_msg[3] = isset($data['time_3'])?$data['time_3']:0;
+            $hour_msg[4] = isset($data['time_4'])?$data['time_4']:0;
+            $hour_msg[5] = isset($data['time_5'])?$data['time_5']:0;
+            $hour_msg[6] = isset($data['time_6'])?$data['time_6']:0;
+            $hour_msg[7] = isset($data['time_7'])?$data['time_7']:0;
+            $hour_msg[8] = isset($data['time_8'])?$data['time_8']:0;
+            $hour_msg[9] = isset($data['time_9'])?$data['time_9']:0;
+            $hour_msg[10] = isset($data['time_10'])?$data['time_10']:0;
+            $hour_msg[11] = isset($data['time_11'])?$data['time_11']:0;
+            $hour_msg[12] = isset($data['time_12'])?$data['time_12']:0;
+            $hour_msg[13] = isset($data['time_13'])?$data['time_13']:0;
+            $hour_msg[14] = isset($data['time_14'])?$data['time_14']:0;
+            $hour_msg[15] = isset($data['time_15'])?$data['time_15']:0;
+            $hour_msg[16] = isset($data['time_16'])?$data['time_16']:0;
+            $hour_msg[17] = isset($data['time_17'])?$data['time_17']:0;
+            $hour_msg[18] = isset($data['time_18'])?$data['time_18']:0;
+            $hour_msg[19] = isset($data['time_19'])?$data['time_19']:0;
+            $hour_msg[20] = isset($data['time_20'])?$data['time_20']:0;
+            $hour_msg[21] = isset($data['time_21'])?$data['time_21']:0;
+            $hour_msg[22] = isset($data['time_22'])?$data['time_22']:0;
+            $hour_msg[23] = isset($data['time_23'])?$data['time_23']:0;
+
+            $total = array_sum($hour_msg);
+            if($total !=$data['num']){
+                return $this->error('整点发布总数需要等于设置的单数');
+            }
+            $edit['hour_msg'] = json_encode($hour_msg);
+            $edit['num'] = 0;
+            $edit['incomplete_num'] = 0;
+
+        }
+
         Db::startTrans();
         try{
             Db::name("seller_task")->where(['id'=>$data['id']])->update($edit);
@@ -617,7 +791,7 @@ class Task extends Base
         $add['service_price'] = $this->service($goods_price); //套餐服务费
         /*返款服务费用计算*/
         $add['refund_service_price'] = round($this->system['refund_service_price'] * $goods_price,2);
-        $add['refund_service_price'] = $add['refund_service_price'] > 30 ? 30 : $add['refund_service_price'];
+        $add['refund_service_price'] = $add['refund_service_price'] > 2 ? 2 : $add['refund_service_price'];
         /*需要分成的银锭统计*/
         $divide_price += $add['goods_more_fee'] * $data['num'];//多商品服务费
         if($data['task_type']==4 || $data['task_type']==5){ //直通车或通道任务服务费
@@ -895,6 +1069,7 @@ class Task extends Base
         if($this->seller['vip'] != 1)return $this->error('您不是会员，请先充值会员');
         if($list['status']!=1)return $this->error('该订单已支付，请勿重复支付');
         $shop = Db::name('shop')->where(['id'=>$list['shop_id']])->value('shop_name');
+
         try{
             Db::startTrans();
             $prices = 0;
@@ -902,14 +1077,14 @@ class Task extends Base
                 $price = $list['deposit'] + $list['silver_ingot'];
                 $price1 = $list['deposit'];
                 $price2 = $list['silver_ingot'];
-                if($price > $this->seller['balance'])throw new Exception('押金余额不足，请充值！！');
+                if($price > $this->seller['balance'])throw new Exception('本金余额不足，请充值！！');
             }else{
                 $price1 = $list['deposit'];
                 $price2 = 0;
                 if(($this->seller['balance'] + $this->seller['reward']) < ($list['deposit']+$list['silver_ingot'])){
-                    throw new Exception('押金余额不足，请充值！');
+                    throw new Exception('本金余额不足，请充值！');
                 }
-                if($list['deposit'] > $this->seller['balance'])throw new Exception('押金余额不足，请充值');
+                if($list['deposit'] > $this->seller['balance'])throw new Exception('本金余额不足，请充值');
                 if($list['silver_ingot'] > $this->seller['reward']){
                     $prices = $this->seller['reward'];
                     $price2 += $list['silver_ingot'] - $this->seller['reward'];
@@ -932,10 +1107,10 @@ class Task extends Base
             if($prices > 0){
                 if(!finance($this->seller['id'],1,-$prices,2,5,"使用银锭发布《{$shop}》店铺任务{$list['task_number']}扣除银锭{$prices}银锭"))throw new Exception('银锭财务写入失败');
             }
-            if(!finance($this->seller['id'],1,-$price1,1,5,"使用押金发布《{$shop}》店铺任务{$list['task_number']}扣除押金{$price1}元"))throw new Exception('押金财务写入失败！');
+            if(!finance($this->seller['id'],1,-$price1,1,5,"使用本金发布《{$shop}》店铺任务{$list['task_number']}扣除本金{$price1}元"))throw new Exception('押金财务写入失败！');
             if($price2 > 0){
                 Db::name('seller')->where(['id'=>$this->seller['id']])->setDec('balance',$price2);
-                if(!finance($this->seller['id'],1,-$price2,1,15,"使用押金代付银锭发布《{$shop}》店铺任务{$list['task_number']}扣除押金{$price2}元"))throw new Exception('押金代付财务写入失败！');
+                if(!finance($this->seller['id'],1,-$price2,1,15,"使用本金代付银锭发布《{$shop}》店铺任务{$list['task_number']}扣除本金{$price2}元"))throw new Exception('押金代付财务写入失败！');
             }
             Db::commit();
         }catch (Exception $e){
@@ -1083,19 +1258,28 @@ class Task extends Base
                 if($data['type']==11)$where['delivery_state']=1;
                 if($data['type']==3)$where['delivery_state']=0;
             }else{
-                $where['state'] = $data['type'];
+                //$where['state'] = $data['type'];
             }
 
         }else{
-            $where['state'] = ['in',[0,1,3,4,5]];
+            //$where['state'] = ['in',[0,1,3,4,5]];
         }
         if($data['searchTime']){
             $time1 = strtotime($data['searchTime'][0]);
             $time2 = strtotime($data['searchTime'][1]);
-            $where['delivery_time'] = ['between',[$time1,$time2]];
+            $where['create_time'] = ['between',[$time1,$time2]];
         }
         if($data['task_number'])$where['task_number'] = ['like',$data['task_number'].'%'];
         if($data['shop_id'])$where['shop_id'] = $data['shop_id'];
+
+        if(isset($data['user_buyno_wangwang']) && $data['user_buyno_wangwang']){
+            $where['user_buyno_wangwang'] = ['like',$data['user_buyno_wangwang'].'%'];
+        }
+
+        if(isset($data['table_order_id']) && $data['table_order_id']){
+            $where['table_order_id'] = ['like',$data['table_order_id'].'%'];
+        }
+
         $where['seller_id'] = $this->seller['id'];
         $total = Db::name('user_task')->where($where)->count('id');
         $list = UserTask::where($where)->order('id desc')->limit($firse,$data['size'])->select();
@@ -1103,6 +1287,9 @@ class Task extends Base
         foreach ($list as &$item){
             $item['checked'] = false;
             $item['shop'] = Db::name('shop')->where(['id'=>$item['shop_id']])->value('shop_name');
+            $item['seller_task'] = Db::name('seller_task')->where(['id'=>$item['seller_task_id']['id']])->field('deposit,silver_ingot')->find();
+            $goods = Db::name('task_goods')->where(['task_id'=>$item['seller_task_id']['id']])->field('goods_id,price,num,goods_spec,pc_img,name')->select()->toArray();
+            $item['goods_id'] = $goods;
         }
         $res = [
             'list'=>$list,
@@ -1122,30 +1309,50 @@ class Task extends Base
      */
     public function excel(Request $request){
         $data = $request->param();
+
         if(isset($data['type']) && $data['type'] != ''){
             if($data['type']==11 || $data['type']==3){
                 $where['state'] = 3;
                 if($data['type']==11)$where['delivery_state']=1;
                 if($data['type']==3)$where['delivery_state']=0;
             }else{
-                $where['state'] = $data['type'];
+               // $where['state'] = $data['type'];
             }
 
         }else{
-            $where['state'] = ['in',[0,1,3,4,5]];
+           // $where['state'] = ['in',[0,1,3,4,5]];
         }
-        $where['seller_id'] = $this->seller['id'];
+        $where['a.seller_id'] = $this->seller['id'];
         if(isset($data['start']) && $data['start'] && isset($data['end']) && $data['end']){
-            $where['delivery_time'] = ['between',[strtotime($data['start']),strtotime($data['end'])]];
+            $where['a.create_time'] = ['between',[strtotime($data['start']),strtotime($data['end'])]];
         }
-        $list = Db::name('user_task')->where($where)->field('seller_task_id,task_number,user_buyno_wangwang,table_order_id,principal,user_principal,delivery,delivery_num,upload_order_time')->select();
+
+        if(isset($data['shop_id']) &&$data['shop_id'])$where['a.shop_id'] = $data['shop_id'];
+        $list = Db::name('user_task')
+            ->alias('a')
+            ->join('seller_task b','a.seller_task_id = b.id','LEFT')
+            ->where($where)
+            ->field('a.seller_task_id,a.task_number,
+        a.user_buyno_wangwang,a.table_order_id,a.principal,a.user_principal,a.delivery,a.delivery_num,
+        a.upload_order_time,b.service_price,b.refund_service_price,b.praise_fee,b.img_praise_fee,
+       b.video_praise_fee')->select();
         $list = $list ? $list->toArray() : [];
+        $system = Db::name('system')->find();
         foreach ($list as &$item){
             $shop_id = Db::name('seller_task')->where(['id'=>$item['seller_task_id']])->value('shop_id');
             $item['seller_task_id'] = Db::name('shop')->where(['id'=>$shop_id])->value('shop_name');
             $item['upload_order_time'] = $item['upload_order_time'] ? date('Y-m-d H:i:s',$item['upload_order_time']) : '';
+            $praise= Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>1])->count('id');
+            $item['praise'] =$praise?$system['praise']:0;
+            $img = Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>2])->count('id');
+            $item['img'] =$img? $system['img_praise']:0;
+            $video = Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>3])->count('id');
+            $item['video'] =$video?$system['video_praise']:0;
         }
-        $title = ['店铺名','任务编号','旺旺号','淘宝订单号','任务金额','付款金额','快递类型','快递单号','支付时间'];
+
+
+        $title = ['店铺名','任务编号','旺旺号','淘宝订单号','任务金额','付款金额','快递类型','快递单号','支付时间',
+            '套餐服务费','返款服务费','文字优质好评','图片优质好评','视频优质好评','6追评文字好评','追评图片好评','追评视频好评'];
         Phpexcel::exportExcel($title,$list,'发货任务导出表');
     }
 
@@ -1204,6 +1411,19 @@ class Task extends Base
         $list = SellerTask::where(['id'=>$data['id'],'seller_id'=>$this->seller['id']])->find();
         if(!$list)return $this->error('未找到数据');
         $list = $list->toArray();
+
+        if($list['is_hour_publish']){
+            $hour_msg = json_decode($list['hour_msg']);
+            $list['num'] =array_sum($hour_msg);
+            $list['is_hour_publish'] = '整点任务';
+            $str='';
+            foreach ($hour_msg as $k=> $value){
+                if($value){
+                    $str .=$k.":00  ".$value.'单；';
+                }
+            }
+            $list['hour_msg'] = $str;
+        }
         $type = [
             '主商品',
             '副商品1',
@@ -1372,14 +1592,26 @@ class Task extends Base
         if(!$data['id'])return $this->error('请选择要返款的任务单！');
         if(!$data['price'])return $this->error('请填写返款金额！');
         if(!is_numeric($data['price']))return $this->error('请正确的填写返款金额！');
-        $list = Db::name('user_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id'],'state'=>5])->field("id,seller_task_id,task_number,principal,state")->find();
+       // $list = Db::name('user_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id'],'state'=>5])->field("id,seller_task_id,task_number,principal,state")->find();
+        $list = Db::name('user_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id']])
+            ->field("id,user_id,seller_task_id,task_number,principal,state")->find();
         if(!$list)return $this->error('未找到数据或数据状态不正确！请刷新重试');
+        if($list['state']!=5 && $list['state']!=3)return $this->error('订单状态不正确！');
         $margin = Db::name('seller_task')->where(['id'=>$list['seller_task_id']])->value('margin');
         $margin = $margin ? $margin : 0;
         if($data['price'] < $list['principal'] * 0.8)return $this->error('返款金额下调不得低于80%');
         if($data['price'] > $list['principal'] * 1.2)return $this->error('返款金额上调不得高于20%');
         $price = $data['price'] - $list['principal'] - $margin;
         if($this->seller['balance'] < $price)return $this->error('返款有差额，账户余额不足补差价');
+        
+        $userA=Db::name('users')
+            ->where('id',$list['user_id'])
+            ->find();
+        $add_balance=$userA['balance']+$data['price'];//返款佣金 买手本身的佣金+商家确认返还的佣金
+        $refund_message=[
+                'balance'=>$add_balance,
+             ];
+        
         try{
             Db::startTrans();
             if($price != 0){
@@ -1392,18 +1624,23 @@ class Task extends Base
                     $prices = $price;
                     $str = '扣除';
                 }
-                if(!finance($this->seller['id'],1, -$price,1,9,"任务{$list['task_number']}返款补差额{$str}押金{$prices}"))throw new Exception('财务写入失败！');
+                if(!finance($this->seller['id'],1, -$price,1,9,"任务{$list['task_number']}返款补差额{$str}本金{$prices}"))throw new Exception('财务写入失败！');
             }
             $task['seller_principal'] = $data['price'];
             $task['platform_refund_time'] = time();
             $task['state'] = 6;
             Db::name('user_task')->where(['id'=>$list['id']])->update($task);
+            $resA = Db::name('users')->where('id', $list['user_id'])->update($refund_message);
+            if($resA) {
+                  finance($list['user_id'], 2, +$data['price'], 1, 7,"任务{$list['task_number']}已完成,退还本金{$data['price']}元");
+           }    
             Db::commit();
         }catch (Exception $e){
             Db::rollback();
             return $this->error($e->getMessage());
         }
-        return $this->success('返款成功！');
+        
+        return $this->success('发货返款成功！');
     }
 
     /**
@@ -1421,7 +1658,7 @@ class Task extends Base
         $goods = Db::name('goods')->where(['seller_id'=>$this->seller['id'],'id'=>$data['id']])->find();
         if(!$goods)return $this->error('未找到商品数据！');
         $system = Db::name('system')->find();
-        if(!$goods['number'] && $system['switch']==1)return $this->error('做任务需要商品校验码，该商品没有！');
+        //if(!$goods['number'] && $system['switch']==1)return $this->error('做任务需要商品校验码，该商品没有！');
         return $this->success('success');
     }
 
@@ -1508,6 +1745,12 @@ class Task extends Base
         if(!$data['id'])return $this->error('参数错误');
         $list = Db::name('seller_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id']])->find();
         if(!in_array($list['status'],[1,2,3]))return $this->error('任务状态不正确！');
+
+        if($list['is_hour_publish']){
+            $hour_msg = json_decode($list['hour_msg']);
+            $list['num'] =array_sum($hour_msg);
+        }
+
         if($list['status']==3 && $list['num'] != $list['incomplete_num'])return $this->error('已有人接单不能取消！');
         try{
             Db::startTrans();
@@ -1515,7 +1758,7 @@ class Task extends Base
             if($list['status']!=1){
                 Db::name('seller')->where(['id'=>$this->seller['id']])->setInc('balance',$list['yajin']);
                 Db::name('seller')->where(['id'=>$this->seller['id']])->setInc('reward',$list['yinding']);
-                if(!finance($this->seller['id'],1,$list['yajin'],1,10,"商家取消任务{$list['task_number']}退回押金{$list['yajin']}元"))throw new Exception('财务写入失败！');
+                if(!finance($this->seller['id'],1,$list['yajin'],1,10,"商家取消任务{$list['task_number']}退回本金{$list['yajin']}元"))throw new Exception('财务写入失败！');
                 if($list['yinding']>0){
                     if(!finance($this->seller['id'],1,$list['yinding'],2,10,"商家取消任务{$list['task_number']}退回银锭{$list['yinding']}银锭"))throw new Exception('财务写入失败！');
                 }
@@ -1566,6 +1809,47 @@ class Task extends Base
      * @throws \think\exception\DbException
      * @throws \think\exception\PDOException
      */
+    public function fahuo99(Request $request){
+        $data = $request->param();
+        if(!$data['id'])return $this->error('请选择要返款的任务单！');
+        if(!$data['price'])return $this->error('请填写返款金额！');
+        if(!is_numeric($data['price']))return $this->error('请正确的填写返款金额！');
+       // $list = Db::name('user_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id'],'state'=>5])->field("id,seller_task_id,task_number,principal,state")->find();
+        $list = Db::name('user_task')->where(['id'=>$data['id'],'seller_id'=>$this->seller['id'],'state'=>3])->field("id,seller_task_id,task_number,principal,state")->find();
+        if(!$list)return $this->error('未找到数据或数据状态不正确！请刷新重试');
+        $margin = Db::name('seller_task')->where(['id'=>$list['seller_task_id']])->value('margin');
+        $margin = $margin ? $margin : 0;
+        if($data['price'] < $list['principal'] * 0.8)return $this->error('返款金额下调不得低于80%');
+        if($data['price'] > $list['principal'] * 1.2)return $this->error('返款金额上调不得高于20%');
+        $price = $data['price'] - $list['principal'] - $margin;
+        if($this->seller['balance'] < $price)return $this->error('返款有差额，账户余额不足补差价');
+        try{
+            Db::startTrans();
+            if($price != 0){
+                $update['balance'] = $this->seller['balance'] - $price;
+                Db::name('seller')->where(['id'=>$this->seller['id']])->update($update);
+                if($price < 0){
+                    $prices = -$price;
+                    $str = '退回';
+                }else{
+                    $prices = $price;
+                    $str = '扣除';
+                }
+                if(!finance($this->seller['id'],1, -$price,1,9,"任务{$list['task_number']}返款补差额{$str}本金{$prices}"))throw new Exception('财务写入失败！');
+            }
+            $task['seller_principal'] = $data['price'];
+            $task['platform_refund_time'] = time();
+            $task['state'] = 6;
+            Db::name('user_task')->where(['id'=>$list['id']])->update($task);
+            Db::commit();
+        }catch (Exception $e){
+            Db::rollback();
+            return $this->error($e->getMessage());
+        }
+        return $this->success('发货返款成功！');
+    }
+ 
+     
     public function fahuo(Request $request){
         /*$number=array(
             "1580535416647809-1580537038644", "1580626979712925-1580629259117","1580706029942436-1580709586919",

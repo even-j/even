@@ -14,13 +14,14 @@ class SellerCash extends Model
         $user_info=db('seller')->where('id',$value)->find();
         $user_info['type']="商家";
         $user_info['username']=$user_info['seller_name'];
+
         return $user_info;
     }
 
 
     public  function getTypeAttr($value){
         $type_array=array(
-            '1'=>"押金",
+            '1'=>"本金",
             '2'=>"银锭",
         );
         return $type_array[$value];

@@ -28,7 +28,7 @@ class Base extends Controller//继承系统控制器
             return $this->redirect(url('Login/index'));
         }else{
             $this->id =Session::get('id');//获取用户ID
-            $users = db('users')->where('id', $this->id)->field('id,username,vip,reward,balance,logins_ip,vip_time,qq,mobile,pay_pwd,invite_code')->find();
+            $users = db('users')->where('id', $this->id)->find();
             $this->users = $users;
             $this->assign('users',$users);
             $this->invite_code=$this->users['invite_code'];//获取用户邀请码

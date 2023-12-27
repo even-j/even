@@ -44,8 +44,14 @@
                         ],
                         /*任务ID*/
                         task_id:"{$list.id}",
+                        // 弹框
+                        dialogVisible: false,
+                        // 图片临时路径
+                        fileList:[],
+                        // 图片base64路径
+                        localFile: "",
                         // 提示内容
-                        alertNum:{$list.seller_principal}
+                        alertNum:{$list.commission}
                     };
                 },
                     mixins:[singlePersonMixin],
@@ -60,9 +66,10 @@
                     methods:{
                         slideBarClick:function(){
                             var that = this;
+                            if(that.localFile.length===0) return alertError("请上传好评截图！");
                             this.$dialog.confirm({
                                 title: "温馨提示",
-                                message: '商家确认返款金额为:' + this.alertNum
+                                message: '商家确认返佣金额为:' + this.alertNum
                             }).then(function () {
                                 var id={$list.id};
                                 $.ajax({
@@ -70,7 +77,7 @@
                                     url: "{:url('mobile/task/confirm_refund')}",
                                     async: true,
                                     data: {
-                                        'id': id,
+                                        'id': id,"high_praise_img":that.localFile,
                                     },
                                     success: function (data) {
                                         if (data.code == 1) {
@@ -87,7 +94,34 @@
                                     }
                                 });
                             }).catch(function () {})
-                        }
+                        },
+                        // 阻止弹框默认关闭
+                        beforeClose: function (action, done) {
+                            if (action === "confirm") {
+                                done(false);
+                            } else {
+                                done();
+                            }
+                        },
+                        //复制文字
+                        copyText: function (text) {
+                            var oInput = document.createElement("input");
+                            oInput.value = text;
+                            document.body.appendChild(oInput);
+                            oInput.select(); // 选择对象
+                            document.execCommand("Copy"); // 执行浏览器复制命令
+                            oInput.className = "oInput";
+                            oInput.style.display = "none";
+                            alertSuccess("复制成功");
+                        },
+                        // 删除图片
+                        handleRemove:function (file) {
+                            this.localFile = "";
+                        },
+                        // 图片改变事件
+                        handleChange:function (file){
+                            this.localFile = file.content;
+                        },
                     },
                 mounted: function () {
                     publicFunction();
@@ -153,7 +187,22 @@
         </div>
     </div>
         <div class="processedButton">
-            <van-button @click="slideBarClick">确认返款</van-button>
+            <van-button @click="dialogVisible = true">确认收货返款</van-button>
         </div>
     </div>
+
+    <!-- 上传图片弹框 -->
+    <van-dialog @confirm="slideBarClick" :before-close="beforeClose" v-model="dialogVisible" title="温馨提示" show-cancel-button>
+        <div class="zhuipin-task-upload">
+            <p>请上传好评截图：</p>
+            <van-uploader
+                    @delete="handleRemove"
+                    :after-read="handleChange"
+                    v-model="fileList"
+                    multiple
+                    :max-count="1"></van-uploader>
+        </div>
+    </van-dialog>
+
+
     {include file="public/footer" /}

@@ -30,6 +30,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
     var username = function (d) {
         return '<p class="p2">'+d.uid.username+'</p>';
     };
+
+    var tjuser = function (d) {
+        return '<p class="p2">'+d.uid.tjuser+'</p>';
+    };
     var state = function (d) {
         if(d.state==0){
             return '<span class="red">未审核</span>';
@@ -57,6 +61,9 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'alipayname', title: '支付宝姓名', minWidth: 80, width:95, align: "center" },
             // { field: 'addressname', title: '收货人姓名', minWidth: 80, width:100, align: "center" },
              { field: 'detail_address', title: '收货地址', minWidth: 80, width:100, align: "center" },
+            { field: 'creat_time', title: '提交时间', minWidth: 50, width: 80, align: "center" },
+            { field: 'tjuser', title: '来源用户ID', minWidth: 100, align: "center" , templet: tjuser},
+
             { field: 'wwdaimg', title: 'IP所在地截图', minWidth: 95, align: "center", templet: tplImg2 },
             { field: 'wwdaimg', title: '旺旺档案截图', minWidth: 95, align: "center", templet: tplImg3 },
             { field: 'alipayimg', title: '支付宝实名截图', minWidth: 95, align: "center", templet: tplImg4 },
@@ -234,6 +241,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         var alipayname = field.alipayname; //支付宝姓名
         var username = field.username;  //用户名
         var qq = field.qq;  //QQ号
+        var tjuser = field.tjuser;  //QQ号
 
         var detail_address = field.detail_address; //收货地址
         table.reload("userListTable", {//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
@@ -251,6 +259,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
                 , state: state //状态
                 , username: username //用户名
                 , qq: qq //QQ号
+                ,tjuser:tjuser
             }
         })
         setTimeout(function () {

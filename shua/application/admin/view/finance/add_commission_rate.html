@@ -66,9 +66,16 @@
                                         <td>提现账户信息：</td>
                                         <td>
                                             <div class="text-left">
+                                                {if $list['pay_type']=='1'}
+
                                                 <div class="text-danger">银行：<span class="yinhang">{$list['bank_name']}</span></div>
                                                 <div class="text-warning">银行卡号: <span class="yhkh">{$list['bank_number']}</span></div>
                                                 <div class="text-info">姓名: <span class="xm">{$list['bank_seller']}</span></div>
+                                                {else}
+                                                <div class="text-danger">支付宝：<span class="yinhang">{$list['zfb']}</span></div>
+                                                {/if}
+
+
                                             </div>
                                         </td>
                                     </tr>

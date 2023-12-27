@@ -84,7 +84,7 @@
           <th>合计</th>
         </tr>
         <tr>
-          <td :rowspan="rowspan">押金</td>
+          <td :rowspan="rowspan">本金</td>
           <td><span v-for="(item,index) in info.goods" :key="index">{{item.type}}： <b>{{(item.price * item.num).toFixed(2)}}</b> 元/单</span> </td>
           <td><b>{{info.goods_price}}</b> 元 </td>
           <td rowspan="16"><b>{{info.num}}</b> 单</td>
@@ -172,11 +172,11 @@
         </tr>
         <tr>
           <td colspan="8" class="th">
-            <p>总计 = 押金： <b>{{info.deposit}}</b> 元 + 银锭： <b>{{info.silver_ingot}}</b> 银锭</p>
+            <p>总计 = 本金： <b>{{info.deposit}}</b> 元 + 银锭： <b>{{info.silver_ingot}}</b> 银锭</p>
           </td>
         </tr>
       </table>
-      <h5 style="margin-top:20px ;">2.选择支付方式<p>（必选押金支付，押金可当银锭使用，银锭不可当押金使用，银锭余额不足系统自动将押金转为不足的银锭金额）</p>
+      <h5 style="margin-top:20px ;">2.选择支付方式<p>（必选本金支付，本金可当银锭使用，银锭不可当本金使用，银锭余额不足系统自动将本金转为不足的银锭金额）</p>
       </h5>
       <div class="way">
         <div class="way_top">
@@ -186,8 +186,8 @@
 									<input aria-hidden="true" class="el-checkbox__original" type="checkbox" value="">
 								</span>
             <span class="el-checkbox__label">
-									<span class="tipsText">押金支付</span>
-									<span class="vertcalSmall">&nbsp;（剩余押金：<b>{{balance}}</b> 元）</span>
+									<span class="tipsText">本金支付</span>
+									<span class="vertcalSmall">&nbsp;（剩余本金：<b>{{balance}}</b> 元）</span>
 								</span>
           </label>
           <span>

@@ -18,7 +18,7 @@ class UserCash extends Model
 
     public  function getTypeAttr($value){
         $type_array=array(
-            '1'=>"押金",
+            '1'=>"本金",
             '2'=>"银锭",
         );
         return $type_array[$value];

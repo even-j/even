@@ -165,7 +165,7 @@
                             if(!this.formValue.province2) return alertError("收货地址不能为空");
                             if(!this.addressValue) return alertError("收货地址详细信息不能为空");
                             if(!this.phoneValue) return alertError("收货人手机号码不能为空");
-                            if(!this.yzmValue) return alertError("请输入手机号验证码");
+                            //if(!this.yzmValue) return alertError("请输入手机号验证码");
                             $.ajax({
                                 type : 'POST',
                                 url : "{:url('mobile/my/editbuyno')}",
@@ -367,7 +367,7 @@
                             该手机号必须与您支付宝上认证的手机号码一致；否则不予审核通过
                         </div>
                     </div>
-                    <!-- 手机验证码 -->
+                    <!-- 手机验证码
                     <div class="phone-yzm">
                         <p>*手机验证码:</p>
                         <div class="public-input">
@@ -376,7 +376,7 @@
                         <div class="yzm-btn" @click="sendYzm">
                             <van-button :disabled="btnDisabled" class="yzm-btn-item" type="info">{{yzmMsg}}</van-button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="wangwang-id" style="border-bottom: 0">
                         <div class="wangwang-id-item">
                             <span>*支付宝认证姓名:</span>
@@ -410,7 +410,7 @@
                                 </div>
                             </div>
                             <p class="wangwang-dangan-alert" style="color: #333333">
-                                身份证正面拍照,身份证信息必须清晰可见,身份证姓名必须和您填写的支付宝实名制姓名一致。此照片仅用于小白兔审核买号使用。
+                                身份证正面拍照,身份证信息必须清晰可见,身份证姓名必须和您填写的支付宝实名制姓名一致。此照片仅用于安巨审核买号使用。
                             </p>
                         </div>
                     </div>
@@ -452,7 +452,7 @@
                 <div class="pulic-alert-item">
                     <p>1.您绑定的账号需满足<span style="color: red">注册时间超过3个月、实名认证、信誉等级3心以上、信誉大于2钻的买号注册时间要超过3年，好评率大于99%的安全号;</span></p>
                     <p>2.淘宝|天猫可绑定3个买号，每个买号要求绑定不同的收货信息(收货人姓名 .地址，联系电话均要求不同并且真实有效，能联系上买手本人，同事或者亲戚);</p>
-                    <p>3.平台填写的收货信息，务必和淘宝网下单时收货信息保持一致，否则将封闭您的小白兔账号，并没收所有佣金:</p>
+                    <p>3.平台填写的收货信息，务必和淘宝网下单时收货信息保持一致，否则将封闭您的安巨账号，并没收所有佣金:</p>
                     <p>4.所有绑定的收货地址必须真实有效，因买手原因造成商家真实发货且由于地址原因包裹丢失，损失由买手承担:</p>
                     <p>5.必须确保绑定的所有买号收货地址与登录IP地址保持一致， 建议还可以写公司地址，亲属地址，朋友地址;</p>
                     <p>6.买号提交审核后，平台预计在24小时内完成审核操作。</p>

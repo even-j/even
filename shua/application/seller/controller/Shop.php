@@ -67,7 +67,17 @@ class Shop extends Base
         $add['type'] = $data['type'];
         $add['code'] = $data['code'];
         $add['state'] = 0;
+        $add['pic_url'] = isset($data['pic_url'])?$data['pic_url']:'';
+        $add['flag_sign'] = isset($data['flag_sign'])?$data['flag_sign']:'';
+        $add['flag_memo'] = isset($data['flag_memo'])?$data['flag_memo']:'';
+        if(isset($data['cycle_time']) && $data['cycle_time']){
+            $cycle_time=$data['cycle_time'];
+        }else{
+            $cycle_time=30;
+        }
+        $add['cycle_time'] =$cycle_time;
         $add['create_time'] = time();
+        //print_r($add);die;
         if(!Db::name('shop')->insert($add))return $this->error('申请数据添加失败');
         return $this->success('绑定店铺申请成功，请耐心等待后台审核！');
     }
@@ -107,6 +117,15 @@ class Shop extends Base
         $edit['code'] = $data['code'];
         $edit['state'] = 0;
         $edit['update_time'] = time();
+        $edit['pic_url'] = isset($data['pic_url'])?$data['pic_url']:'';
+        $edit['flag_sign'] = isset($data['flag_sign'])?$data['flag_sign']:'';
+        $edit['flag_memo'] = isset($data['flag_memo'])?$data['flag_memo']:'';
+        if(isset($data['cycle_time']) && $data['cycle_time']){
+            $cycle_time=$data['cycle_time'];
+        }else{
+            $cycle_time=30;
+        }
+        $edit['cycle_time'] =$cycle_time;
         if(!Db::name('shop')->where(['id'=>$data['id']])->update($edit))return $this->error('申请数据添加失败');
         return $this->success('绑定店铺申请成功，请耐心等待后台审核！');
     }

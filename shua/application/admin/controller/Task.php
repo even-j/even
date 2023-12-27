@@ -39,6 +39,11 @@ class Task extends Base
                 $where['user_buyno_wangwang'] =['like','%'.trim($date['wwid']).'%'];
                 //$where['user_buyno_wangwang'] = $date['wwid'];
             }
+
+            if (isset($date['table_order_id']) && $date['table_order_id']) {
+                $where['table_order_id'] =['like','%'.trim($date['table_order_id']).'%'];
+                //$where['user_buyno_wangwang'] = $date['wwid'];
+            }
             if (isset($date['username']) && $date['username']) {
                 $where_name['username'] = ['like', '%' . trim($date['username']) . '%'];
                 $uid = db('users')->where($where_name)->column('id');
@@ -319,6 +324,13 @@ class Task extends Base
         $buyno_list = SellerTask::where($where)->select();
         if ($buyno_list) $buyno_list = $buyno_list->toArray();
         foreach ($buyno_list as $k => $v) {
+            
+            $v['num']= intval($v['num']);
+            $v['complete_num']= intval($v['complete_num']);
+            $v['incomplete_num']= intval($v['incomplete_num']);
+            $num = $v['num']-$v['complete_num']-$v['incomplete_num'];
+            
+            
             $dd[$k]['rand_num'] = $v['rand_num'];//任务编号id
             $dd[$k]['task_number'] = $v['task_number'];//任务编号
             $dd[$k]['seller_name'] = $v['seller_id']['seller_name'];//用户名
@@ -326,7 +338,7 @@ class Task extends Base
             $dd[$k]['wangwang'] = $v['shop_id']['wangwang'];//卖家旺旺
             $dd[$k]['task_type'] = $v['task_type'];//订单类型
             $dd[$k]['terminal'] = $v['terminal'].':'.$v['num'];//刷单量
-            $dd[$k]['numxq'] = '已接'.':'.$v['num']-$v['complete_num']-$v['incomplete_num'].'完成'.':'.$v['num'];
+            $dd[$k]['numxq'] = '已接'.':'.$num.'完成'.':'.$v['num'];
             $dd[$k]['goods_number'] = $v['goods_number'];
             $dd[$k]['goods_z_price'] = $v['goods_z_price'];
             $dd[$k]['service_price'] = $v['service_price']*$v['num'];//基础佣金
@@ -560,7 +572,7 @@ class Task extends Base
             }
 
             $count = UserTask::where($where)->count('id');
-            $buyno_list = UserTask::where($where)->limit(($page - 1) * $limit, $limit)->order('high_praise_time desc')->select();
+            $buyno_list = UserTask::where($where)->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
             if ($buyno_list) $buyno_list = $buyno_list->toArray();
             foreach ($buyno_list as $K => &$v) {
                 if($v['is_shengji']==1){
@@ -845,25 +857,25 @@ class Task extends Base
             if(!$res){
                 throw new Exception('修改失败!');
             }
-//            if($data['state']==4){
-//            $deposit=$data_info['deposit'];//押金
-//            $silver_ingot=$data_info['silver_ingot'];//银锭
-//                $seller_info=db('seller')->where('id', $data_info['seller_id'])->find();
-//                if(!$seller_info){
-//                    throw new Exception('商家不存在!');
-//                }
-//                $seller_balance=$seller_info['balance']+$deposit;
-//                $seller_reward=$seller_info['reward']+$silver_ingot;
-//                $res1=db('seller')->where('id',$data_info['seller_id'])->update(['balance'=>$seller_balance,'reward'=>$seller_reward]);
-//                if(!$res1){
-//                    throw new Exception('退款出错!');
-//                }
-//                $d1=finance($seller_info['id'],1,$seller_balance,1,8,"押金:{$seller_balance},任务取消返还");
-//                $d2=finance($seller_info['id'],1,$seller_reward,2,8,"银锭:{$seller_reward},任务取消返还");
-//                if(!$d1 || !$d2){
-//                    throw new Exception('写入财务出错!');
-//                }
-//            }
+            if($data['state']==4){
+            $deposit=$data_info['deposit'];//押金
+            $silver_ingot=$data_info['silver_ingot'];//银锭
+                $seller_info=db('seller')->where('id', $data_info['seller_id'])->find();
+                if(!$seller_info){
+                    throw new Exception('商家不存在!');
+                }
+                $seller_balance=$seller_info['balance']+$deposit;
+                $seller_reward=$seller_info['reward']+$silver_ingot;
+                $res1=db('seller')->where('id',$data_info['seller_id'])->update(['balance'=>$seller_balance,'reward'=>$seller_reward]);
+                if(!$res1){
+                    throw new Exception('退款出错!');
+                }
+                $d1=finance($seller_info['id'],1,$deposit,1,8,"押金:{$seller_balance},任务{$data_info['task_number']}取消返还");
+                $d2=finance($seller_info['id'],1,$deposit,2,8,"银锭:{$seller_reward},任务{$data_info['task_number']}取消返还");
+                if(!$d1 || !$d2){
+                    throw new Exception('写入财务出错!');
+                }
+            }
             $res1=admin_log("淘宝任务审核", "管理员{$this->admin_info['user_name']}操作:任务编号{$data_info['task_number']}");
             if(!$res1){
                 throw new Exception('操作日志写入失败！');
@@ -936,6 +948,19 @@ class Task extends Base
 
             }
         }
+
+        if($task['is_hour_publish']){
+            $hour_msg = json_decode($task['hour_msg']);
+
+            $task['hour_msg'] = '0点:'.$hour_msg['0'].'单'.'&nbsp;&nbsp;'.'1点:'.$hour_msg['1'].'单'.'&nbsp;&nbsp;'.'2点:'.$hour_msg['2'].'单'.'&nbsp;&nbsp;'.'3点:'.$hour_msg['3'].'单'.'&nbsp;&nbsp;'.
+                '4点:'.$hour_msg['4'].'单'.'&nbsp;&nbsp;'.'5点:'.$hour_msg['5'].'单'.'&nbsp;&nbsp;'.'6点:'.$hour_msg['6'].'单'.'&nbsp;&nbsp;'.'7点:'.$hour_msg['7'].'单'.'&nbsp;&nbsp;'.
+                '8点:'.$hour_msg['8'].'单'.'&nbsp;&nbsp;'.'9点:'.$hour_msg['9'].'单'.'&nbsp;&nbsp;'.'10点:'.$hour_msg['10'].'单'.'&nbsp;&nbsp;'.'11点:'.$hour_msg['11'].'单'.'&nbsp;&nbsp;'.
+                '12点:'.$hour_msg['12'].'单'.'&nbsp;&nbsp;'.'13点:'.$hour_msg['13'].'单'.'&nbsp;&nbsp;'.'14点:'.$hour_msg['14'].'单'.'&nbsp;&nbsp;'.'15点:'.$hour_msg['15'].'单'.'&nbsp;&nbsp;'.
+                '16点:'.$hour_msg['16'].'单'.'&nbsp;&nbsp;'.'17点:'.$hour_msg['17'].'单'.'&nbsp;&nbsp;'.'18点:'.$hour_msg['18'].'单'.'&nbsp;&nbsp;'.'19点:'.$hour_msg['19'].'单'.'&nbsp;&nbsp;'.
+                '20点:'.$hour_msg['20'].'单'.'&nbsp;&nbsp;'.'21点:'.$hour_msg['21'].'单'.'&nbsp;&nbsp;'.'22点:'.$hour_msg['22'].'单'.'&nbsp;&nbsp;'.'23点:'.$hour_msg['23'].'单'.'&nbsp;&nbsp;';
+        }
+
+
         $task['goods'] = $goods;
         $this->assign('task', $task);
         return view();
@@ -1659,6 +1684,52 @@ class Task extends Base
             return $this->error('操作日志写入失败！');
         }
         return $this->success($text);
+    }
+
+
+    public function operation2(){
+        $data=input();
+        if(!$data['id'] ||!$data['type']){
+            return $this->error('参数错误！');
+        }
+
+        if(!$data['table_order_id']){
+            return   $this->error('请填写单号！');
+        }
+        $task_info=db('user_task')->where('id',$data['id'])->find();
+        if(!$task_info){
+            return   $this->error('订单不存在！');
+        }
+
+        $update_data['table_order_id']=$data['table_order_id'];
+
+
+                $update_data['update_time']=time();
+                $msg="修改";
+
+        $res=db('user_task')->where('id',$data['id'])->update($update_data);
+        if($res){
+            $res1=admin_log("买家购买管理订单{$msg}", "管理员{$this->admin_info['user_name']}操作:任务编号{$task_info['task_number']}");
+            if(!$res1){
+                return $this->error('操作日志写入失败！');
+            }
+            return $this->success("{$msg}成功！");
+        }else{
+            return $this->error("{$msg}失败！");
+        }
+    }
+
+    public function operation1(){
+        $id=input('id');
+        if(!$id){
+            return $this->error('参数错误！');
+        }
+        $task_info=db('user_task')->where('id',$id)->field('id,delivery,table_order_id')->find();
+        if(!$task_info){
+            return  $this->error('订单不存在！');
+        }
+        $this->assign('task_info',$task_info);
+        return view('PlatformCounterpayment/operation1');
     }
 
     public function operation(){

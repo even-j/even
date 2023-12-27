@@ -4,14 +4,14 @@
 <div class="right">
 	<!-- 基本信息标题 --> 
 	<div class="right-top">
-		<b>个人中心 / 资金管理 /<strong> 押金提现 </strong></b>
+		<b>个人中心 / 资金管理 /<strong> 本金提现 </strong></b>
 	</div>
 	<div class="user_content">
 		<!-- 押金提现 -->
 		<div class="web_gonggao">
 			<div class="gonggao_row">
 				<div class="gonggao_top">
-					<a href="javascript:" class="select_on">押金提现</a>
+					<a href="javascript:" class="select_on">本金提现</a>
 				</div>
 			</div>
 		</div>
@@ -26,7 +26,13 @@
 			<!-- 打款方式 -->
 			<div class="dakuan">
 				<p class="dakuan_title" style="align-self: flex-start;margin-top: 2px;">打款方式:</p>
-				<div class="dakuan_col">
+				<div class="radio">
+					<el-radio-group v-model="radio2" @change="labelChange">
+						<el-radio label="1">银行卡</el-radio>
+						<el-radio label="2">支付宝</el-radio>
+					</el-radio-group>
+				</div>
+				<!-- <div class="dakuan_col">
 					<div class="dakuan_box1">
 						<span>银行卡转账</span>
 						<a href="{:url('index/bank')}" target="_blank" class="dakuan_view">查看提现账户</a>
@@ -34,7 +40,7 @@
 					<div class="dakuan_box2">
 						<p>提示: <span>提现账户只能绑定一张银行卡</span></p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<!-- 提现金额 -->
 			<div class="dakuan">
@@ -83,6 +89,7 @@
 			data: function () {
 				return {
 					radio: "1",
+					radio2: "1",
 					/* 输入框数量默认值5 */
 					tiXianNum: "{$config.seller_min_money}",
 					/* 到账金额 */
@@ -109,7 +116,11 @@
 						type: "warning"
 					}).then(function () {
 
-						$.post("{:url('recharge/cashDo')}",{price:that.tiXianNum,pay_pwd:that.pay_pwd},function(res){
+						$.post("{:url('recharge/cashDo')}",{
+							price:that.tiXianNum,
+							pay_pwd:that.pay_pwd,
+							pay_type:that.radio2,
+						},function(res){
 							if(res.code==1){
 								layer.msg(res.msg,{icon:1,time:2000},function(){
 									location.href=res.url;
@@ -127,4 +138,9 @@
 		});
 	});
 </script>
+<style>
+	span{
+		display: inline-block;
+	}
+</style>
 {include file="public/footer" /}

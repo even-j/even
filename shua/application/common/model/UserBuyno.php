@@ -10,6 +10,9 @@ class UserBuyno extends Model
     public  function getCreateTimeAttr($value){
         return date('Y-m-d H:i:s',$value);
     }
+    public  function getCreatTimeAttr($value){
+        return date('Y-m-d H:i:s',$value);
+    }
     //vip到期时间
     public function getVipTimeAttr($value){
         return date('Y-m-d H:i:s',$value);

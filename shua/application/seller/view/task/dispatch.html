@@ -121,9 +121,11 @@
         <el-radio :label="2" :value="2" border size="medium" style='width: 138px;' v-model="datainfo.terminal">
           <b class="el-icon-mobile-phone"></b> 手机
         </el-radio>
+        <!--
         <el-radio :label="1" :value="1" border size="medium" style='width: 150px;' v-model="datainfo.terminal">
           <b class="el-icon-s-platform"></b> pc端
         </el-radio>
+       -->
       </div>
       <h5>4.选择商品</h5>
       <div class="radio" id='bangding'>
@@ -168,7 +170,7 @@
                   </tr>
                   <tr>
                     <td class="td-one">
-                      <img :src="url+item.pc_img" alt="" class="goodsPicture"
+                      <img :src="item.pc_img" alt="" class="goodsPicture"
                            onerror="imgError(this)">&nbsp;&nbsp;
                       <p class="titles">{{item.name}}</p>
                     </td>
@@ -226,7 +228,7 @@
         <div class="upload_pic">
           <p>二维码：</p>
           <div class="el_pic_upload">
-            <el-upload :auto-upload="false" :file-list="url+img"
+            <el-upload :auto-upload="false" :file-list="img"
                        :limit="1"
                        :on-change="handleChange"
                        :on-remove="ewmRemove"
@@ -347,7 +349,7 @@
               </tr>
               <tr>
                 <td class="td-one">
-                  <img :src="url+item.pc_img" alt="" class="goodsPicture" onerror="imgError(this)">&nbsp;&nbsp;
+                  <img :src="item.pc_img" alt="" class="goodsPicture" onerror="imgError(this)">&nbsp;&nbsp;
                   <p class="titles">{{item.name}}</p>
                 </td>
                 <td style="width:150px;text-align:left;padding-left:20px ;"><span style="color: red;">{{item.show_price}} 元</span>
@@ -631,7 +633,7 @@
             /* 通道图片*/
             imgSuccress:function(res){
                 if(res.code==1){
-                    this.datainfo.channel_img.push(url+res.data);
+                    this.datainfo.channel_img.push(res.data);
                 }else{
                     layer.alert(res.msg);
                 }

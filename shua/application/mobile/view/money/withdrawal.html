@@ -21,7 +21,8 @@
                 el: ".tfkz-container",
                 data: function () {
                     return {
-                        radio: "1",
+                        radio: "2",
+                        radio2: "2",
                         /* 输入框数量默认值5 */
                         tiXianNum: {$admin_limit.user_min_money},
                         /* 提现密码的值 */
@@ -89,7 +90,8 @@
                                 data : {
                                     "price":that.tiXianNum,
                                     "password":that.tiXianPassWordValue,
-                                    "radio":that.radio
+                                    "radio":that.radio,
+                                    "pay_type":that.radio2,
                                 },
                                 success : function(data){
                                     if(data.code==1){
@@ -211,22 +213,22 @@
             </div>
             <p class="yue">本金余额：<span>{$users.balance}</span><span>元</span></p>
             <p class="yue">银锭余额：<span>{$users.reward}</span><span>银锭</span></p>
-            <div class="dakuan-style">
-                <span class="dakuan-style-title">打款方式：</span>
-                <span class="zhuanzhang">银行卡转账</span>
-                <a href="{:url('my/withdrawal')}">查看提现账户</a>
-                <p>提示: <span>提现账户只能绑定一张银行卡</span></p>
+            <div class="select-tixian">
+                <span>打款方式：</span>
+                <van-radio-group class="radio-box" v-model="radio2">
+                    <van-radio class="radio-box-item active" name="1">银行卡</van-radio>
+                    <van-radio class="radio-box-item" name="2">支付宝</van-radio>
+                </van-radio-group>
             </div>
             <div class="tixian-jine">
                 <span class="tixian-jine-title">提现金额：</span>
                 <div class="stepper">
-                    <van-stepper v-model="tiXianNum" @change="handleChange"  :decimal-length="2" :min="tiXianPrice" />
+                    <van-stepper key="123" v-model="tiXianNum" @change="handleChange"  :decimal-length="2" :min="tiXianPrice" />
                 </div>
                 <p class="tixian-min">单笔提现最低 <span>{{tiXianPrice}}</span> 元</p>
-
+                <br>
+                <br>
                 <div class="alert">
-                   <!--<p v-html="tiXianContent"><span></span></p>-->
-                   <p><span></span></p>
                    <p>预计2个工作日内（国家法定假日和双休日顺延）平台完成提现操作 到账时间以各大银行为准,预计3-5工作日左右</p>
  
                 </div>

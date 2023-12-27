@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <script src="/static/seller/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/seller/node_modules/element-ui/lib/theme-chalk/index.css" />
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/seller/css/register.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/register.css"/>
     <script charset="utf-8" src="/static/seller/layer/layer.js" type="text/javascript"></script>
     <script src="/static/seller/js/vue.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/seller/node_modules/element-ui/lib/index.js" type="text/javascript" charset="utf-8"></script>
     <style>
       .login_box {
-        height: 465px!important;
+        height: 565px!important;
       }
     </style>
     <script type="text/javascript">
@@ -31,10 +32,101 @@
                 login_pwd:'',
                 login_pwd2:'',
                 qq:'',
-                dxyzm:''
+                dxyzm:'',wechat:'',
+
+              provinceValue2: "",
+              cityValue2: "",
+              blockValue2: "",
+              provinceList2: [],
+              cityList2: [],
+              blockList2: [],
+              newCity2: [],
+              newBlock2: [],
+              /* 省市常用登陆地 */
+              mapJson: "/static/buy/json/map.json",
             }
           },
+
+          created: function () {
+            this.getCityData2();
+          },
           methods: {
+            // 获取json数据,二级联动
+            getCityData2: function () {
+              var that = this;
+              axios.get(this.mapJson).then(function (response) {
+                if (response.status === 200) {
+                  var data = response.data;
+                  // 省市区数据分类
+                  for (var item in data) {
+                    if (item.match(/0000$/)) {
+                      that.provinceList2.push({
+                        id: item,
+                        value: data[item],
+                        children: []
+                      });
+                    } else if (item.match(/00$/)) {
+                      that.newCity2.push({
+                        id: item,
+                        value: data[item],
+                        children: []
+                      });
+                    } else {
+                      that.newBlock2.push({
+                        id: item,
+                        value: data[item]
+                      });
+                    }
+                  }
+                  // 分类市级
+                  for (var index in that.provinceList2) {
+                    for (var index1 in that.newCity2) {
+                      if (that.provinceList2[index].id.slice(0, 2) === that.newCity2[index1].id.slice(0,
+                              2)) {
+                        that.provinceList2[index].children.push(that.newCity2[index1]);
+                      }
+                    }
+                  }
+                  // 分类区级
+                  for (var item1 in that.newCity2) {
+                    for (var item2 in that.newBlock2) {
+                      if (that.newBlock2[item2].id.slice(0, 4) === that.newCity2[item1].id.slice(0, 4)) {
+                        that.newCity2[item1].children.push(that.newBlock2[item2]);
+                      }
+                    }
+                  }
+                } else {
+                  // console.log(response.status);
+                }
+              }).catch(function (error) {
+                // console.log(typeof + error);
+              })
+            },
+            // 选省
+            chooseProvince2: function (e) {
+              for (var index2 in this.provinceList2) {
+                if (e === this.provinceList2[index2].id) {
+                  this.provinceValue2 = this.provinceList2[index2].value;
+                  this.cityList2 = this.provinceList2[index2].children;
+                  this.cityValue2 = this.provinceList2[index2].children[0].value;
+                  this.blockList2 = this.provinceList2[index2].children[0].children;
+                }
+              }
+              console.log(this.provinceValue2, this.cityValue2);
+            },
+            // 选市
+            chooseCity2: function (e) {
+              for (var index3 in this.newCity2) {
+                if (e === this.newCity2[index3].id) {
+                  this.cityValue2 = this.newCity2[index3].value;
+                  this.blockList2 = this.newCity2[index3].children;
+                }
+              }
+              console.log(this.cityValue2);
+            },
+
+
+
             /* 失败的弹框 */
             alertError: function(e) {
               this.$message.error(e);
@@ -52,7 +144,7 @@
                if(!this.login_pwd) return layer.msg('密码不能为空',{icon:2});
                if(this.login_pwd2 !== this.login_pwd)return layer.msg('两次密码输入不一样',{icon:2});
                if(!this.qq)return layer.msg('QQ账号不能为空',{icon:2});
-               if(!this.dxyzm)return layer.msg('验证码不能为空,请点击发送验证码',{icon:2});
+               //if(!this.dxyzm)return layer.msg('验证码不能为空,请点击发送验证码',{icon:2});
               $.ajax({
                 type : 'POST',
                 url : "{:url('Register/registerDo')}",
@@ -165,12 +257,36 @@
             <img class="input_pic" src="/static/buy/img/qq.png" />
             <input type="text" name="qq" placeholder="请输入QQ账号" class="user_input" maxlength="11" v-model="qq" @change="qqChange()">
           </div>
-          <!-- 验证码 -->
+
+          <div class="input_box">
+            <img class="input_pic" src="/static/buy/img/user.png" />
+            <input type="text" name="wechat" id="wechat" placeholder="请输入微信号(必填,否则不能放单)" class="user_input" v-model="wechat">
+          </div>
+          <!-- 验证码
           <div class="yzm_input_box">
             <img class="yzm_pic" style="height: 26px;" src="/static/buy/img/123.png" />
             <input type="text" placeholder="短信验证码" class="yzm_input" maxlength="6"  v-model="dxyzm">
-            <el-button class="el_btn1" type="primary" :disabled="disabled">发送验证码</el-button>
+            <el-button
+                    class="el_btn1" type="primary" :disabled="disabled">发送验证码</el-button>
           </div>
+
+-->
+
+          <div class="input_box">
+            <img class="input_pic" src="/static/buy/img/user.png" />
+            <el-select class="el_select" v-model="provinceValue2" @change="chooseProvince2" placeholder="请选择省份">
+              <el-option v-for="item in provinceList2" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+          </div>
+
+          <div class="input_box">
+            <img class="input_pic" src="/static/buy/img/user.png" />
+            <el-select class="el_select" v-model="cityValue2" @change="chooseCity2" placeholder="请选择城市">
+              <el-option v-for="item in cityList2" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+          </div>
+
+
           <div class="btn">
             <el-button class="el_btn2" type="primary" @click="click">注册</el-button>
           </div>

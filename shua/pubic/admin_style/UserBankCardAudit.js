@@ -23,6 +23,11 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         return '<p class="p2">'+d.user_id.username+'</p>';
     };
 
+    var tjuser = function (d) {
+        return '<p class="p2">'+d.user_id.tjuser+'</p>';
+    };
+
+
     var qq = function (d) {
         return '<p class="p2">'+d.user_id.qq+'</p>';
     };
@@ -43,6 +48,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'id', title: '序号', minWidth: 100, align: "center" },
             { field: 'user_id', title: '用户名', minWidth: 100, align: "center" , templet: username},
             { field: 'idcard_img_a', title: '收款账号', minWidth: 100, width: 315, align: "center", templet: bank },
+            { field: 'zfb', title: '支付宝', minWidth: 100, width: 315, align: "center"},
             // { field: 'bank_user', title: '持卡人', minWidth: 100, align: "center" },
             // { field: 'bank_id', title: '银行名称', minWidth: 100, align: "center" },
             // { field: 'city', title: '开户行城市', minWidth: 165, align: "center" },
@@ -51,6 +57,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'idcard', title: '证件号码', minWidth: 250, align: "center" },
             { field: 'mobile', title: '手机号码', minWidth: 100, align: "center" },
             { field: 'user_id', title: 'QQ', minWidth: 100, align: "center" , templet: qq},
+            { field: 'create_time', title: '提交时间', minWidth: 50, width: 80, align: "center" },
+
+            { field: 'tjuser', title: '来源用户ID', minWidth: 100, align: "center" , templet: tjuser},
+
             { field: 'idcard_img_a', title: '身份证正面照', minWidth: 100, height: 315, align: "center", templet: tplImg },
             { field: 'idcard_img_b', title: '身份证反面照', minWidth: 100, height: 315, align: "center", templet:tplImg2},
             { field: 'state', title: '状态', minWidth: 100, fixed: "right", align: "center" },
@@ -183,6 +193,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
         var bank_number = field.bank_number; //卡号
         var bank_seller = field.bank_seller; //开户人
         var qq = field.qq; //QQ号
+        var tjuser = field.tjuser; //QQ号
         table.reload("userListTable", {//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
             page: {
                 curr: 1 //重新从第 1 页开始
@@ -196,6 +207,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
                 , bank_number: bank_number  //卡号
                 , bank_seller: bank_seller  //开户人
                 , qq: qq  //QQ号
+                ,tjuser:tjuser
             }
         })
         setTimeout(function () {

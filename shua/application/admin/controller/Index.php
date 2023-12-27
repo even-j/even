@@ -30,6 +30,12 @@ class Index extends Base
         $data['cash_price']=$data['seler_cash_price']+$data['user_cash_price'];
         // 获取今日充值总金额
         $data['recharge_price']=Db::name('recharge')->where(['state'=>1]) ->whereTime('create_time','today')->sum('price');
+
+        $data['seller_balance']=Db::name('seller')->sum('balance');
+        $data['seller_reward']=Db::name('seller')->sum('reward');
+
+        $data['user_balance']=Db::name('users')->sum('balance');
+        $data['user_reward']=Db::name('users')->sum('reward');
         $this->assign('data',$data);
         return view();
     }

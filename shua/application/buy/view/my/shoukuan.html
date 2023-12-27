@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css" />
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/daiChuLi.css"/>
@@ -76,6 +76,7 @@
                     // 确认返款
                     queRenFanKuan:function () {
                         var that = this;
+                        if(!that.localFile) return vm.alertError("请上传好评截图！");
                         this.$confirm('商家确认返款金额为:' + this.alertNum, '温馨提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消',
@@ -88,6 +89,7 @@
                                 async: true,
                                 data: {
                                     'id': id,
+                                    "high_praise_img":that.localFile,
                                 },
                                 success: function (data) {
                                     if (data.code == 1) {
@@ -143,7 +145,7 @@
                             <a href="javascript:" class="select_on">待处理事项</a>
                         </div>
                         <div class="gonggao_top">
-                            <el-button type="danger" @click="queRenFanKuan">确认返款</el-button>
+                            <el-button type="danger" @click="dialogVisible = true">确认收货返款</el-button>
                         </div>
                     </div>
                 </div>
@@ -181,6 +183,25 @@
                 </div>
 
 
+                <el-dialog title="温馨提示" :visible.sync="dialogVisible">
+                    <div>
+                        <p>请上传好评截图：</p>
+                        <p style="margin: 20px 0;">
+                            <el-upload ref="unload" action="string"
+                                       list-type="picture-card"
+                                       :on-remove="handleRemove"
+                                       :on-change="handleChange"
+                                       :limit="1"
+                                       :auto-upload="false">
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                        </p>
+                    </div>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="queRenFanKuan">确 定</el-button>
+                    </div>
+                </el-dialog>
                
 
             </div>

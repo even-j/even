@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/jiBenXinXi.css"/>
@@ -144,7 +144,7 @@
                              if(!this.phoneNumObj.oldPhoneNum){ return vm.alertError("原手机号码不能为空");}
                              if(!this.phoneNumObj.zhifuPassWord) {return vm.alertError("支付密码不能为空");}
                              if(!this.phoneNumObj.newPhoneNum) {return vm.alertError("新手机号码不能为空");}
-                             if(!this.phoneNumObj.newYzmNum) {return vm.alertError("新手机号码验证码不能为空");}
+                             //if(!this.phoneNumObj.newYzmNum) {return vm.alertError("新手机号码验证码不能为空");}
                             $.ajax({
                                 type : 'POST',
                                 url : "{:url('buy/my/editphone')}",
@@ -177,9 +177,10 @@
                         if(!this.passWordObj.newPassWord) {return vm.alertError("新登录密码不能为空");}
                         if(!this.passWordObj.queRenPassWord){ return vm.alertError("确认登录密码不能为空");}
                         if(!this.passWordObj.phoneNum){ return vm.alertError("手机号码不能为空");}
-                        if(!this.passWordObj.newYzmNum) {return vm.alertError("验证码不能为空");}
+                        //if(!this.passWordObj.newYzmNum) {return vm.alertError("验证码不能为空");}
                         if (!zhifuReg.test(this.passWordObj.newYzmNum)) {
-                            return vm.alertError("验证码格式不规范");}
+                            //return vm.alertError("验证码格式不规范");
+                        }
                         $.ajax({
                             type : 'POST',
                             url : "{:url('buy/my/edit_login_pwd')}",
@@ -212,9 +213,10 @@
                         if(!this.zhifuPassWordObj.newZhiFuPassWord) {return vm.alertError("新支付密码不能为空");}
                         if(!this.zhifuPassWordObj.queRenZhiFuPassWord) {return vm.alertError("确认新密码不能为空");}
                         if(!this.zhifuPassWordObj.phoneNum){ return vm.alertError("手机号码不能为空");}
-                        if(!this.zhifuPassWordObj.yzmNum) return vm.alertError("验证码不能为空");
+                        //if(!this.zhifuPassWordObj.yzmNum) return vm.alertError("验证码不能为空");
                         if (!zhifuReg.test(this.zhifuPassWordObj.newZhiFuPassWord)) {
-                            return vm.alertError("您输入的密码不规范");}
+                            //return vm.alertError("您输入的密码不规范");
+                        }
                         $.ajax({
                             type : 'POST',
                             url : "{:url('buy/my/edit_pay_pwd')}",
@@ -416,6 +418,11 @@
                             <div>QQ账号:</div>
                             <div class="user_gray">{$users.qq}</div>
                         </div>
+
+                        <div class="user_detail">
+                            <div>居住城市:</div>
+                            <div class="user_gray">{$users.province}-{$users.city}</div>
+                        </div>
                     </div>
                     <!-- 用户信息右 -->
                     <div class="user_right">
@@ -425,10 +432,14 @@
                             <el-button type="primary" icon="el-icon-edit" circle size="small"
                                        @click="openDialogPhoneNum"></el-button>
                         </div>
+
+                        <!--
                         <div class="user_detail">
                             <div>VIP延时:</div>
                             <div><a href="{:url('my/vip_recharge')}" class="user_blue">点击延时VIP</a></div>
                         </div>
+                        -->
+
                         <div class="user_detail">
                             <div>登录密码:</div>
                             <div class="user_blue">**********</div>
@@ -445,6 +456,17 @@
                                            @click="openDialogZhiFuPassWord"></el-button>
                             </div>
                         </div>
+
+
+                        <div class="user_detail">
+                            <div>微信账号:</div>
+                            <div class="user_gray">{$users.wechat}</div>
+                        </div>
+                        <div class="user_detail">
+                            <div>身份证:</div>
+                            <div class="user_gray">{$users.province1}-{$users.city1}</div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- 修改用户名 -->
@@ -502,6 +524,7 @@
                                 </el-input>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                            <!--
                             <div class="el_form_item">
                                 <p>验证码:</p>
                                 <el-input v-model="phoneNumObj.newYzmNum" placeholder="请输入验证码" maxlength="6" class="el_form_width"
@@ -514,6 +537,8 @@
                                            @click="sendYzm" :disabled="yzmDisabled" v-html="yzmMsg"></el-button>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                            -->
+
                         </el-form>
                         <!-- 修改密码按钮 -->
                         <div slot="footer" class="dialog-footer" style="align-self: flex-end;margin: 20px;">
@@ -556,6 +581,7 @@
                                 </el-input>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                            <!--
                             <div class="el_form_item">
                                 <p>验证码:</p>
                                 <el-input v-model="passWordObj.newYzmNum" placeholder="请输入验证码" maxlength="6" class="el_form_width"
@@ -568,6 +594,7 @@
                                            @click="sendYzm2" :disabled="yzmDisabled2" v-html="yzmMsg2"></el-button>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                           -->
                         </el-form>
                         <!-- 修改密码按钮 -->
                         <div slot="footer" class="dialog-footer" style="align-self: flex-end;margin: 20px;">
@@ -616,6 +643,7 @@
                                 </el-input>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                            <!--
                             <div class="el_form_item">
                                 <p>验证码:</p>
                                 <el-input v-model="zhifuPassWordObj.yzmNum" placeholder="请输入验证码" maxlength="6" class="el_form_width"
@@ -628,6 +656,7 @@
                                            @click="sendYzm3" :disabled="yzmDisabled3" v-html="yzmMsg3"></el-button>
                                 <span style="margin-left: 10px;color: red;">*</span>
                             </div>
+                            -->
                         </el-form>
                         <!-- 支付密码按钮 -->
                         <div slot="footer" class="dialog-footer" style="align-self: flex-end;margin: 20px;">

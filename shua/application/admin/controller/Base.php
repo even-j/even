@@ -78,7 +78,7 @@ class Base extends Controller
      * @throws \think\exception\DbException
      */
     public function menu(){
-        if(!Cache::get('menu'.$this->role_id)){
+        //if(!Cache::get('menu'.$this->role_id)){
             if(Db::name('admin_role')->where(['id'=>$this->role_id])->value('is_susper')==1){
                 $res = Db::name('admin_menu')->where(['state'=>1,'fid'=>0])->order('sort desc')->field('id,title,href,fid,spread,icon')->select();
                 if($res){
@@ -139,8 +139,10 @@ class Base extends Controller
             $menu = $res;
 
             Cache::set('menu'.$this->role_id,$menu,3600);//缓存1小时
-        }
-        return Cache::get('menu'.$this->role_id);
+        //}
+
+
+        return $menu;//Cache::get('menu'.$this->role_id);
     }
 
     protected function checkPower(){

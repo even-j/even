@@ -22,7 +22,7 @@ class Recommend extends Base
         if(Db::name('user_task')->where(['user_id'=>$this->id])->where('state',1)->count('id') >= $system['invitation_num'] ){
             $state = 1;
             $url = [
-                'seller' => $_SERVER['HTTP_HOST']. '/index.php/seller/register/index/type/1/invite/'.$this->invite_code,
+                'seller' => $_SERVER['HTTP_HOST']. '/index.php/seller/login/register/type/1/invite/'.$this->invite_code,
                 'user' => $_SERVER['HTTP_HOST']. '/index.php/buy/login/register/type/1/invite/'.$this->invite_code,
             ];
         }else{
@@ -69,6 +69,9 @@ class Recommend extends Base
             $order = "vip_time asc";
         }else{
             $order = "last_time asc";
+        }
+        if( isset($data['mobile']) && $data['mobile']){
+            $map['mobile'] = $data['mobile'];
         }
         if($data['searchTime']){
             $map['create_time'] = ['between',[strtotime($data['searchTime'][0]),strtotime($data['searchTime'][1])]];

@@ -381,28 +381,28 @@
                     <label>收款银行名称：</label>
                     <div class="input-group spinner">
                         <input type="text" class="form-control text-center" value="{$data.bank_name}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                               name="bank_name">
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <label>支行名称：</label>
                     <div class="input-group spinner">
                         <input type="text" class="form-control text-center" value="{$data.bank_zhihang}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                               name="bank_zhihang">
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <label>银行卡号：</label>
                     <div class="input-group spinner">
                         <input type="text" class="form-control text-center" value="{$data.bank_num}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                               name="bank_num">
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <label>银行卡姓名：</label>
                     <div class="input-group spinner">
                         <input type="text" class="form-control text-center" value="{$data.bank_user}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                               name="bank_user">
                     </div>
                 </div>
 
@@ -410,7 +410,7 @@
                     <label>QQ群号：</label>
                     <div class="input-group spinner">
                         <input type="text" class="form-control text-center" value="{$data.qq}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                               name="qq">
                     </div>
                 </div>
 
@@ -424,17 +424,19 @@
 
                 <div class="form-group col-6">
                     <label>支付宝收款二维码：</label>
-                    <div class="input-group spinner">
-                        <input type="text" class="form-control text-center" value="{$data.alipay_url}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                    <div class="input-group spinner" style="flex-direction: column;">
+                        <input type="file" style="width: 100%;" class="form-control text-center alipay"  placeholder="请输入内容" lay-verify="input10">
+                        <img src="{$data.alipay_url}" id="alipay_url_display" alt="" style="width: 200px;height: auto;">
+                        <input type ='hidden' name = 'alipay_url' id ='alipay_url' value="{$data.alipay_url}">
                     </div>
                 </div>
 
                 <div class="form-group col-6">
                     <label>客服微信二维码：</label>
-                    <div class="input-group spinner">
-                        <input type="text" class="form-control text-center" value="{$data.wechat_url}" placeholder="请输入内容" lay-verify="input10"
-                               name="alipay">
+                    <div class="input-group spinner" style="flex-direction: column;">
+                        <input type="file" style="width: 100%;" class="form-control text-center wechat" placeholder="请输入内容" lay-verify="input10">
+                        <img src="{$data.wechat_url}" alt="" id ='wechat_url_display' style="width: 200px;height: auto;">
+                        <input type ='hidden' name = 'wechat_url' id ='wechat_url' value="{$data.wechat_url}">
                     </div>
                 </div>
 
@@ -488,6 +490,70 @@
     <script src="/admin_style/assets/plugins/select2/js/select2.js"></script>
     <script src="/admin_style/assets/js/pages/select2/select2-init.js"></script>
     <script>
+        
+        $(function(){
+            async function upload(f, flag){
+                let formData = new FormData()
+                //获取用户选择的图片
+                formData.append('file', f);
+
+                // 携带数据请求后台
+                $.ajax({
+                    url: "{:url('seller/goods/goodsImg')}",
+                    type: 'POST',
+                    data: formData,     // 传入实例化的formData对象，此对象包含了要上传的文件
+                    contentType: false, // 在请求服务器的时候，数据有非字符串格式的内容（文件是二进制）
+                    processData: false, // formData对象不需要转换成参数字符串   
+                    cache: false,
+                    success: function (data) {
+                        if ( flag === 'wechat' ) {
+                            $("#wechat_url").val(data.data)
+                            $("#wechat_url_display").hide()
+                        }
+                        if ( flag === 'alipay' ) {
+                            var alipay_url = data.data
+                            $("#alipay_url").val(data.data)
+                            $("#alipay_url_display").hide()
+                        }
+                    }
+                });
+            }
+
+            $(".wechat")[0].addEventListener('change', function () {
+                const { files } = this
+                const f = files[0]
+                try {
+                    let img_now = document.querySelector('.pic')
+                    if ( img_now ) img_now.remove()
+                } catch {
+
+                }
+                const img = document.createElement('img')
+                img.src = URL.createObjectURL(f)
+                img.style.width = '200px'
+                img.style.height = 'auto'
+                img.className = 'pic'
+                $(this).parent().append(img)
+                upload(f, 'wechat')
+            })
+            $(".alipay")[0].addEventListener('change', function () {
+                const { files } = this
+                const f = files[0]
+                try {
+                    let img_now = document.querySelector('.pic')
+                    if ( img_now ) img_now.remove()
+                } catch {
+
+                }
+                const img = document.createElement('img')
+                img.src = URL.createObjectURL(f)
+                img.style.width = '200px'
+                img.style.height = 'auto'
+                img.className = 'pic'
+                $(this).parent().append(img)
+                upload(f, 'alipay')
+            })
+        })
         layui.use(["tree", "util", 'form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function () {
             var tree = layui.tree,
                 util = layui.util,

@@ -19,11 +19,23 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
     var type = function (d) {
         return '<p class="p2">'+d.recharge_type+d.type+'</p>';
     };
+
+    var pay_type = function (d) {
+        return '<p class="p2">'+d.pay_type+'</p>';
+    };
+    var picUrl = function (d) {
+        if(d.pic_url)
+        return '<img class="jump" src="'+d.pic_url+'" style="height: 170px; width: 200px;" >';
+        else
+        return '';
+    };
+
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
         url: '/index.php/admin/finance/Recharge',
         method:'post', //默认是get
+        cellMinWidth: 60,
         page: true,
         limits: [10, 15, 20, 25,500,3000,5000],
         limit: 10,
@@ -37,12 +49,71 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'qq', title: 'qq', Width: 90, align: "center" },
             { field: 'user_type', title: '用户身份', Width: 90, align: "center" },
             { field: 'recharge_type', title: '类型/用途', Width: 90, align: "center" , templet:type},
+            { field: 'pay_type', title: '支付方式', Width: 90, align: "center" , templet:pay_type},
+
             //{ field: 'type', title: '用途', width: 90, align: "center"},
             { field: 'price', title: '金额', Width: 250, align: "center" , totalRow: true},
             { field: 'state', title: '状态', Width: 250, align: "center" },
             { field: 'create_time', title: '时间', Width: 70, align: "center" },
+            { field: 'pic_url', title: '转账截图',  minWidth: 100, height: 315, align: "center",templet:picUrl },
+            { title: '操作', minWidth: 100, templet: '#userListBar', fixed: "right", align: "center" }
         ]]
     });
+
+    //列表操作
+    table.on('tool(userList)', function (obj) {
+        var layEvent = obj.event,
+            data = obj.data;
+        if (layEvent === 'del') { //删除
+            layer.confirm('确定删除？', { icon: 3, title: '提示信息' }, function (index) {
+                // $.get("删除文章接口",{
+                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
+                // },function(data){
+                obj.del();
+                layer.close(index);
+                $.post("/index.php/admin/finance/Recharge_delete",{id:obj.data.id,type:1},function (res) {
+                    return  layer.msg(res.msg);
+                })
+                tableIns.reload();
+                layer.close(index);
+                // })
+            });
+        }else if(layEvent === 'examine'){
+            examine(data)
+        }
+    });
+    function examine(edit) {
+        console.log(edit)
+        layui.layer.open({
+            type: 2,
+            content:"/index.php/admin/finance/examine_recharge/id/"+edit.id+'/type/'+1,
+            area: ['900px', '300px'],
+            title: '违规备注',
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                //审核模态框中需要数据
+                //因为名字我不知道 就简单写了两个 模仿即可
+                if(edit){
+                    //console.log(edit,1111111111111);
+                    body.find(".dataid").val(edit.id);
+                }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+    }
+
+
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        $(document).on('click','.jump',function(){
+            return  window.open($(this).attr('src'));
+        });
+    });
+
     //申请时间
     var date2 = laydate.render({
         elem: '#application-Time'

@@ -70,7 +70,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function ()
             { field: 'collectionNumber', title: '已接/完成', width: 100, align: "center", templet:ywc },
             { field: 'goodss_num', title: '产品数量', minWidth: 50, width: 50, align: "center" },
             { field: 'goods_price', title: '商品售价', minWidth: 50, width: 80, align: "center" },
-            { field: 'is_free_shiping', title: '邮费', minWidth: 50, width: 50, align: "center"},
+           // { field: 'is_free_shiping', title: '邮1费', minWidth: 50, width: 50, align: "center"},
             { field: 'publish_time', title: '发布时间', minWidth: 50, width: 150, align: "center" },
             { field: 'task_status', title: '支付状态', minWidth: 50, width: 150, align: "center" },
             { title: '操作', minWidth: 100, width: 180, templet: userListBar, fixed: "right", align: "center" },

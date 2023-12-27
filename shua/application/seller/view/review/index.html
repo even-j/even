@@ -136,7 +136,7 @@
                 <div style="flex-wrap: wrap;">
                   <span class="goods">图片好评：</span>
                   <div style="display: inline-block;position: relative;margin-right:4.5px;padding: 0;" v-for="(row,index) in item.img">
-                    <img :src="url+row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
+                    <img :src="row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
                     <i @click="delImg(key,index)" class="el-icon-error" style="position: absolute;top:0px;right: 0px"></i>
                   </div>
                   <label style="display: inline-block">
@@ -165,7 +165,7 @@
                         :on-success="succress"
                         :ref='key'
                 >
-                  <video v-if="item.video" :src="url+item.video" controls class="avatar"></video>
+                  <video v-if="item.video" :src="item.video" controls class="avatar"></video>
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
                 <span style="display: inline;position: absolute;right: 0px;top: 80px;color: red">*请确认评价图片与商品库内选择规格是否一致</span>

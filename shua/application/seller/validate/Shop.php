@@ -12,8 +12,8 @@ class Shop extends Validate
      * @var array
      */
     protected $rule = [
-        'shop_name'  =>  'require|unique:shop',
-        'wangwang'  =>  'require|unique:shop',
+        'shop_name'  =>  'require',//|unique:shop
+        'wangwang'  =>  'require',//|unique:shop
         'name'=>'require',
         'mobile'  =>  'require|max:11|/^1[3-9]{1}[0-9]{9}$/',
         'province'  =>  'require',

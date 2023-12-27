@@ -30,8 +30,43 @@ class Login extends Controller//继承系统控制器
             if($db==1){
                 $now=time();
                 $users= Db::name('users')->where('username','=',$data['name'])->find();
+                
+                $admin_limit=Db::name('system')->where('id',1)->find();
+                $strs = str_replace('，', ',', $admin_limit['limit_mobile']);
+                $array = explode(',', $strs);
+                if(in_array($users['mobile'],$array)){
+                    return $this->error('此手机号码已被禁止登录，请联系客服');
+                }
+                $list_limit = Db::name('hei')->select()->toArray();
+                $mobileArr = $wwArr = $sfzArr = $qqArr =[];
+                foreach ($list_limit as $limit){
+                    if($limit['type']==1)$mobileArr[]=$limit['name'];
+                    if($limit['type']==2)$wwArr[]=$limit['name'];
+                    if($limit['type']==3)$qqArr[]=$limit['name'];
+                    if($limit['type']==4)$sfzArr[]=$limit['name'];
+                }
+
+                if(in_array($users['mobile'],$mobileArr)){
+                    return $this->error('黑名单禁止登录，请联系客服');
+                }
+
+                if($users['qq'] && in_array($users['qq'],$mobileArr)){
+                    return $this->error('黑名单禁止登录，请联系客服');
+                }
+                $idcard =Db::name('user_bank')->where('user_id',$users['id'])->where('state',1)->value('idcard');
+                if($idcard && in_array($idcard,$sfzArr)){
+                    return $this->error('黑名单禁止登录，请联系客服');
+                }
+
+                $wwlist = Db::name('user_buyno')->where('uid',$users['id'])->where('state',1)->column('wwid');
+                foreach ($wwlist as $ww){
+                    if($ww && in_array($ww,$wwArr)){
+                        return $this->error('黑名单禁止登录，请联系客服');
+                    }
+                }
+                
                 if($users['vip_time']<$now){
-                    $edituservip=Db::name('users')->where('username','=',$data['name'])->update(['vip'=>0]);
+                    //$edituservip=Db::name('users')->where('username','=',$data['name'])->update(['vip'=>0]);
                 }
                 $operation_time=time();
                 \think\Session::set('operation_time',$operation_time);
@@ -42,7 +77,7 @@ class Login extends Controller//继承系统控制器
                 Db::name('users')->where('id',$users['id'])->update($update);
                 return $this->success('登录成功正在跳转','mobile/my/index');
             }elseif($db==2){
-                // return $this->success('登录成功正在跳转','My/index');
+                 return $this->success('登录成功正在跳转','My/index');
                 return $this->error('账号或密码错误');
             }else{
                 return $this->error('用户不存在');
@@ -85,6 +120,7 @@ class Login extends Controller//继承系统控制器
     
     /*注册验证*/
     public function check_register(){
+        return $this->error('注册已关闭,请联系客服');
         $code=session('code');
         $data=input();
         $data['username']=trim($data['username']);
@@ -127,7 +163,7 @@ class Login extends Controller//继承系统控制器
             $field = 'seller_name';
         }
        // if(!$db)return $this->error('推荐链接有误！');
-        if ($data['invite']=''){
+        if ($data['invite']!=''){
         $tjuser = Db::name($db)->where(['invite_code'=>$data['invite'],'state'=>1])->value($field);
         if(!$tjuser)return $this->error('推荐链接有误！');
         }
@@ -147,6 +183,12 @@ class Login extends Controller//继承系统控制器
             'vip'           =>      1,
             'invite_code'   =>      md5(time().rand(0,99999)),
             'vip_time'      =>      $add_vip_time,
+
+            'wechat'            =>      isset($data['wechat'])?$data['wechat']:'',
+            'province'            =>      isset($data['province'])?$data['province']:'',
+            'city'            =>      isset($data['city'])?$data['city']:'',
+
+
         ];
         $user['tjuser'] = $tjuser;
         $user['tjuser_state'] = $data['type'];

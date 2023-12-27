@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css"/>
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/zhangHaoTiXian.css"/>
@@ -40,7 +40,12 @@
                             kaiHuName: "",
                             yinHangKaHao: "",
                             shenFenZhengNum: "",
-                            phoneNum: ""
+                            phoneNum: "",
+                            province: "",
+							city:"",
+                            zfb: '',
+							idcard_img:"",
+							idcard_img1:"",
                         },
                         provinceValue2: "",
                         cityValue2: "",
@@ -56,16 +61,14 @@
                             kaiHuName: "{$withdeawl.branch_name}",
                             yinHangKaHao: "{$withdeawl.bank_no}",
                             shenFenZhengNum: "{$withdeawl.idcard}",
-                            phoneNum: "{$withdeawl.mobile}"
+                            phoneNum: "{$withdeawl.mobile}",
+                            zfb: "{$withdeawl.zfb}",
                     },
                     provinceValue2: "{$withdeawl.province}",
                         cityValue2: "{$withdeawl.city}",
                         /* 变量保存图片 */
-                        localFile: "",
-                        localFile2: "",
-                        filelist: [{
-                        url: '{$withdeawl.idcard_img_a}'
-                    }],
+                        localFile: '{$withdeawl.idcard_img_a}',
+                        localFile2: '{$withdeawl.idcard_img_b}',
                         filelist2: [{
                         url: '{$withdeawl.idcard_img_b}'
                     }],
@@ -106,7 +109,20 @@
                     }
                 },
                 methods: {
-
+                    imgSuccress2:function(res){
+						if(res.code==1){
+							this.localFile2 = res.data
+						}else{
+							layer.alert(res.msg);
+						}
+					},
+                    imgSuccress:function(res){
+						if(res.code==1){
+							this.localFile = res.data
+						}else{
+							layer.alert(res.msg);
+						}
+					},
                     getMobile:function(){
                         $.post("{:url('my/bankMobile')}",{'mobile' : this.form.phoneNum},function(res){
                             if(res.code==1){
@@ -124,14 +140,11 @@
                         if(!this.provinceValue2) {return vm.alertError("请选择开户行城市");}
                         if(!this.form.kaiHuName) {return vm.alertError("请输入支行名称");}
                         if(!this.form.yinHangKaHao) {return vm.alertError("请输入银行卡号");}
-                        if (!bankreg.test(this.form.yinHangKaHao)) {
-                            return vm.alertError("银行卡号码格式不规范,请检查后重新输入");}
+                        if (!bankreg.test(this.form.yinHangKaHao)) {return vm.alertError("银行卡号码格式不规范,请检查后重新输入");}
                         if(!this.form.shenFenZhengNum) {return vm.alertError("请输入身份证号码");}
-                        if (!idcardReg.test(this.form.shenFenZhengNum)) {
-                            return vm.alertError("身份证号码格式不规范,请检查后重新输入");}
+                        if (!idcardReg.test(this.form.shenFenZhengNum)) {return vm.alertError("身份证号码格式不规范,请检查后重新输入");}
                         if(!this.form.phoneNum) {return vm.alertError("请输入银行预留手机号码");}
-                        if (!phoneReg.test(this.form.phoneNum)) {
-                            return vm.alertError("手机号码格式不规范,请检查后重新输入");}
+                        if (!phoneReg.test(this.form.phoneNum)) {return vm.alertError("手机号码格式不规范,请检查后重新输入");}
                         $.ajax({
                             type : 'POST',
                             url : "{:url('buy/my/add_bank_card')}",
@@ -145,6 +158,7 @@
                                 "bank_id":vm.form.yinHangName,
                                 "idcard":vm.form.shenFenZhengNum,
                                 "mobile":vm.form.phoneNum,
+                                "zfb":vm.form.zfb,
                                 "idcard_img_a":vm.localFile,
                                 "idcard_img_b":vm.localFile2,
                             },
@@ -194,25 +208,6 @@
                         /* 让弹框显示 */
                         this.dialogFormVisible = true;
                         this.inputDisabled = true;
-                    },
-                    /* 获取图片的base64路径 */
-                    handleChange: function (e) {
-                        var that = this;
-                        var reader = new FileReader();
-                        reader.readAsDataURL(e.raw);
-                        reader.onload = function () {
-                            // console.log(reader.result);
-                            that.localFile = reader.result;
-                        }
-                    },
-                    handleChange2: function (e) {
-                        var that = this;
-                        var reader = new FileReader();
-                        reader.readAsDataURL(e.raw);
-                        reader.onload = function () {
-                            // console.log(reader.result);
-                            that.localFile2 = reader.result;
-                        }
                     },
                     /* 判断上传文件类型和大小 */
                     beforeUpload: function (file) {
@@ -377,7 +372,7 @@
                                 "branch_name":vm.form.kaiHuName,
                                 "bank_id":vm.form.yinHangName,
                                 "idcard":vm.form.shenFenZhengNum,
-                                "mobile":vm.form.phoneNum,
+                                "mobile":vm.form.phoneNum,  "zfb":vm.form.zfb,
                                 "idcard_img_a":vm.localFile,
                                 "idcard_img_b":vm.localFile2,
                             },
@@ -430,7 +425,7 @@
         <div class="right_box">
             <!-- 基本信息标题 -->
             <div class="msg_title">
-                <p>个人中心&nbsp;/&nbsp;账号信息&nbsp;/&nbsp;<span class="msg_title_txt">基本信息</span></p>
+                <p>个人中心&nbsp;/&nbsp;账号信息&nbsp;/&nbsp;<span class="msg_title_txt">实名认证</span></p>
             </div>
             <div class="user_content">
 
@@ -438,7 +433,7 @@
                 <div class="web_gonggao">
                     <div class="gonggao_row">
                         <div class="gonggao_top">
-                            <a href="javascript:" class="select_on">提现账户管理</a>
+                            <a href="javascript:" class="select_on">实名认证管理</a>
                         </div>
                     </div>
                 </div>
@@ -447,8 +442,8 @@
                 <!-- 暂无银行卡 -->
                 <div class="yinhangka">
                     <img src="/static/buy/img/yinhangka.png" alt=""/>
-                    <p>暂未绑定银行卡</p>
-                    <el-button type="success" size="small" icon="el-icon-plus" @click="openDialogForm">绑定银行卡</el-button>
+                    <p>暂未实名认证</p>
+                    <el-button type="success" size="small" icon="el-icon-plus" @click="openDialogForm">实名认证</el-button>
                 </div>
                 {/empty}
 
@@ -474,7 +469,7 @@
                         </el-table-column>
                         <el-table-column label="操作" align="center">
                             <el-button type="warning" icon="el-icon-edit" size="small" :disabled="curDisabled"
-                                       @click="openDialogForm2">更换银行卡
+                                       @click="openDialogForm2">更换实名认证
                             </el-button>
                         </el-table-column>
                     </el-table>
@@ -519,6 +514,10 @@
                                 <el-input v-model="form.yinHangKaHao" placeholder="请输入银行卡号" class="el_form_width"></el-input>
                             </div>
                             <div class="el_form_item">
+                                <p>支付宝账号:</p>
+                                <el-input v-model="form.zfb" placeholder="请输入支付宝账号" class="el_form_width"></el-input>
+                            </div>
+                            <div class="el_form_item">
                                 <p>身份证号码:</p>
                                 <el-input v-model="form.shenFenZhengNum" placeholder="请输入身份证号" class="el_form_width"></el-input>
                             </div>
@@ -531,20 +530,30 @@
                             <div class="upload_pic">
                                 <p>身份证上传(正面):</p>
                                 <div class="el_pic_upload">
-                                    <el-upload ref="unload" action="string" list-type="picture-card" :on-remove="handleRemove"
-                                               :before-upload="beforeUpload" :on-change="handleChange" :limit="1" :auto-upload="false"
-                                               >
-                                        <i class="el-icon-plus"></i>
+                                    <el-upload ref="unload" 
+                                    action="{:url('seller/goods/goodsImg')}" 
+                                    :on-success="imgSuccress"
+                                    list-type="picture-card" 
+                                    :on-remove="handleRemove2"
+                                    :before-upload="beforeUpload"
+                                    :show-file-list="false">
+                                    <img style="width: 100%;height: 100%;" v-if="localFile" :src="localFile" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                     </el-upload>
                                 </div>
                             </div>
                             <div class="upload_pic">
                                 <p>身份证上传(反面):</p>
                                 <div class="el_pic_upload">
-                                    <el-upload ref="unload" action="string" list-type="picture-card" :on-remove="handleRemove2"
-                                               :before-upload="beforeUpload" :on-change="handleChange2" :limit="1" :auto-upload="false"
-                                               >
-                                        <i class="el-icon-plus"></i>
+                                    <el-upload ref="unload" 
+                                    action="{:url('seller/goods/goodsImg')}" 
+                                    :on-success="imgSuccress2"
+                                    list-type="picture-card" 
+                                    :on-remove="handleRemove2"
+                                    :before-upload="beforeUpload"
+                                    :show-file-list="false">
+                                    <img style="width: 100%;height: 100%;" v-if="localFile2" :src="localFile2" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                     </el-upload>
                                 </div>
                             </div>

@@ -76,7 +76,9 @@
 							<b class="size-font">支付</b>
 						</span>
       </div>
-      <h5>1.设置任务单数 &nbsp;&nbsp;&nbsp;&nbsp;<p>注：平台每次发布最多 <b>10</b> 单任务</p>
+      <h5>1.设置任务单数 &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <!--<p>注：平台每次发布最多 <b>10</b> 单任务</p>-->
       </h5>
       <table border="1" bordercolor="#eee" cellpadding="0" cellspacing="0" class="singular">
         <tr style="background: #f5f7fa;">
@@ -94,7 +96,7 @@
           <td v-if="datainfo.task_type==4">关键词分布</td>
           <td v-if="datainfo.task_type==5">关键词分布</td>
           <td v-if="datainfo.task_type==2">{{datainfo.tao_word}}</td>
-          <td v-if="datainfo.task_type==3"><img :src="url+datainfo.qr_code" alt="二维码" onerror="imgError(this)" style="height: 50px"></td>
+          <td v-if="datainfo.task_type==3"><img :src="datainfo.qr_code" alt="二维码" onerror="imgError(this)" style="height: 50px"></td>
           <td v-if="datainfo.task_type==4 || datainfo.task_type==1 || datainfo.task_type==5">
               <div v-for="item in datainfo.goods" style="margin: 5px 0">
                 <span style="margin: 5px 0">商品：{{item.name.substr(0,5)+'...'}}</span>
@@ -103,7 +105,7 @@
           </td>
          <!-- <td v-if="datainfo.task_type==5">{{datainfo.channel_name}}</td>-->
           <td>
-            <el-input-number :max='10' :min="0" label="描述文字" size="small"
+            <el-input-number :max='1000' :min="0" label="描述文字" size="small"
                              v-model="datainfo.num"></el-input-number>
           </td>
         </tr>
@@ -122,55 +124,64 @@
                 v-model="datainfo.memo" maxlength="100"></el-input>
       <h5 style="margin-top:20px ;">3.增值服务 </h5>
       <div class="service">
-        <div class="service-p ">
-          <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            是否包邮
-          </div>
-          <div class="service-right">
-            <div class="between-left">
-              <el-radio-group v-model="datainfo.is_free_shiping">
-                <el-radio :label="1">包邮</el-radio>
-                <el-radio :label="2">不包邮</el-radio>
-              </el-radio-group>
-            </div>
-            <div class="between-right">
-              <p v-if="datainfo.is_free_shiping==2"> 无需买手联系客服。商家每单额外支出 <b>10</b> 元作为运费押金，任务完成后运费押金将退还差价给商家 </p>
-            </div>
-          </div>
-        </div>
-        <div class="service-p">
-          <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            包裹重量
-          </div>
-          <div class="service-right">
-            <div class="between-left">
-              设置每个订单包裹重量
-              <el-input-number :max='30' :min="0" label="描述文字" size="small" v-model="datainfo.weight"></el-input-number>
-              kg
-            </div>
-            <div class="between-right">
-              <p> 最大不超过 <b>30kg</b>，可设置小数点后两位</p>
-            </div>
-          </div>
-        </div>
-        <div class="service-p">
-          <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            快速返款
-          </div>
-          <div class="service-right">
-            <div class="between-right">
-              <p> 服务费用为每单任务商品价格的 <b>0.6%</b></p>
-            </div>
-            <div class="between-right">
-              <el-tooltip effect="light" placement="bottom">
-                <div class="content" slot="content">
-                  {$pics[6]}
-                </div>
-                <i class="el-icon-question"></i>
-              </el-tooltip>
-            </div>
-          </div>
-        </div>
+
+        <!--
+         <div class="service-p ">
+
+           <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             是否包邮
+           </div>
+           <div class="service-right">
+             <div class="between-left">
+               <el-radio-group v-model="datainfo.is_free_shiping">
+                 <el-radio :label="1">包邮</el-radio>
+                 <el-radio :label="2">不包邮</el-radio>
+               </el-radio-group>
+             </div>
+             <div class="between-right">
+               <p v-if="datainfo.is_free_shiping==2"> 无需买手联系客服。商家每单额外支出 <b>10</b> 元作为运费本金，任务完成后运费本金将退还差价给商家 </p>
+             </div>
+           </div>
+         </div>
+
+         <div class="service-p">
+           <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             包裹重量
+           </div>
+           <div class="service-right">
+             <div class="between-left">
+               设置每个订单包裹重量
+               <el-input-number :max='30' :min="0" label="描述文字" size="small" v-model="datainfo.weight"></el-input-number>
+               kg
+             </div>
+             <div class="between-right">
+               <p> 最大不超过 <b>30kg</b>，可设置小数点后两位</p>
+             </div>
+           </div>
+         </div>
+
+
+         <div class="service-p">
+           <div class="service-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             快速返款
+           </div>
+           <div class="service-right">
+             <div class="between-right">
+               <p> 服务费用为每单任务商品价格的 <b>0.6%</b></p>
+             </div>
+             <div class="between-right">
+               <el-tooltip effect="light" placement="bottom">
+                 <div class="content" slot="content">
+                   {$pics[6]}
+                 </div>
+                 <i class="el-icon-question"></i>
+               </el-tooltip>
+             </div>
+           </div>
+         </div>
+
+
+
         <div class="service-p ">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             加赏任务佣金
@@ -185,6 +196,8 @@
             </div>
           </div>
         </div>
+
+
         <div class="service-p ">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             <el-checkbox v-model="datainfo.is_timing_pay">定时付款</el-checkbox>
@@ -202,6 +215,8 @@
             </div>
           </div>
         </div>
+ -->
+
         <div class="service-p ">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             <el-checkbox v-model="datainfo.next_day">隔天任务</el-checkbox>
@@ -218,6 +233,8 @@
             </div>
           </div>
         </div>
+
+<!--
         <div class="service-p ">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             <el-checkbox v-model="datainfo.is_repay">设置回购任务</el-checkbox>
@@ -228,6 +245,8 @@
             </div>
           </div>
         </div>
+-->
+
         <div class="service-p ">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             <el-checkbox v-model="datainfo.is_timing_publish">定时发布</el-checkbox>
@@ -240,6 +259,45 @@
 
           </div>
         </div>
+
+        <div class="service-p ">
+          <div class="service-left">&nbsp;&nbsp;&nbsp;
+            <el-checkbox v-model="datainfo.is_hour_publish">整点发布</el-checkbox>
+          </div>
+          <div class="service-right">
+            <div class="between-left">
+              00:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_0"></el-input-number>单
+              01:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_1"></el-input-number>单
+              02:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_2"></el-input-number>单 <br>
+
+              03:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_3"></el-input-number>单
+              04:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_4"></el-input-number>单
+              05:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_5"></el-input-number>单 <br>
+              06:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_6"></el-input-number>单
+              07:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_7"></el-input-number>单
+              08:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_8"></el-input-number>单 <br>
+              09:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_9"></el-input-number>单
+              10:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_10"></el-input-number>单
+              11:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_11"></el-input-number>单 <br>
+              12:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_12"></el-input-number>单
+              13:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_13"></el-input-number>单
+              14:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_14"></el-input-number>单 <br>
+              15:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_15"></el-input-number>单
+              16:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_16"></el-input-number>单
+              17:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_17"></el-input-number>单 <br>
+              18:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_18"></el-input-number>单
+              19:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_19"></el-input-number>单
+              20:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_20"></el-input-number>单 <br>
+              21:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_21"></el-input-number>单
+              22:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_22"></el-input-number>单
+              23:00<el-input-number :max='30' :min="0" label="" size="small" v-model="datainfo.time_23"></el-input-number>单
+
+            </div>
+          </div>
+        </div>
+
+
+        <!--
         <div class="service-p">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             任务接单间隔
@@ -278,6 +336,10 @@
 
           </div>
         </div>
+        -->
+
+
+
         <div class="service-p">
           <div class="service-left">&nbsp;&nbsp;&nbsp;
             <el-checkbox @change="onClick()" v-model="datainfo.is_praise">设置优质好评</el-checkbox>
@@ -310,7 +372,7 @@
                   <div v-for="(item,key) in val">
                     <span class="goods"><template v-if="key == 0">主商品</template><template v-else>副商品{{key}}</template>：</span>
                     <div style="display: inline-block;position: relative;margin-right:4.5px;padding: 0;" v-for="(row,index) in item.img">
-                      <img :src="url+row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
+                      <img :src="row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
                       <i @click="delImg(k,key,index)" class="el-icon-error" style="position: absolute;top:0px;right: 0px"></i>
                     </div>
                     <label style="display: inline-block">
@@ -341,7 +403,7 @@
                       action="{:url('task/uploadVideo')}"
                       :show-file-list="false"
                       :on-success="succress">
-                <video v-if="datainfo.video" :src="url+datainfo.video" controls class="avatar"></video>
+                <video v-if="datainfo.video" :src="datainfo.video" controls class="avatar"></video>
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
               <span style="display: inline;position: absolute;right: 0px;top: 80px;color: red">*请确认评价图片与商品库内选择规格是否一致</span>
@@ -387,7 +449,7 @@
                     terminal: 2,
                     num: 0,
                     memo: '',
-                    is_free_shiping: '',
+                    is_free_shiping: 1,
                     is_timing_publish: '',
                     next_day: '',
                     postage: 5,
@@ -440,7 +502,7 @@
             //下一步
             nextStep: function () {
                 if (this.datainfo.num <= 0) return layer.msg('请填写任务单数!', {icon: 2});
-                if (this.datainfo.weight <= 0) return layer.msg('请填写商品重量!', {icon: 2});
+               // if (this.datainfo.weight <= 0) return layer.msg('请填写商品重量!', {icon: 2});
                 if (this.datainfo.add_reward == 1) return layer.msg('加赏佣金最少2银锭!', {icon: 2});
                 if (this.datainfo.add_reward > 20) return layer.msg('加赏佣金，最多20银锭!', {icon: 2});
                 if(this.datainfo.is_video_praise==true && this.datainfo.video==''){
@@ -503,8 +565,8 @@
                     return layer.msg('请填写任务单数', {icon: 2});
                 }
                 if (that.datainfo.num > 5){
-                    this.datainfo.is_img_praise = false;
-                    return layer.msg('图片任务一次仅能发布5单任务', {icon: 2});
+                   // this.datainfo.is_img_praise = false;
+                   // return layer.msg('图片任务一次仅能发布5单任务', {icon: 2});
                 }
                 this.datainfo.img = [];
                 if (this.datainfo.is_img_praise == true) {
@@ -525,12 +587,12 @@
 
             showVideo:function() {
                 if (that.datainfo.num != 1){
-                    this.datainfo.is_video_praise = false;
-                    return layer.msg('视频任务有且仅能发一单任务！', {icon: 2});
+                    //this.datainfo.is_video_praise = false;
+                   // return layer.msg('视频任务有且仅能发一单任务！', {icon: 2});
                 }
                 if (that.datainfo.goods.length > 1){
-                    this.datainfo.is_video_praise = false;
-                    return layer.msg('视频好评只能发布单一商品任务！', {icon: 2});
+                   // this.datainfo.is_video_praise = false;
+                  //  return layer.msg('视频好评只能发布单一商品任务！', {icon: 2});
                 }
             },
 

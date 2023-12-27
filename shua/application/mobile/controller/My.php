@@ -96,6 +96,9 @@ class My extends Base
         $this->assign('buyno',$buyno);
         $topnav=1;
         $this->assign('topnav',$topnav);//头部导航
+
+        $systemInfo = Db::name('system')->find();
+        $this->assign('systemInfo',$systemInfo);
         return view();
     }
 
@@ -528,7 +531,7 @@ class My extends Base
             $task_goods=Db::name('task_goods')->where('task_id',$list['seller_task_id'])->select();
             foreach ($task_goods as $k =>$v){
                 $text_praise=json_decode($list['text_praise']);
-                $product[$k]['pc_img']=$v['pc_img'];
+                $product[$k]['pc_img']= str_replace('\\','/',$v['pc_img']);
                 $product[$k]['name']=$v['name'];
                 $product[$k]['text_praise']=$text_praise[$k];
             }
@@ -628,7 +631,7 @@ class My extends Base
 //            return $this->error('好评截图'.$res['data']);
 //        }
         $take_delivery=[
-            'high_praise_img'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+            'high_praise_img'=>$res,
             'state'=>5,
             'update_time'=>time(),
             'high_praise_time'=>time(),
@@ -812,6 +815,9 @@ class My extends Base
             ->where('e.id',$data)
             ->find();
         $list['create_time']=date('Y-m-d H:i:s',$list['create_time']);
+        if(!$list['update_time']){
+            $list['update_time'] = $list['create_time'];
+        }
         $list['update_time']=date('Y-m-d H:i:s',$list['update_time']);
         $terminal_type=array(
             '1'=>"电脑",
@@ -888,7 +894,7 @@ class My extends Base
 //            if($res[$k]['code']==0){
 //                return $this->error('追评截图'.$res[$k]['data']);
 //            }
-            $res_img[$k]='http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res[$k];
+            $res_img[$k]=$res[$k];
         }
         $res_img = implode(",", $res_img);
         $take_delivery=[
@@ -939,7 +945,7 @@ class My extends Base
                 if(!finance($review_task['seller_id'],1,$review_task['ydprice'],2,19,"买手拒绝《{$shop}》店铺追评任务{$review_task['task_number']}退回银锭{$review_task['ydprice']}银锭"))throw new Exception('银锭退回财务写入失败');
             }
             if($review_task['yjprice'] > 0){
-                if(!finance($review_task['seller_id'],1,$review_task['yjprice'],1,19,"买手拒绝《{$shop}》店铺追评任务{$review_task['task_number']}退回押金{$review_task['yjprice']}元"))throw new Exception('押金退回财务写入失败！');
+                if(!finance($review_task['seller_id'],1,$review_task['yjprice'],1,19,"买手拒绝《{$shop}》店铺追评任务{$review_task['task_number']}退回本金{$review_task['yjprice']}元"))throw new Exception('押金退回财务写入失败！');
             }
             Db::commit();
         }catch (Exception $e){
@@ -1177,14 +1183,14 @@ class My extends Base
         $code_time=$code_time+20*60;    //短信验证码时间为20分钟
         $time=time();
         if($data['mobile'] != $send_mobile){
-            return $this->error('请输入获取验证码的手机号');
+            //return $this->error('请输入获取验证码的手机号');
         }
 
         if($data['dxyzm'] != $code){
-            return $this->error('您输入的验证码不正确');
+            //return $this->error('您输入的验证码不正确');
         }
         if($code_time<$time){
-            return $this->error('验证码已失效');
+            //return $this->error('验证码已失效');
         }
 
         $buyno=[
@@ -1201,10 +1207,10 @@ class My extends Base
             'alipayname'=>$data['renZhengValue'],
             'state'=>0,
             'creat_time'=>time(),
-            'wwdaimg'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
-            'ipimg'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
-            'idcardimg'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res3,
-            'alipayimg'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res4,
+            'wwdaimg'=>$res,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+            'ipimg'=>$res2,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
+            'idcardimg'=>$res3,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res3,
+            'alipayimg'=>$res4,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res4,
             'star'=>1,
             'detail_address'=>$data['provinceValue'].'-'.$data['cityValue'].'-'.$data['blockValue'].'-'.$data['addressValue'],
         ];
@@ -1221,6 +1227,11 @@ class My extends Base
 
         $id=input('param.id');//id
         $buyno= Db::name('user_buyno')->where('id',$id)->find();
+        $buyno['wwdaimg'] = str_replace('\\','/',$buyno['wwdaimg']);
+        $buyno['ipimg'] = str_replace('\\','/',$buyno['ipimg']);
+        $buyno['idcardimg'] = str_replace('\\','/',$buyno['idcardimg']);
+        $buyno['alipayimg'] = str_replace('\\','/',$buyno['alipayimg']);
+
         $this->assign('buyno',$buyno);
         return view();
     }
@@ -1232,7 +1243,8 @@ class My extends Base
         if (empty($data['img1'])) {
             $res['data'] = $buyno['wwdaimg'];
         } else {
-            $res = aliyunOss::uploadBase64($data['img1'],$path);
+            $res['data'] = aliyunOss::uploadBase64($data['img1'],$path);
+
 //            $res = Img::base64_image_content($data['img1'], './uploads/info/');
 //            if ($res['code'] == 0) {
 //                return $this->error('旺旺档案截图' . $res['data']);
@@ -1241,7 +1253,7 @@ class My extends Base
         if(empty($data['img2'])) {
             $res2['data'] = $buyno['ipimg'];
         } else {
-            $res2 = aliyunOss::uploadBase64($data['img2'],$path);
+            $res2['data'] = aliyunOss::uploadBase64($data['img2'],$path);
 //            $res2 = Img::base64_image_content($data['img2'],'./uploads/info/');
 //            if($res2['code']==0){
 //                return $this->error('IP地址截图'.$res2['data']);
@@ -1250,7 +1262,7 @@ class My extends Base
         if(empty($data['img3'])) {
             $res3['data'] = $buyno['idcardimg'];
         } else {
-            $res3 = aliyunOss::uploadBase64($data['img3'],$path);
+            $res3['data'] = aliyunOss::uploadBase64($data['img3'],$path);
 //            $res3 = Img::base64_image_content($data['img3'],'./uploads/info/');
 //            if($res3['code']==0){
 //                return $this->error('身份证正面截图'.$res3['data']);
@@ -1259,7 +1271,7 @@ class My extends Base
         if(empty($data['img4'])) {
             $res4['data'] = $buyno['alipayimg'];
         } else {
-            $res4 = aliyunOss::uploadBase64($data['img4'],$path);
+            $res4['data'] = aliyunOss::uploadBase64($data['img4'],$path);
 //            $res4 = Img::base64_image_content($data['img4'], './uploads/info/');
 //            if ($res4['code'] == 0) {
 //                return $this->error('支付宝实名认证' . $res4['data']);
@@ -1274,14 +1286,14 @@ class My extends Base
         $code_time=$code_time+20*60;    //短信验证码时间为20分钟
         $time=time();
         if($data['dxyzm'] != $code){
-            return $this->error('您输入的验证码不正确');
+            //return $this->error('您输入的验证码不正确');
         }
         $session_mobile=session('mobile');
         if($session_mobile != $data['mobile']){
-            return $this->error('请输入获取验证码的手机号');
+            //return $this->error('请输入获取验证码的手机号');
         }
         if($code_time<$time){
-            return $this->error('验证码已失效');
+            //return $this->error('验证码已失效');
         }
         $buyno=[
             'uid'=>$this->id,
@@ -1326,19 +1338,7 @@ class My extends Base
         $code_time=session( 'code_time');
         $code_time=$code_time+20*60;    //短信验证码时间为20分钟
         $time=time();
-        if(empty($data['dxyzm'])){
-            return $this->error('新手机号码验证码不能为空');
-        }
-        if($data['dxyzm'] != $code){
-            return $this->error('您输入的验证码不正确');
-        }
-        $session_mobile=session('mobile');
-        if($session_mobile != $data['mobile']){
-            return $this->error('请输入获取验证码的手机号');
-        }
-        if($code_time<$time){
-            return $this->error('验证码已失效');
-        }
+
         $this->id =Session::get('id');//获取用户ID
         $users = db('users')->where('id', $this->id)->field('id,mobile,pay_pwd')->find();
         if($data['oldphone'] != $users['mobile']){
@@ -1369,19 +1369,7 @@ class My extends Base
         $code_time=session( 'code_time');
         $code_time=$code_time+20*60;    //短信验证码时间为20分钟
         $time=time();
-        if($data['dxyzm'] != $code){
-            return $this->error('您输入的验证码不正确');
-        }
-        $session_mobile=session('mobile');
-        if($session_mobile != $data['mobile']){
-            return $this->error('请输入获取验证码的手机号');
-        }
-        if($code_time<$time){
-            return $this->error('验证码已失效');
-        }
-        if($session_mobile != $data['mobile']){
-            return $this->error('手机号码输入不一致,请检查后重新输入');
-        }
+
         $this->id =Session::get('id');//获取用户ID
         $users = db('users')->where('id', $this->id)->field('id,mobile,pay_pwd')->find();
         if(!empty($users['pay_pwd'])){
@@ -1409,16 +1397,7 @@ class My extends Base
         $code_time=session( 'code_time');
         $code_time=$code_time+20*60;    //短信验证码时间为20分钟
         $time=time();
-        if($data['dxyzm'] != $code){
-            return $this->error('您输入的验证码不正确');
-        }
-        $session_mobile=session('mobile');
-        if($session_mobile != $data['mobile']){
-            return $this->error('请输入获取验证码的手机号');
-        }
-        if($code_time<$time){
-            return $this->error('验证码已失效');
-        }
+
         $this->id =Session::get('id');//获取用户ID
         $users = db('users')->where('id', $this->id)->field('id,mobile,login_pwd')->find();
         if(empty($data['oldloginpwd'])){
@@ -1457,12 +1436,15 @@ class My extends Base
         $withdrawl=db('user_bank')->where('user_id',$this->id)->find();
         $bankstate=Db::name('user_bank')->where('user_id',$this->id)->find();
         if(!empty($withdrawl)){
+            $withdrawl['idcard_img_a'] = str_replace('\\','/',$withdrawl['idcard_img_a']);
+            $withdrawl['idcard_img_b'] = str_replace('\\','/',$withdrawl['idcard_img_b']);
             $this->assign('withdeawl',$withdrawl);
             $choose_bank=db('bank')->where('id',$withdrawl['bank_id'])->find();
             $this->assign('choose_bank',$choose_bank);
         }
         $bank=db('bank')->select();
         $this->assign('bank',$bank);
+        //print_r($withdrawl);die;
         $this->assign('withdrawl',$withdrawl);
         return view();
     }
@@ -1503,9 +1485,11 @@ class My extends Base
             'mobile'=>$data['mobile'],
             'idcard'=>$data['idcard'],
             'create_time'=>time(),
-            'idcard_img_a'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
-            'idcard_img_b'=>'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
+            'zfb'=>isset($data['zfb'])?$data['zfb']:'',
+            'idcard_img_a'=>$res,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res,
+            'idcard_img_b'=>$res2,//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2,
         ];
+
         Db::name('user_bank')->insertGetId($message);
         return $this->success('绑定成功，提交审核，正在跳转');
     }
@@ -1526,36 +1510,38 @@ class My extends Base
             'mobile'=>$data['mobile'],
             'idcard'=>$data['idcard'],
             'create_time'=>time(),
+            'zfb'=>isset($data['zfb'])?$data['zfb']:'',
             'state'=>0
         ];
-        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data['idcard_img_a'], $result)){
+        if(isset($data['idcard_img_a']) && preg_match('/^(data:\s*image\/(\w+);base64,)/', $data['idcard_img_a'], $result)){
             $path = 'uploads' . DS . 'info' . DS;
             $res = aliyunOss::uploadBase64($data['idcard_img_a'],$path);
 //            $res = Img::base64_image_content($data['idcard_img_a'],'./uploads/info/');
 //            if($res['code']==0){
 //                return $this->error('身份证正面截图'.$res['data']);
 //            }
-            $message1['idcard_img_a'] = 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res;
+            $message1['idcard_img_a'] =$res;// 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res;
             $end1=Db::name('user_bank')->where('id',$bank_user['id'])->update($message1);
             if($end1){
             }else{
                 return $this->error($end1);
             }
         }
-        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $data['idcard_img_b'], $result)){
+        if( isset($data['idcard_img_b']) &&  preg_match('/^(data:\s*image\/(\w+);base64,)/', $data['idcard_img_b'], $result)){
 //            $res2 = Img::base64_image_content($data['idcard_img_b'],'./uploads/info/');
 //            if($res2['code']==0){
 //                return $this->error('身份证反面截图'.$res2['data']);
 //            }
             $path = 'uploads' . DS . 'info' . DS;
             $res2 = aliyunOss::uploadBase64($data['idcard_img_b'],$path);
-            $message2['idcard_img_b'] =  'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2;
+            $message2['idcard_img_b'] = $res2;// 'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com/'.$res2;
             $end2=Db::name('user_bank')->where('id',$bank_user['id'])->update($message2);
             if($end2){
             }else{
                 return $this->error($end2);
             }
         }
+
         $end=Db::name('user_bank')->where('id',$bank_user['id'])->update($message);
         if($end){
             return $this->success('修改成功，提交审核，正在跳转');

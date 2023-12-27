@@ -117,7 +117,7 @@
         </tr>
         <tr>
           <td colspan="4">
-            <img :src="url+item" alt="好评截图" v-for="item in info.img" style="height: 100px" @click="viewImg(item)">
+            <img :src="item" alt="好评截图" v-for="item in info.img" style="height: 100px" @click="viewImg(item)">
           </td>
           <td>{{info.upload_time}}</td>
         </tr>
@@ -139,7 +139,7 @@
           </tr>
           <tr>
             <td>{{item.name}}</td>
-            <td><img :src="url+item.pc_img" alt="商品图" height="50px"></td>
+            <td><img :src="item.pc_img" alt="商品图" height="50px"></td>
             <td>{{item.price}}</td>
             <td>{{item.num}}</td>
             <td>{{item.goods_spec}}</td>
@@ -164,7 +164,7 @@
               <div class="comments">
                 <div style="flex-wrap: wrap;">
                   <div style="display: inline-block;position: relative;margin-right:4.5px;padding: 0;" v-for="(row,index) in item.img">
-                    <img :src="url+row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
+                    <img :src="row" alt="" onerror="imgError(this)" style="height: 80px;width: 80px">
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@
             <div class="video_div">
               <div class="td-left">主商品视频：</div>
               <div class="td-right">
-                  <video :src="url+item.video" controls class="avatar"></video>
+                  <video :src="item.video" controls class="avatar"></video>
               </div>
             </div>
           </div>

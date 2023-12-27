@@ -83,7 +83,7 @@ class Alipay extends Controller
                         if(!in_array($result['recharge_type'],[1,2]))throw new Exception('error');
                         if($result['recharge_type']==1){//押金
                             $seller_update['balance'] = $seller['balance'] + $Money;
-                            $str = "押金";
+                            $str = "本金";
                         }
                         if($result['recharge_type']==2){//银锭
                             $seller_update['reward'] = $seller['reward'] + $Money;

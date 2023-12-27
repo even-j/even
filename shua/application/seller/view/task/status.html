@@ -30,7 +30,7 @@
 		</div>
 		<table class="table_one" border="1" cellpadding="0" bordercolor="#eee" cellspacing="0">
 			<tr>
-				<th>平台返款冻结押金</th>
+				<th>平台返款冻结本金</th>
 				<th>平台已返款</th>
 				<th>平台待返款</th>
 				<th>平台发放冻结佣金</th>
@@ -52,7 +52,7 @@
 		<h3>任务信息</h3>
 		<table class="table_one" border="1" cellpadding="0" bordercolor="#eee" cellspacing="0">
 			<tr>
-				<th colspan="11">平台返款冻结押金</th>
+				<th colspan="11">平台返款冻结本金</th>
 
 			</tr>
 			<tr>
@@ -65,6 +65,14 @@
 				<td>店铺</td>
 				<td><b>{{info.shop_id.shop_name}}</b></td>
 			</tr>
+			<tr v-if="info.is_hour_publish=='整点任务'">
+				<td>整点任务 </td>
+				<td  colspan="10" >
+					{{info.hour_msg}}
+				</td>
+
+			</tr>
+
 			<tr v-if="info.terminal==2">
 				<td>移动端</td>
 				<td><b>{{info.num}}</b>  单</td>
@@ -98,7 +106,7 @@
 				<td colspan="2" v-else>PC端</td>
 				<td colspan="7" v-if="info.task_type=='文字好评'">关键词： <b>{{info.key}}</b>  已设置：<b>{{info.num}}</b> 单 </td>
 				<td colspan="7" v-if="info.task_type=='淘口令'">淘口令： <b>{{info.tao_word}}</b>  已设置：<b>{{info.num}}</b> 单 </td>
-				<td colspan="7" v-if="info.task_type=='二维码'">二维码： <img onerror="imgError(this)" :src="url+info.qr_code" alt="二维码" style="height: 50px;display: inline-block;" @click="open(info.qr_code,二维码)">  已设置：<b>{{info.num}}</b> 单 </td>
+				<td colspan="7" v-if="info.task_type=='二维码'">二维码： <img onerror="imgError(this)" :src="info.qr_code" alt="二维码" style="height: 50px;display: inline-block;" @click="open(info.qr_code,二维码)">  已设置：<b>{{info.num}}</b> 单 </td>
 				<td colspan="7" v-if="info.task_type=='直通车'">关键词： <b>{{info.key}}</b>  已设置：<b>{{info.num}}</b> 单 </td>
 				<td colspan="7" v-if="info.task_type=='通道任务'">通道： <b>{{info.channel_name}}</b>  已设置：<b>{{info.num}}</b> 单 </td>
 			</tr>
@@ -142,7 +150,7 @@
 							</tr>
 							<tr v-for="(item,key) in info.goods_id" :key="key">
 									<td class="td-one">
-											<img onerror="imgError(this)" class="goodsPicture" alt="" :src="url+item.pc_img" >&nbsp;&nbsp;
+											<img onerror="imgError(this)" class="goodsPicture" alt="" :src="item.pc_img" >&nbsp;&nbsp;
 											<p class="titles" >{{item.name}}</p>
 									</td>
 									<td style="width:100px;text-align:left;">
@@ -192,7 +200,7 @@
 			</tr>
 			<tr v-for="(item,key) in goodsPraise" :key="key">
 				<td>{{item.goods.name}} </td>
-				<td style="padding: 10px;width: 80px" align="center"><img onerror="imgError(this)" :src="url+item.goods.pc_img" alt="" width="80"></td>
+				<td style="padding: 10px;width: 80px" align="center"><img onerror="imgError(this)" :src="item.goods.pc_img" alt="" width="80"></td>
 				<td>
 					<p v-for="(vo,k) in item.praise" :key="k">第{{k+1}}组：{{vo.content}}</p>
 				</td>
@@ -204,7 +212,7 @@
 	</el-dialog>
 	<el-dialog :visible.sync="videoShow">
 		<div style="display: flex;align-items: center;justify-content: center">
-			<video :src="url+video" controls height="400"></video>
+			<video :src="video" controls height="400"></video>
 		</div>
 		<span slot="footer" class="dialog-footer">
 					<el-button type="primary" @click="videoShow = false" size="small">确 定</el-button>
@@ -219,10 +227,10 @@
 			</tr>
 			<tr v-for="(item,key) in goodsImgPraise" :key="key">
 				<td>{{item.goods.name}} </td>
-				<td style="padding: 10px;width: 80px" align="center"><img onerror="imgError(this)" :src="url+item.goods.pc_img" alt="" width="80"></td>
+				<td style="padding: 10px;width: 80px" align="center"><img onerror="imgError(this)" :src="item.goods.pc_img" alt="" width="80"></td>
 				<td>
 					<div v-for="(vo,k) in item.praise" :key="k">
-						第{{k+1}}组:<img onerror="imgError(this)" :src="url+val" alt="" height="80" style="display: inline;margin-left: 10px" v-for="val in vo.content">
+						第{{k+1}}组:<img onerror="imgError(this)" :src="val" alt="" height="80" style="display: inline;margin-left: 10px" v-for="val in vo.content">
 					</div>
 				</td>
 			</tr>
@@ -298,7 +306,7 @@
           <th>合计</th>
         </tr>
         <tr>
-          <td :rowspan="rowspan">押金</td>
+          <td :rowspan="rowspan">本金</td>
           <td><span v-for="(item,index) in info.goods_id" :key="index">{{item.type}}： <b>{{(item.price * item.num).toFixed(2)}}</b> 元/单</span> </td>
           <td><b>{{info.goods_price}}</b> 元 </td>
           <td rowspan="16"><b>{{info.num}}</b> 单</td>
@@ -386,7 +394,7 @@
         </tr>
         <tr>
           <td colspan="8" class="th">
-            <p>总计 = 押金： <b>{{info.deposit}}</b> 元 + 银锭： <b>{{info.silver_ingot}}</b> 银锭</p>
+            <p>总计 = 本金： <b>{{info.deposit}}</b> 元 + 银锭： <b>{{info.silver_ingot}}</b> 银锭</p>
           </td>
         </tr>
       </table>

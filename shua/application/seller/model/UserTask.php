@@ -19,7 +19,7 @@ class UserTask extends Model
     }
     public function getSellerTaskIdAttr($name)
     {
-        $list = Db::name('seller_task')->where(['id'=>$name])->field('task_number,task_type')->find();
+        $list = Db::name('seller_task')->where(['id'=>$name])->field('id,task_number,task_type')->find();
         $arr = [
             '1'=>'关键词',
             '2'=>'淘口令',

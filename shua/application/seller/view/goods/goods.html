@@ -26,9 +26,11 @@
 				<el-form-item label="宝贝名称:" prop="name" style='width:600px;'>
 					<el-input placeholder="请输入内容" v-model="goods.name"></el-input>
 				</el-form-item>
+				<!--
 				<el-form-item label="核对数字:" prop="pass" v-if="state">
 					<el-input placeholder="请输入6位纯数字" style='width: 216px;' v-model="goods.number"></el-input>
 				</el-form-item>
+				-->
 				<el-form-item label="宝贝主图">
 					<el-upload
 							action="{:url('goods/goodsImg')}"
@@ -99,7 +101,7 @@
                     const isJPEG = file.type === 'image/jpeg';
                     const isPNG = file.type === 'image/png';
                     const isJPG = file.type === 'image/jpg';
-                    const isLt2M = file.size / 1024 / 1024 < 5;
+                    const isLt2M = file.size / 1024 / 1024 < 20;
 
                     if (!isJPEG && !isPNG && !isJPG) {
                         return layer.msg('上传图片格式错误!',{icon:2});
@@ -122,7 +124,7 @@
 				// 整个保存判断
 				storage(){
 					if(this.state==1){
-						if(!this.goods.number)return layer.msg('请填写核对数字',{icon:2,time:2000});
+						//if(!this.goods.number)return layer.msg('请填写核对数字',{icon:2,time:2000});
 					}
 					$.post("{:url('goods/goodsAdd')}",this.goods,function(res){
 						if(res.code==1){

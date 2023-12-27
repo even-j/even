@@ -80,7 +80,7 @@ class Finance extends Base
                 }
                 $dable = SellerCash::where(['id' => ['gt', 0]]);
                 $count = Db::name('seller_cash')->where($where)->count('id');
-                $notice_list = SellerCash::where($where)->limit(($page - 1) * $limit, $limit)->field('id,uid,price,type,yprice,state,memo,create_time,poundage,toaccount,bank_seller,mobile,bank_number,bank_name')->order('id desc')->select();
+                $notice_list = SellerCash::where($where)->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
             } else {
                 if (isset($date['name']) && $date['name']) {
                     $uid = db('users')->where('username', trim($date['name']))->value('id');
@@ -104,9 +104,13 @@ class Finance extends Base
                     $where['create_time'] = ['between', [$time1, $time2]];
                 }
                 $count = Db::name('user_cash')->where($where)->count('id');
-                $notice_list = UserCash::where($where)->limit(($page - 1) * $limit, $limit)->field('id,uid,price,type,yprice,state,memo,create_time,poundage,toaccount,bank_seller,mobile,bank_number,bank_name')->order('id desc')->select();
+                $notice_list = UserCash::where($where)->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
             }
-            if ($notice_list) $notice_list = $notice_list->toArray();
+            if ($notice_list){
+                $notice_list = $notice_list->toArray();
+
+            }
+
             return json(['code' => 0, 'count' => $count, 'msg' => '获取数据成功', 'data' => $notice_list]);
             return $this->notice_date(1, $date);
         }
@@ -362,6 +366,32 @@ class Finance extends Base
         return view();
     }
 
+    public function Recharge_delete()
+    {
+        $date = input();
+        if (!$date['id'] || !$date['type']) {
+            return $this->error('参数错误！');
+        }
+
+        $count = Recharge::where('id', $date['id'])->count('id');
+
+        if (!$count) {
+            return $this->error('记录不存在！');
+        }
+
+        $res = db('recharge')->where('id', $date['id'])->delete();
+
+        if ($res) {
+            $res1 = admin_log("充值记录删除", "管理员{$this->admin_info['user_name']}操作:删除卡号");
+            if (!$res1) {
+                return $this->error('操作日志写入失败！');
+            }
+            return $this->success('删除成功！');
+        } else {
+            return $this->error('删除失败！');
+        }
+    }
+
     /**
      * @return mixed
      * 支付宝充值
@@ -427,8 +457,10 @@ class Finance extends Base
                 $where['recharge_type'] = trim($date['currencyType']);
             }
             $count = Recharge::where($where)->count('id');
-            $recharge_list = Recharge::where($where)->limit(($page - 1) * $limit, $limit)->field('id,uid,number,user_type,recharge_type,type,price,state,create_time')->order('id desc')->select();
+            $recharge_list = Recharge::where($where)->limit(($page - 1) * $limit, $limit)
+                ->order('id desc')->select();
             if ($recharge_list) $notice_list = $recharge_list->toArray();
+
             foreach ($recharge_list as $K => $v) {
                 if ($v['user_type'] == "商家") {
                     $username = db('seller')->where('id', $v['uid'])->field('qq,seller_name,mobile')->find();
@@ -547,7 +579,8 @@ class Finance extends Base
                 $where['create_time'] = ['between', [$time1, $time2]];
             }
             $count = SellerBank::where($where)->count('id');
-            $notice_list = SellerBank::where($where)->limit(($page - 1) * $limit, $limit)->field('id,uid,bank_seller,bank_id,branch_name,city,bank_number,idcard,mobile,idcard_img,state,create_time')->order('id desc')->select();
+            $notice_list = SellerBank::where($where)->limit(($page - 1) * $limit, $limit)
+                ->order('id desc')->select();
             if ($notice_list) $notice_list = $notice_list->toArray();
             return json(['code' => 0, 'count' => $count, 'msg' => '获取数据成功', 'data' => $notice_list]);
             return $this->notice_date(1, $date);
@@ -584,6 +617,14 @@ class Finance extends Base
                 $where_uid = db('users')->where($where_name)->column('id');
                 $where['user_id'] =['in',$where_uid];
             }
+            
+            
+            if (isset($date['tjuser']) && $date['tjuser']) {
+                $where_uid = db('users')->where('tjuser',$date['tjuser'])->column('id');
+                $where['user_id'] =['in',$where_uid];
+            }
+            
+            
             //qq查询
             if (isset($date['qq']) && $date['qq']) {
                 $where['user_id'] = db('users')->where('qq',$date['qq'])->value('id');
@@ -606,7 +647,7 @@ class Finance extends Base
                 $where['create_time'] = ['between', [$time1, $time2]];
             }
             $count = UserBank::where($where)->count('id');
-            $notice_list = UserBank::where($where)->limit(($page - 1) * $limit, $limit)->field('id,user_id,bank_user,bank_id,branch_name,city,bank_no,idcard,mobile,idcard_img_a,idcard_img_b,state,create_time')->order('id desc')->select();
+            $notice_list = UserBank::where($where)->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
             if ($notice_list) $notice_list = $notice_list->toArray();
             return json(['code' => 0, 'count' => $count, 'msg' => '获取数据成功', 'data' => $notice_list]);
             return $this->notice_date(1, $date);
@@ -638,6 +679,80 @@ class Finance extends Base
         $list['user_type'] = $data['user_type'];
         $this->assign('list', $list);
         return view();
+    }
+
+    public function examine_recharge()
+    {
+        $date = input();
+        if (!$date['id'] || !$date['type']) {
+            $this->error('参数错误！');
+        }
+
+        $data_info = db('recharge')->where('id', $date['id'])->find();
+
+        $this->assign('data_info', $data_info);
+        return view();
+    }
+
+    public function to_examine_recharge()
+    {
+        if (request()->isPost()) {
+
+            $date = input();
+            if (!$date['id'] || $date['state'] == '' ) {
+                return $this->error('参数错误！');
+            }
+
+            $data_info = db('recharge')->where('id', $date['id'])->find();
+            if ($data_info['state'] != 0 ) {
+                return $this->error('通过后不能审核！');
+            }
+
+            $update_data['state'] = $date['state'];
+            $update_data['remarks'] = $date['remarks'];
+            $update_data['update_time'] = time();
+            Db::startTrans();
+            $res = db('recharge')->where('id', $date['id'])->update($update_data);
+
+            if($date['state'] =='1'){
+                if($data_info['user_type']=='1'){
+                    if($data_info['recharge_type']=='1'){
+                        Db::name('seller')->where(['id'=>$data_info['uid']])->setInc('balance',$data_info['price']);
+                        if(!finance($data_info['uid'],1,$data_info['price'],1,2,"充值支付{$data_info['price']}元"))throw new Exception('押金写入财务失败！');
+                    }
+                    if($data_info['recharge_type']=='2'){
+                        Db::name('seller')->where(['id'=>$data_info['uid']])->setInc('reward',$data_info['price']);
+                        if(!finance($data_info['uid'],1,$data_info['price'],2,2,"充值支付{$data_info['price']}元"))throw new Exception('押金写入财务失败！');
+                    }
+                }
+
+
+                if($data_info['user_type']=='2'){
+                    if($data_info['recharge_type']=='1'){
+                        Db::name('users')->where(['id'=>$data_info['uid']])->setInc('balance',$data_info['price']);
+                        if(!finance($data_info['uid'],2,$data_info['price'],1,2,"充值支付{$data_info['price']}元"))throw new Exception('押金写入财务失败！');
+                    }
+                    if($data_info['recharge_type']=='2'){
+                        Db::name('users')->where(['id'=>$data_info['uid']])->setInc('reward',$data_info['price']);
+                        if(!finance($data_info['uid'],2,$data_info['price'],2,2,"充值支付{$data_info['price']}元"))throw new Exception('押金写入财务失败！');
+                    }
+                }
+
+
+
+            }
+            Db::commit();
+
+            if ($res) {
+                $res1 = admin_log("支付审核审核", "管理员{$this->admin_info['user_name']}操作:审核id{$date['id']}");
+                if (!$res1) {
+                    return $this->error('操作日志写入失败！');
+                }
+                return $this->success('修改成功！');
+            } else {
+                return $this->error('修改失败！');
+            }
+        }
     }
 
 
@@ -976,7 +1091,7 @@ class Finance extends Base
 //            if (isset($date['state']) && $date['state']!='' && $date['state']!=88) {
 //            $where['state'] =$date['state'];
 //            }
-        $where['state'] = 1;
+        //$where['state'] = 1;
         //添加时间筛选
         if (isset($date['time']) && $date['time']) {
             $date['time']=urldecode($date['time']);
@@ -993,8 +1108,10 @@ class Finance extends Base
             if (isset($date['phone']) && $date['phone']) {
                 $where['mobile'] = $date['phone'];
             }
+
             $usertype = "商家";
-            $notice_list = cashseller::where($where)->field('id,uid,user_type,type,bank_seller,bank_name,bank_number,price,poundage,toaccount,state')->order('id desc')->select();
+            $notice_list = cashseller::where($where)->field('id,uid,user_type,type,bank_seller,bank_name,bank_number,
+            price,poundage,toaccount,state,zfb,pay_type,create_time')->order('id desc')->select();
         } else {
 
             if (isset($date['name']) && $date['name']) {
@@ -1006,11 +1123,43 @@ class Finance extends Base
             }
             $usertype = "买手";
 
-            $notice_list = cashuser::where($where)->field('id,uid,user_type,type,bank_seller,bank_name,bank_number,price,poundage,toaccount,state')->order('id desc')->select();
+            $notice_list = cashuser::where($where)->field('id,uid,user_type,type,bank_seller,bank_name,bank_number,
+            price,poundage,toaccount,state,zfb,pay_type,create_time')->order('id desc')->select();
         }
         if ($notice_list) $notice_list = $notice_list->toArray();
-        $title = ['PTID', '用户名', '类型', '提现类型', '姓名', '银行名', '银行账号', '申请金额', '手续费', '到账金额', '状态'];
-        Phpexcel::exportExcel($title, $notice_list, "{$usertype}提现导出表");
+        $notice_array = [];
+        foreach ($notice_list as  $value){
+            if($value['user_type']=='商家'){
+                $tjuser = Db::name('seller')->where(['seller_name' => $value['uid']])->value('tjuser');
+            }else{
+                $tjuser = Db::name('users')->where(['username' => $value['uid']])->value('tjuser');
+            }
+
+            $notice_arr = [
+                'id'=>$value['id'],
+                'uid'=>$value['uid'],
+                'user_type'=>$value['user_type'],
+                'tjuser'=>$tjuser,
+                'type'=>$value['type'],
+                'bank_seller'=>$value['bank_seller'],
+            ];
+
+            if($value['pay_type']=='2'){
+                $notice_arr['bank'] =$value['zfb'];
+            }else{
+                $notice_arr['bank'] ='银行:'.$value['bank_name'].';'.'银行卡号:'.$value['bank_number'];
+            }
+            $notice_arr['price'] = $value['price'];
+            $notice_arr['poundage'] = $value['poundage'];
+            $notice_arr['toaccount'] = $value['toaccount'];
+            $notice_arr['state'] = $value['state'];
+            $notice_arr['time'] = $value['create_time'];
+            $notice_array[] =$notice_arr;
+        }
+
+
+        $title = ['PTID', '用户名', '类型','来源ID', '提现类型', '姓名', '收款账号', '申请金额', '手续费', '到账金额', '状态','提现时间'];
+        Phpexcel::exportExcel($title, $notice_array, "{$usertype}提现导出表");
     }
 
 }

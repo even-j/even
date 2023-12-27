@@ -26,6 +26,11 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
     var tplImg5 = function (d) {
         return '<img src="'+d.idcardimg+'" style="height: 170px; width: 200px;" >';
     };
+
+    var tplImg22 = function (d) {
+        return '<img class="jump" src="'+d.pic_url+'" style="height: 170px; width: 200px;" >';
+    };
+
     var state = function (d) {
         if(d.state==0){
             return '<span class="red">未审核</span>';
@@ -78,10 +83,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'wangwang', title: '店铺主旺旺ID', minWidth: 80, width:95, align: "center" },
             { field: 'seller_id', title: '用户账号', minWidth: 80, width:110, align: "center",templet: sellername },
             { field: 'link', title: '店铺链接', minWidth: 80, width:95, align: "center" },
+
+            { field: 'pic_url', title: '店铺后台截图', minWidth: 80, width:95, align: "center" ,templet:tplImg22},
             { field: 'create_time', title: '添加时间', minWidth: 50, width: 160, align: "center" },
             { field: 'address', title: '发件信息', minWidth: 95, align: "center", templet: address },
             { field: 'address', title: '淘宝发件地址', minWidth: 95, align: "center", templet: fahuoaddress },
             { field: 'code', title: '发货仓', minWidth: 95, align: "center"},
+            { field: 'cycle_time', title: '复购天数', minWidth: 95, align: "center"},
             { field: 'state', title: '状态', minWidth: 50, width: 110, align: "center",templet: state },
             { field: 'state', title: '物流状态', minWidth: 50, width: 110, align: "center",templet: logistics },
             { title: '操作', minWidth: 150, templet: '#userListBar', fixed: "right", align: "center" }

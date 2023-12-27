@@ -81,11 +81,11 @@ class Vip extends Base
         Db::startTrans();
         try{
             if($data['pay_type']==2){//押金支付
-                if($this->seller['balance'] < $sys[$data['vip']-1])throw new Exception('押金余额不足');
+                if($this->seller['balance'] < $sys[$data['vip']-1])throw new Exception('本金余额不足');
                 $update['balance'] = $this->seller['balance'] - $sys[$data['vip']-1];
                 $update['vip'] = 1;
                 $update['vip_time'] = $this->seller['vip_time'] + ($data['vip'] * 90 * 24 * 3600);
-                $memo = "购买{$m}个月会员,使用押金：{$sys[$data['vip']-1]}元，到期时间为".date('Y-m-d H:i:s',$update['vip_time']);
+                $memo = "购买{$m}个月会员,使用本金：{$sys[$data['vip']-1]}元，到期时间为".date('Y-m-d H:i:s',$update['vip_time']);
                 if($this->seller['vip_time'] < time())$update['vip_time'] = time() + ($data['vip'] * 90 * 24 * 3600);
                 Db::name('seller')->where(['id'=>$this->seller['id']])->update($update);
                 $price_type = 1;

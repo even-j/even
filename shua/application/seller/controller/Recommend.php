@@ -18,10 +18,10 @@ class Recommend extends Base
      */
     public function index()
     {
-        if(Db::name('seller_task')->where(['seller_id'=>$this->seller['id'],'status'=>['in',[2,3,4,6]]])->count('id') > 0){
+        if(Db::name('seller_task')->where(['seller_id'=>$this->seller['id'],'status'=>['in',[2,3,4,6]]])->count('id') >= 0){
             $state = 1;
             $url = [
-                'seller' => $_SERVER['HTTP_HOST']. '/index.php/seller/register/index/type/2/invite/'.$this->seller['invite_code'],
+                'seller' => $_SERVER['HTTP_HOST']. '/index.php/seller/login/register/type/2/invite/'.$this->seller['invite_code'],
                 'user' => $_SERVER['HTTP_HOST']. '/index.php/buy/login/register/type/2/invite/'.$this->seller['invite_code'],
             ];
         }else{

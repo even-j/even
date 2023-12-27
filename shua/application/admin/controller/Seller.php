@@ -381,10 +381,18 @@ class Seller extends Base
                 'mobile'=>$date['mobile'],
                 'balance'=>$date['balance'],
                 'reward'=>$date['reward'],
-                'qq'=>$date['qq'],
-                'vip'=>$date['vip'],
+                'qq'=>$date['qq'],  'wechat'=>$date['wechat'], // 'province'=>$date['province'],  'city'=>$date['city'],
+                'vip'=>$date['vip'],'rebate1'=>$date['rebate1'],'rebate2'=>$date['rebate2'],
                 'vip_time'=>$date['vip_time'],
             ];
+
+            if(isset($date['city']) && $date['city']){
+                $edit_bianji['province'] = $date['province'];
+                $edit_bianji['city'] = $date['city'];
+            }
+
+
+
             if(isset($seller_info['reward'])&&$seller_info['reward']!=$date['reward']){ //判断管理员是否修改银锭
                 if($seller_info['reward']>$date['reward']){
                     $reward=$seller_info['reward']-$date['reward']; //扣除银锭
@@ -407,7 +415,7 @@ class Seller extends Base
                     $balance_price=-$balance;
                 }else{
                     $balance=$date['balance']-$seller_info['balance']; //充值押金
-                    $balance_type="充值押金";
+                    $balance_type="充值本金";
                     $balance_from="2";//充值
                     $balance_price=$balance;
                 }
@@ -720,7 +728,7 @@ class Seller extends Base
                 'address'=>$date['address'],
                 'state'=>$date['examine_state'],
                 'cause'=>$date['note'],
-                'code'=>$date['code'],
+                'code'=>$date['code'],'flag_sign'=>$date['flag_sign'],'flag_memo'=>$date['flag_memo'],
                 'update_time'=>time()
             ];
             if($date['examine_state']==1){

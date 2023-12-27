@@ -105,6 +105,7 @@ class Review extends Base
         $add_task['user_task_id'] = $list['id'];
         $add_task['task_id'] = $list['seller_task_id'];
         $add_task['create_time'] = time();
+        $system = Db::name('system')->find();
         try{
             Db::startTrans();
             $id = Db::name('review_task')->insertGetId($add_task);
@@ -118,7 +119,7 @@ class Review extends Base
                     $add_praise['content'] = $goods['praise'];
                     $add_praise['create_time'] = time();
                     Db::name('review_task_praise')->insert($add_praise);
-                    $price += 2;
+                    $price += $system['praise'];
                 }
                 if($goods['is_img_praise']=='true'){
                     if(!isset($goods['img']) || !$goods['img'])throw new Exception('好评图片不能为空！');
@@ -128,7 +129,7 @@ class Review extends Base
                     $add_praise['content'] = implode(',',$goods['img']);
                     $add_praise['create_time'] = time();
                     Db::name('review_task_praise')->insert($add_praise);
-                    $price += 3;
+                    $price += $system['img_praise'];
                 }
                 if($goods['is_video_praise']=='true'){
                     if(!isset($goods['video']) || !$goods['video'])throw new Exception('好评视频不能为空！');
@@ -138,7 +139,7 @@ class Review extends Base
                     $add_praise['content'] = $goods['video'];
                     $add_praise['create_time'] = time();
                     Db::name('review_task_praise')->insert($add_praise);
-                    $price += 10;
+                    $price += $system['video_praise'];
                 }
             }
             Db::name('review_task')->where(['id'=>$id])->update(['money'=>$price,'user_money'=>($price*0.5)]);
@@ -161,6 +162,8 @@ class Review extends Base
         $data = $request->param();
         $id= $data['id'];
         $this->assign('id',$id);
+        $system = Db::name('system')->find();
+        $this->assign('system',$system);
         $this->assign('seller',$this->seller);
         return view();
     }
@@ -181,9 +184,15 @@ class Review extends Base
         $id= $data['id'];
         $list = Db::name('review_task')->where(['id'=>$id])->find();
         if(!$list)return $this->error('未找到数据！',url('index/index'));
+
+        $system = Db::name('system')->find();
+
         $list['praise'] = Db::name('review_task_praise')->where(['task_id'=>$list['id'],'type'=>1])->count('id');
+        $list['praise'] = $list['praise']*$system['praise'];
         $list['img'] = Db::name('review_task_praise')->where(['task_id'=>$list['id'],'type'=>2])->count('id');
+        $list['img'] = $list['img']*$system['img_praise'];
         $list['video'] = Db::name('review_task_praise')->where(['task_id'=>$list['id'],'type'=>3])->count('id');
+        $list['video'] = $list['video']*$system['video_praise'];
         return $this->success('success','',$list);
     }
 
@@ -213,11 +222,11 @@ class Review extends Base
             $price = 0;
             if($data['is_reward']!='true'){
                 $price = $list['money'];
-                if($price > $this->seller['balance'])throw new Exception('押金余额不足，请充值！！');
+                if($price > $this->seller['balance'])throw new Exception('本金余额不足，请充值！！');
                 $update['balance'] = $this->seller['balance'] - $price;
             }else{
                 if(($this->seller['balance'] + $this->seller['reward']) < $list['money']){
-                    throw new Exception('押金余额不足，请充值！');
+                    throw new Exception('本金余额不足，请充值！');
                 }
                 if($list['money'] > $this->seller['reward']){
                     $prices = $this->seller['reward'];
@@ -240,7 +249,7 @@ class Review extends Base
                 if(!finance($this->seller['id'],1,-$prices,2,16,"使用银锭发布《{$shop}》店铺追评任务{$list['task_number']}扣除银锭{$prices}银锭"))throw new Exception('银锭财务写入失败');
             }
             if($price > 0){
-                if(!finance($this->seller['id'],1,-$price,1,15,"使用押金代付银锭发布《{$shop}》店铺追评任务{$list['task_number']}扣除押金{$price}元"))throw new Exception('押金代付财务写入失败！');
+                if(!finance($this->seller['id'],1,-$price,1,15,"使用本金代付银锭发布《{$shop}》店铺追评任务{$list['task_number']}扣除本金{$price}元"))throw new Exception('押金代付财务写入失败！');
             }
             Db::commit();
         }catch (Exception $e){
@@ -402,7 +411,7 @@ class Review extends Base
                     if(!finance($this->seller['id'],1,$list['ydprice'],2,17,"取消《{$shop}》店铺追评任务{$list['task_number']}退回银锭{$list['ydprice']}银锭"))throw new Exception('银锭退回财务写入失败');
                 }
                 if($list['yjprice'] > 0){
-                    if(!finance($this->seller['id'],1,$list['yjprice'],1,17,"取消《{$shop}》店铺追评任务{$list['task_number']}退回押金{$list['yjprice']}元"))throw new Exception('押金退回财务写入失败！');
+                    if(!finance($this->seller['id'],1,$list['yjprice'],1,17,"取消《{$shop}》店铺追评任务{$list['task_number']}退回本金{$list['yjprice']}元"))throw new Exception('押金退回财务写入失败！');
                 }
                 Db::commit();
             }catch (Exception $e){

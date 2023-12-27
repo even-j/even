@@ -196,7 +196,7 @@
                         if(!this.phoneNumObj.oldPhoneNum){ return alertError("原手机号码不能为空");}
                         if(!this.phoneNumObj.zhifuPassWord) {return alertError("支付密码不能为空");}
                         if(!this.phoneNumObj.newPhoneNum) {return alertError("新手机号码不能为空");}
-                        if(!this.phoneNumObj.newYzmNum) {return alertError("新手机号码验证码不能为空");}
+                        //if(!this.phoneNumObj.newYzmNum) {return alertError("新手机号码验证码不能为空");}
                         $.ajax({
                             type : 'POST',
                             url : "{:url('mobile/my/editphone')}",
@@ -230,9 +230,9 @@
                         if(!this.passWordObj.newPassWord) {return alertError("新登录密码不能为空");}
                         if(!this.passWordObj.queRenPassWord){ return alertError("确认登录密码不能为空");}
                         if(!this.passWordObj.phoneNum){ return alertError("手机号码不能为空");}
-                        if(!this.passWordObj.newYzmNum) {return alertError("验证码不能为空");}
-                        if (!zhifuReg.test(this.passWordObj.newYzmNum)) {
-                            return alertError("验证码格式不规范");}
+                       // if(!this.passWordObj.newYzmNum) {return alertError("验证码不能为空");}
+                       // if (!zhifuReg.test(this.passWordObj.newYzmNum)) {
+                       //     return alertError("验证码格式不规范");}
                         $.ajax({
                             type : 'POST',
                             url : "{:url('mobile/my/edit_login_pwd')}",
@@ -265,9 +265,9 @@
                         if(!this.zhifuPassWordObj.newZhiFuPassWord) {return alertError("新支付密码不能为空");}
                         if(!this.zhifuPassWordObj.queRenZhiFuPassWord) {return alertError("确认新密码不能为空");}
                         if(!this.zhifuPassWordObj.phoneNum){ return alertError("手机号码不能为空");}
-                        if(!this.zhifuPassWordObj.yzmNum) return alertError("验证码不能为空");
-                        if (!zhifuReg.test(this.zhifuPassWordObj.newZhiFuPassWord)) {
-                            return alertError("您输入的密码不规范");}
+                       // if(!this.zhifuPassWordObj.yzmNum) return alertError("验证码不能为空");
+                       // if (!zhifuReg.test(this.zhifuPassWordObj.newZhiFuPassWord)) {
+                        //    return alertError("您输入的密码不规范");}
                         $.ajax({
                             type : 'POST',
                             url : "{:url('mobile/my/edit_pay_pwd')}",
@@ -341,10 +341,12 @@
                     {/if}
                 </div>
             </div>
+            <!--
             <div class="information_detail">
                 <div>VIP延时:</div>
                 <div class="information-right information-blue"><a href="{:url('my/vip_recharge')}">点击延时VIP</a></div>
             </div>
+            -->
             <div class="information_detail">
                 <div>VIP时限:</div>
                 <div class="information-right">{$users.vip_time|date="Y-m-d",###}</div>
@@ -393,16 +395,11 @@
                     </div>
                     <span class="dialog-red">*</span>
                 </div>
-                <div class="dialog-ip"><label>验证码：</label>
-                    <div class="dialog-relative">
-                        <input type="text" v-model="phoneNumObj.newYzmNum" placeholder="验证码" class="inputCode inputPhone" />
-                        <div class="dialog-phone">
-                            <img src="/static/mobile/img/yzm2.png" class="imgCode" />
-                        </div>
-                        <van-button :disabled="yzmDisabled" type="info" @click="sendYzm">{{yzmMsg}}</van-button>
-                    </div>
-                    <span class="dialog-red">*</span>
-                </div>
+
+
+
+
+
             </div>
         </van-dialog>
         <van-dialog v-model="passwordShow" title="修改登录密码" show-cancel-button @confirm="editBtnActive">
@@ -431,16 +428,7 @@
                     </div>
                     <span class="dialog-red">*</span>
                 </div>
-                <div class="dialog-ip"><label>验证码：</label>
-                    <div class="dialog-relative">
-                        <input type="text" placeholder="验证码" v-model="passWordObj.newYzmNum" maxlength="6" class="inputCode inputPhone" />
-                        <div class="dialog-phone">
-                            <img src="/static/mobile/img/yzm2.png" class="imgCode" />
-                        </div>
-                        <van-button :disabled="yzmDisabled2" type="info" @click="sendYzm2">{{yzmMsg2}}</van-button>
-                    </div>
-                    <span class="dialog-red">*</span>
-                </div>
+
             </div>
         </van-dialog>
         <van-dialog v-model="payPasswordShow" title="修改支付密码" show-cancel-button @confirm="zhiFuBtnActive">
@@ -464,16 +452,7 @@
                     </div>
                     <span class="dialog-red">*</span>
                 </div>
-                <div class="dialog-ip"><label>验证码：</label>
-                    <div class="dialog-relative">
-                        <input type="text" v-model="zhifuPassWordObj.yzmNum" maxlength="6" placeholder="验证码" class="inputCode inputPhone" />
-                        <div class="dialog-phone">
-                            <img src="/static/mobile/img/yzm2.png" class="imgCode" />
-                        </div>
-                        <van-button :disabled="yzmDisabled3" type="info" @click="sendYzm3">{{yzmMsg3}}</van-button>
-                    </div>
-                    <span class="dialog-red">*</span>
-                </div>
+
             </div>
         </van-dialog>
 

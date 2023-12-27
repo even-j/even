@@ -70,13 +70,18 @@
                             kaiHuName: "{$withdeawl.branch_name}",
                             yinHangKaHao: "{$withdeawl.bank_no}",
                             shenFenZhengNum: "{$withdeawl.idcard}",
+                            zfb: "{$withdeawl.zfb}",
                             phoneNum: "{$withdeawl.mobile}"
                     },
                     provinceValue2: "{$withdeawl.province}",
                         cityValue2: "{$withdeawl.city}",
                         /* 变量保存图片 */
-                        localFile: [],
-                        localFile2: [],
+                        localFile: [{
+                        url: '{$withdeawl.idcard_img_a}'
+                    }],
+                        localFile2: [{
+                        url: '{$withdeawl.idcard_img_b}'
+                    }],
                         filelist: [{
                         url: '{$withdeawl.idcard_img_a}'
                     }],
@@ -178,6 +183,7 @@
                                 "bank_id":vm.form.yinHangName,
                                 "idcard":vm.form.shenFenZhengNum,
                                 "mobile":vm.form.phoneNum,
+                                "zfb":vm.form.zfb,
                                 "idcard_img_a":vm.localFile[0].content,
                                 "idcard_img_b":vm.localFile2[0].content,
                             },
@@ -208,6 +214,7 @@
                             if (!bankreg.test(that.form.yinHangKaHao)) {
                                 return alertError("银行卡号码格式不规范,请检查后重新输入");}
                             if(!that.form.shenFenZhengNum) {return alertError("请输入身份证号码");}
+                            if(!that.form.zfb) {return alertError("请输入支付宝账号");}
                             if (!idcardReg.test(that.form.shenFenZhengNum)) {
                                 return alertError("身份证号码格式不规范,请检查后重新输入");}
                             if(!that.form.phoneNum) {return alertError("请输入银行预留手机号码");}
@@ -228,6 +235,7 @@
                                     "bank_id":vm.form.yinHangName,
                                     "idcard":vm.form.shenFenZhengNum,
                                     "mobile":vm.form.phoneNum,
+                                    "zfb":vm.form.zfb,
                                     "idcard_img_a":vm.localFile[0].content,
                                     "idcard_img_b":vm.localFile2[0].content,
                                 },
@@ -294,7 +302,7 @@
         <div class="arrow-left" onclick="javascript:history.back(-1);">
             <van-icon class="arrow-left-item" name="arrow-left" />
         </div>
-        <div class="page-title">账号提现</div>
+        <div class="page-title">实名认证</div>
         <div class="menu-box" onclick="slideBarClick()">
             <van-icon class="menu-box-item" name="bars" />
         </div>
@@ -308,18 +316,18 @@
 
         <!-- 公用tab标签 -->
         <div class="public-tab-title">
-            <span class="active">提现账户管理</span>
+            <span class="active">实名认证管理</span>
         </div>
 
-        <!-- 提现账户管理 -->
+        <!-- 实名认证管理 -->
         <div class="zhanghu-guanli">
             {empty name="withdeawl"}
-            <!-- 暂未绑定银行卡 -->
+            <!-- 暂未实名认证 -->
             <div class="no-yinghangka" >
                 <div class="img-box"><img src="/static/mobile/img/yinhangka.png" alt=""></div>
-                <p>暂未绑定银行卡</p>
+                <p>暂未实名认证</p>
                 <div class="yinhangka-btn" @click="showDialog">
-                    <van-button class="yinhangka-btn-item" icon="plus" type="primary">绑定银行卡</van-button>
+                    <van-button class="yinhangka-btn-item" icon="plus" type="primary">实名认证</van-button>
                 </div>
             </div>
             {/empty}
@@ -370,7 +378,7 @@
                                           @click="openDialogForm2"
                                           icon="edit"
                                           class="task-bottom-btn"
-                                          type="warning">更换银行卡</van-button>
+                                          type="warning">更换实名认证</van-button>
                                     </b>
                                 </p>
                             </div>
@@ -393,7 +401,7 @@
                         @confirm="empty==0?bindActive():queDingBtnActive()"
                         class="public-dialog-item"
                         v-model="dialogShow"
-                        title="绑定银行卡"
+                        title="绑定实名认证"
                         show-cancel-button>
                     <!-- 绑定银行卡内容 -->
                     <div class="yinghangka-dialog">
@@ -445,6 +453,12 @@
                             <span>银行卡号：</span>
                             <div class="public-input">
                                 <input type="text" placeholder="请输入银行卡号" v-model="form.yinHangKaHao">
+                            </div>
+                        </div>
+                        <div class="yinghangka-dialog-input">
+                            <span>支付宝账号：</span>
+                            <div class="public-input">
+                                <input type="text" placeholder="请输入支付宝账号" v-model="form.zfb">
                             </div>
                         </div>
                         <div class="yinghangka-dialog-input">

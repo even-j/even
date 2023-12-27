@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小白兔</title>
+    <title>安巨</title>
     <link rel="stylesheet" type="text/css" href="/static/buy/element-ui/lib/theme-chalk/index.css" />
     <!-- 页面内容CSS -->
     <link rel="stylesheet" type="text/css" href="/static/buy/css/pageCss/maiHaoAdd.css"/>
@@ -41,7 +41,7 @@
                                 id:`{$vo.id}`,
                             name: `{$vo.addressname}`,
                             address: `{$vo.addresspro}{$vo.addresscity}{$vo.addressarea}{$vo.addresstext}`,
-                            zhifubaoNum: `{$vo.alipayimg}`,
+                            zhifubaoNum: "{$vo.alipayimg}",
                                 addressphone:`{$vo.addressphone}`,
                                 beizhu:`{$vo.note}`,
                             maiHaoZhuangTai: "{if condition="$vo.state ==0"}未审核{elseif condition="$vo.state ==1"/}审核通过{else /}已禁用{/if}"
@@ -399,7 +399,7 @@
                         if(!this.addressValue) return vm.alertError("收货地址详细信息不能为空");
                         if(!this.phoneValue) return vm.alertError("收货人手机号码不能为空");
                         if(!this.renZhengValue) return vm.alertError("支付宝认证姓名不能为空");
-                        if(!this.yzmValue) return vm.alertError("请输入手机号验证码");
+                        //if(!this.yzmValue) return vm.alertError("请输入手机号验证码");
                         $.ajax({
                             type : 'POST',
                             url : "{:url('buy/my/addbuyno')}",
@@ -707,7 +707,7 @@
                                 <p class="card_col_p">该手机号必须与您支付宝上认证的手机号码一致；否则不予审核通过</p>
                             </div>
                         </div>
-                        <!-- 手机验证码 -->
+                        <!-- 手机验证码
                         <div class="card_item">
                             <p class="card_item_p">*手机验证码:</p>
                             <div style="margin-bottom: 20px;">
@@ -715,7 +715,7 @@
                                 </el-input>
                                 <el-button type="primary" style="margin-left: 20px;" class="sendBtn" :disabled="isDisabled">发送验证码</el-button>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- 支付宝认证姓名 -->
                         <div class="card_item">
                             <p class="card_item_p">*支付宝认证姓名:</p>
@@ -741,7 +741,7 @@
                                     <i class="el-icon-plus"></i>
                                 </el-upload>
 <!--                                <el-button type="success" style="margin-left: 50px;" @click="activeUpload3">点击上传</el-button>-->
-                                <p class="card_col_p">身份证正面拍照,身份证信息必须清晰可见,身份证姓名必须和您填写的支付宝实名制姓名一致。此照片仅用于小白兔审核买号使用。</p>
+                                <p class="card_col_p">身份证正面拍照,身份证信息必须清晰可见,身份证姓名必须和您填写的支付宝实名制姓名一致。此照片仅用于安巨审核买号使用。</p>
                             </div>
 
                             <!-- 大图预览 -->
@@ -794,7 +794,7 @@
                     <el-alert title="温馨提示" type="warning" show-icon>
                         <p>1.您绑定的账号需满足<span style="color:red;">注册时间超过3个月、实名认证、信誉等级3心以上、信誉大于2钻的买号注册时间要超过3年，好评率大于99%的安全号:</span></p>
                         <p>2.淘宝|天猫可绑定3个买号，每个买号要求绑定不同的收货信息(收货人姓名 .地址，联系电话均要求不同并且真实有效，能联系上买手本人，同事或者亲戚);</p>
-                        <p>3.平台填写的收货信息，务必和淘宝网下单时收货信息保持一致，否则将封闭您的小白兔账号，并没收所有佣金:</p>
+                        <p>3.平台填写的收货信息，务必和淘宝网下单时收货信息保持一致，否则将封闭您的安巨账号，并没收所有佣金:</p>
                         <p>4.所有绑定的收货地址必须真实有效，因买手原因造成商家真实发货且由于地址原因包裹丢失，损失由买手承担:</p>
                         <p>5.必须确保绑定的所有买号收货地址与登录IP地址保持一致， 建议还可以写公司地址，亲属地址，朋友地址;</p>
                         <p>6.买号提交审核后，平台预计在24小时内完成审核操作。</p>

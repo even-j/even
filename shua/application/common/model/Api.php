@@ -41,4 +41,35 @@ class Api extends Model
         curl_close ( $ch );
         return json_decode($file_contents);
     }
+
+    static public function getTaoBao($taobao_id){
+
+        $uid=360432;
+        $ticks=time();
+        $secret ='7914829B44544E45A81';
+        $token = md5($uid.$ticks.$taobao_id.$secret);
+        $api_url='http://www.taoyanhao.com/Api/Rest.ashx?type=ItemSimpleInfo';
+        $data = array(
+            'uid'      => $uid,
+            'ticks'    =>$ticks,
+            'itemid'   => $taobao_id,
+            'token'    => $token
+        );
+
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($api_url, false, $context);
+        $result=json_decode($result,true);
+        if(isset($result['success']) && $result['success']=='1'){
+            return $result['data'];
+        }else{
+            return '';
+        }
+    }
 }

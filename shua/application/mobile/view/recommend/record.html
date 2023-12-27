@@ -165,6 +165,10 @@
             <div class="select-date">
                 <!-- 选择日期 -->
                 <div class="span-date">
+                    <input type="text" placeholder="请输入手机号" v-model="info.mobile">
+                </div>
+
+                <div class="span-date">
                     <mu-date-input @change="setSearchTime(1)" class="span-date-item" v-model="info.searchTime1" label="请选择开始日期" label-float></mu-date-input>
                     <mu-date-input @change="setSearchTime(2)" class="span-date-item" v-model="info.searchTime2" label="请选择结束日期" label-float></mu-date-input>
                 </div>
@@ -188,8 +192,8 @@
                                 <p>{{item.create_time}}</p>
                             </div>
                             <div class="managementHeng">
-                                <p>用户名QQ：</p>
-                                <p>{{item.qq}}</p>
+                                <p>手机号：</p>
+                                <p>{{item.mobile}}</p>
                             </div>
                             <div class="managementHeng">
                                 <p>完成任务数量：</p>

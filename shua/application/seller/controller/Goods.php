@@ -6,6 +6,7 @@ namespace app\seller\controller;
 
 use app\common\controller\Img;
 use app\common\controller\aliyunOss;
+use app\common\model\Api;
 use app\seller\model\GoodsKeyWorld;
 use think\Db;
 use think\Exception;
@@ -163,9 +164,11 @@ class Goods extends Base
             $list['pc_img'] = json_decode($list['pc_img'],true);
             if(!$list)return $this->error('该数据不存在');
             $img = [];
+            if($list['pc_img']){
             foreach ($list['pc_img'] as $key=>$item){
                 $img[$key]['name'] = '';
                 $img[$key]['url'] = $item;//'http://tfkzpic.oss-cn-hangzhou.aliyuncs.com'.$item;
+            }
             }
             $res = [
                 'list' => $list,
@@ -343,16 +346,18 @@ class Goods extends Base
         $taobao_id = $res['id'];
         $state = Db::name('system')->value('switch');
         if($state==1){
-            if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
+            //if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
         }
         if($data['number']){
-            if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
+            //if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
         }
         $edit['number'] = $data['number'];
         Db::startTrans();
         try{
+            if($data['pc_img']){
             foreach ($data['pc_img'] as &$item){
                 $item = str_replace('http://tfkzpic.oss-cn-hangzhou.aliyuncs.com','',$item);
+            }
             }
             $edit['pc_img'] = json_encode($data['pc_img']);
             $edit['name'] = $data['name'];
@@ -388,22 +393,49 @@ class Goods extends Base
         $taobao_id = $res['id'];
         $state = Db::name('system')->value('switch');
         if($state==1){
-            if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
+            //if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
         }
         if($data['number']){
-            if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
+           // if (!preg_match('/^[0-9]{6}$/i',$data['number']))return $this->error('核对码只能是6位数字！');
         }
         $add['number'] = $data['number'];
+        if(isset($data['pc_img']) && $data['pc_img']){
+            $path = 'uploads' . DS . 'info' . DS;
+            foreach ($data['pc_img'] as $k =>$v){
+                if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $v, $result)){
+                    $data['pc_img'][$k] = aliyunOss::uploadBase64($v,$path);
+                }
+            }
+        }else{
+            $data['pc_img']='';
+        }
+        $info['shopName'] = $data['name'];
+        $info['price'] = $data['show_price'];
+        if(!$data['name'] || !$data['pc_img'] || !$data['show_price']){
+            $info = Api::getTaoBao($taobao_id);
+            if(!$info){
+                return $this->error('图片链接获取商品失败！');
+            }
+
+            if(empty($info['img'])){
+                return $this->error('图片链接获取商品失败！');
+            }
+            $info['shopName'] =isset($info['title'])?$info['title']:$info['shopName'];
+            $data['pc_img']=[$info['img']];
+        }
+        
+        
         Db::startTrans();
         try{
-            $add['pc_img'] = json_encode($data['pc_img']);
-            $add['name'] = $data['name'];
+            $add['pc_img'] =  json_encode($data['pc_img']);
+            $add['name'] = $data['name']?$data['name']:$info['shopName'];
             $add['shop_id'] = $data['shop_id'];
             $add['seller_id'] = $this->seller['id'];
             $add['link'] = $data['link'];
             $add['taobao_id'] = $taobao_id;
-            $add['show_price'] = $data['show_price'];
+            $add['show_price'] = $data['show_price']?$data['show_price']:$info['price'];
             $add['create_time'] = time();
+            //print_r($add);die;
             Db::name('goods')->insert($add);
             Db::commit();
         }catch (Exception $e){

@@ -22,6 +22,16 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             return '<span class="green">是</span>';
         }
     }
+
+    var citycity = function (d) {
+        return d.province+`-`+d.city
+    }
+
+    var citycity1 = function (d) {
+        return d.province1+`-`+d.city1
+    }
+
+
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
@@ -39,6 +49,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'username', title: '用户名', minWidth: 50, width: 110, align: "center" },
             { field: 'mobile', title: '手机号', minWidth: 55, width: 110, align: "center" },
             { field: 'qq', title: 'QQ', minWidth: 50, width: 110, align: "center" },
+            { field: 'wechat', title: '微信', minWidth: 50, width: 110, align: "center" },
+
+            { field: 'city', title: '居住城市', minWidth: 50, width: 110, align: "center",templet:citycity },
+            //{ field: 'city1', title: '身份证', minWidth: 50, width: 110, align: "center",templet:citycity1 },
             { field: 'create_time', title: '注册时间', minWidth: 50, width: 80, align: "center" },
             { field: 'balance/reward', title: '余额/银锭', minWidth: 50, width: 150, height:100, align: "center",templet: balance  },
             // { field: 'star', title: '星级', minWidth: 50, width: 60, align: "center" },
@@ -48,6 +62,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             { field: 'tjuser', title: '来源用户ID', minWidth: 50, width: 110, align: "center" },
             { field: 'note', title: '违规备注', minWidth: 50, width: 110, align: "center" },
             { field: 'mc_task_num', title: '每月累计完成单数', minWidth: 80, width:95, align: "center" },
+            { field: 'invite_code', title: '邀请码', minWidth: 50, width: 110, align: "center" },
             { title: '操作', minWidth: 100, width: 600, templet: '#userListBar', fixed: "right", align: "center" }
         ]]
     });
@@ -76,6 +91,51 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate'], function () {
             editstar(data)
         } else if (layEvent === 'xiaoxi') {//消息
             xiaoxi(data)
+        }else if (layEvent === 'del') { //删除
+            layer.confirm('确定删除此用户？', { icon: 3, title: '提示信息' }, function (index) {
+                console.log(data);
+                var dataid=data.id;
+                $.ajax({
+                    type: "post",
+                    url: '/index.php/admin/Buyer/del_buyuser/id/'+dataid+'',
+                    data: {
+                        'id':dataid
+                    },
+                    dataType: "json",
+                    async:true,
+                    success:function(data) {
+                        if(data.code == 1){
+                            layer.msg(data.msg, {icon: 1},function () {
+                                // 搜索条件
+                                var name = $("input[name=name]").val(); //姓名
+
+                                var qq = $("input[name=qq]").val(); //手机号
+                              table.reload('userListTable', {
+                                    method: 'post'
+                                    , where: {
+                                        'name': name, //姓名
+                                        'qq': qq,
+                                    }
+                                    , page: {
+                                        curr: 1
+                                    }
+                                });
+                                setTimeout(function () {
+                                    parent.layui.layer.closeAll();
+                                    top.layer.msg("操作成功！");
+
+                                }, 500);
+                                return false;
+                            });
+                        }else{
+                            layer.msg(data.msg, {icon: 2});
+                            //layer.msg('删除失败', {icon: 2});
+                        }
+                    }
+                });
+                // tableIns.reload();
+                // layer.close(index);
+            });
         }
     });
     //申请时间1
