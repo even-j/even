@@ -1,0 +1,286 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+
+/* 让表格对齐 */
+body .el-table th.gutter {
+	display: table-cell !important;
+}
+
+.left {
+	width: 280px;
+}
+
+.right {
+	width: 910px;
+}
+
+
+.user_content {
+	width: 910px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	box-sizing: border-box;
+}
+
+/* 充值会员 */
+.web_gonggao {
+	padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.web_gonggao .gonggao_top {
+	padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+/* 会员状态 */
+.vip_zhuangtai {
+	padding: 0 20px 20px 20px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.vip_zhuangtai p {
+	color: #999;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.vip_zhuangtai p span {
+	color: #fa7979;
+	margin-left: 10px;
+	font-weight: normal;
+	display: inline;
+}
+
+.vip_zhuangtai p:nth-of-type(2) {
+	margin: 10px 0;
+}
+
+/* 会员套餐 */
+.vip_taocan {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.vip_taocan .vip_taocan_title {
+	color: #999;
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.vip_taocan ul {
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
+	margin: 0 30px;
+}
+
+.vip_taocan ul li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	width: 130px;
+	border: 2px solid #ffe469;
+	border-radius: 5px;
+}
+
+.vip_taocan ul li p:nth-of-type(1) {
+	height: 30px;
+	width: 130px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #666;
+	border-bottom: 2px solid #ffe469;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.vip_taocan ul li p:nth-of-type(2) {
+	height: 60px;
+	width: 130px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #fa7979;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.vip_taocan ul li p:nth-of-type(2) img {
+	width: 20px;
+	margin-right: 5px;
+}
+
+.vip_taocan ul li.vip_taocan_selecton p:nth-of-type(1) {
+	background: #fa7979;
+	color: white;
+	border-bottom: 2px solid #fa7979;
+	transition: .2s;
+}
+
+.vip_taocan ul li.vip_taocan_selecton {
+	border: 2px solid #fa7979;
+	transition: .2s;
+}
+
+/* 当前选中套餐 */
+.current_select_taocan {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 20px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.current_select_taocan .current_select_item {
+	color: #999;
+	font-size: 16px;
+	font-weight: 600;
+	margin-right: 5px;
+}
+
+.current_select_taocan .current_select_date,
+.current_select_taocan .current_select_price {
+	color: #fa7979;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.current_select_date span,
+.current_select_price span,
+.zhifu_price_count span {
+	float: left;
+}
+
+.current_select_taocan .current_select_gang {
+	margin: 0 5px;
+	font-size: 20px;
+	color: #999999;
+}
+
+.current_select_taocan .current_select_img {
+	width: 20px;
+	margin-right: 5px;
+}
+
+/* 支付方式 */
+.zhifubao {
+	padding: 20px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.zhifubao .zhifubao_title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #999999;
+	margin-bottom: 20px;
+}
+
+.zhifubao .zhifubao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.zhifubao_row .zhifubao_item {
+	width: 130px;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	margin-right: 100px;
+	cursor: pointer;
+}
+
+.zhifubao_row .zhifubao_item.zhifubao_color {
+	color: #3f8edb;
+	border: 2px solid #3f8edb;
+}
+
+.zhifubao_item .zhifubao_img {
+	width: 24px;
+	margin-right: 10px;
+}
+
+.zhifubao_item .zhifubao_name {
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 1px;
+}
+
+/* 支付金额 */
+.zhifu_price {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 20px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.zhifu_price .zhifu_price_txt {
+	font-size: 16px;
+	font-weight: 600;
+	color: #999999;
+}
+
+.zhifu_price .zhifu_price_img {
+	width: 20px;
+	margin: 0 10px;
+}
+
+.zhifu_price .zhifu_price_count {
+	color: #fa7979;
+	font-weight: 600;
+}
+
+/* 支付按钮 */
+.zhifu_btn {
+	padding: 20px 0 0 20px;
+}
+
+.zhifu_btn .zhifu_btn_item {
+	font-size: 16px;
+}

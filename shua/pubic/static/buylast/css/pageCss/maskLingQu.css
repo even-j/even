@@ -1,0 +1,122 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 让表格对齐 */
+body .el-table th.gutter {
+	display: table-cell !important;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 任务管理 */
+.renwuguanli_box {
+	width: 940px;
+	background: white;
+	padding: 20px;
+	margin: 30px 0;
+}
+
+.renwuguanli {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.renwuguanli .renwuguanli_item {
+	padding-bottom: 10px;
+}
+
+.renwuguanli .renwuguanli_item a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.renwuguanli .renwuguanli_item .renwuguanli_item_select {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+/* 任务管理 */
+.renwuguanli_box .select_row_one,
+.renwuguanli_box .select_row_two {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 10px 0 20px;
+}
+
+.renwuguanli_box .select_row_one p,
+.renwuguanli_box .select_row_two p {
+	white-space: nowrap;
+	margin-right: 10px;
+	font-size: 14px;
+}
+
+.renwuguanli_box .select_row_one .el_select,
+.renwuguanli_box .select_row_two .el_select {
+	margin-right: 30px;
+}
+
+.renwuguanli_box .select_row_two .el_date {
+	width: 340px;
+}
+
+.renwuguanli_box .select_row_two .el-range-separator {
+	z-index: 1;
+}
+
+/* 数据列表 */
+.shuju_table {
+	width: 100%;
+}
+
+/* 分页 */
+.renwuguanli_box .fenye {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding-top: 20px;
+}

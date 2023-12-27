@@ -1,0 +1,248 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  min-width: 1200px;
+  margin: 0 auto;
+  background: #eeeeee;
+}
+
+/* 中间部分 */
+.center_box {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 280px);
+  margin: 0 auto;
+}
+
+/* 下拉菜单 */
+.select_box {
+  width: 240px;
+  margin: 30px 20px 30px 0;
+}
+
+/* 右边盒子部分 */
+.right_box {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 基本信息标题 */
+.msg_title {
+  width: 940px;
+  margin: 30px 0;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.msg_title p {
+  font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+  color: rgb(63, 142, 219);
+}
+
+.user_content {
+  width: 940px;
+  margin: 0 0 30px 0;
+  padding: 20px;
+  background: #ffffff;
+}
+
+/* 银锭充值 */
+.web_gonggao {
+  padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.web_gonggao .gonggao_top {
+  padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+  padding: 8px 20px;
+  text-decoration: none;
+  color: #999999;
+  border-top: 2px solid #ffffff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+  color: #3f8edb;
+  border-top: 2px solid #3f8edb;
+}
+
+.box-card {
+  margin-bottom: 50px;
+}
+
+/* 数据展示1 */
+.task_name {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.task_name .task_card {
+  width: 400px;
+  margin: 10px 0;
+}
+
+.task_name .task_card p {
+  margin: 10px 0;
+}
+
+/* 表格 */
+.box-card table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 1px solid #dddddd;
+}
+
+.box-card table tr th {
+  width: 33.33333%;
+  padding: 10px;
+  color: #909399;
+  border: 1px solid #dddddd;
+  background: #f5f7fa;
+}
+
+.box-card table tr td {
+  width: 33.33333%;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #dddddd;
+}
+
+.box-card table tr .table-img {
+  font-size: 0;
+  width: 70%;
+  white-space: nowrap;
+}
+
+.box-card table tr .table-img img {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+}
+
+/* 暂无数据 */
+.swell {
+  padding-top: 10px;
+}
+
+.sample {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  background: #f8f8f8;
+}
+
+.sample-center {
+  font-size: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.sample-center .sample-title {
+  width: 200px;
+  margin-right: 20px;
+  text-align: justify;
+  word-break: break-all;
+}
+
+.sample-center .sample-content {
+  width: 250px;
+}
+
+.sample-center .sample-content:last-child {
+  width: 400px;
+}
+
+.sample-center .sample-content p {
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: justify;
+  word-break: break-all;
+  color: red;
+}
+
+.sample-center .sample-content p:last-child {
+  margin-bottom: 0;
+}
+
+.sample-center .sample-content p span {
+  font-size: 12px;
+  color: #333333;
+}
+
+.sample-center .sample-btn .el-button {
+  margin-left: 50px;
+}
+
+.sample-img {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.sample-img span {
+  font-size: 14px;
+  color: red;
+}
+
+.sample-img img {
+  width: 130px;
+  height: 130px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sample-video {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.sample-video span {
+  font-size: 14px;
+  color: red;
+}
+
+.sample-video video {
+  width: 200px;
+  height: 150px;
+}

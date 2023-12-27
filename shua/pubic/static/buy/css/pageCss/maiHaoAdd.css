@@ -1,0 +1,192 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 基本信息标题 */
+.msg_title {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 30px 0;
+}
+
+.msg_title p {
+	font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+	color: rgb(63, 142, 219);
+}
+
+.user_content {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+}
+
+/* 买号添加 */
+.web_gonggao {
+	padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.web_gonggao .gonggao_top {
+	padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+/* 添加账号 */
+.right_box .add_num {
+	font-size: 18px;
+}
+
+/* 按钮 */
+.right_box .add_num .btn_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: 30px 0;
+}
+
+.right_box .add_num .btn_row .el-button {
+	margin-right: 10px;
+}
+
+/* 请注意 */
+.alert {
+	background-color: #fdf6ec;
+	color: #E6A23C;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin: 20px auto;
+}
+
+.alert .alert_title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: 18px;
+	margin: 20px;
+}
+
+.alert .alert_txt {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+	color: red;
+	font-size: 14px;
+}
+
+.alert .alert_txt p {
+	width: 90%;
+	margin: 0 auto 10px;
+}
+
+/* 添加账号 */
+.right_box .add_num .card_item {
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid #EEEEEE;
+	margin-bottom: 20px;
+}
+
+.right_box .add_num .card_item .card_region {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.right_box .add_num .card_item .card_region .card_select {
+	width: 150px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.right_box .add_num .card_item .card_item_p {
+	color: #909090;
+	width: 160px;
+	line-height: 40px;
+}
+
+.right_box .add_num .card_item .card_item_input {
+	width: 300px;
+}
+
+.right_box .add_num .card_item .card_col {
+	display: flex;
+	flex-direction: column;
+}
+
+.right_box .add_num .card_item .card_col .card_col_p {
+	color: #909090;
+	font-size: 14px;
+	margin: 20px 0;
+	max-width: 600px;
+}
+
+/* 上传图片 */
+.el_pic_upload {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

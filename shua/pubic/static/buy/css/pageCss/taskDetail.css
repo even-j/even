@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+}
+
+.container {
+	width: 100%;
+	min-width: 1200px;
+	background: #EEEEEE;
+	margin: 0 auto;
+}
+
+/* 让表格对齐 */
+body .el-table th.gutter {
+	display: table-cell !important;
+}
+
+/* 中间部分 */
+.center_box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	min-height: calc(100vh - 280px);
+}
+
+/* 下拉菜单 */
+.select_box {
+	width: 240px;
+	margin: 30px 20px 30px 0;
+}
+
+/* 右边盒子部分 */
+.right_box {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 基本信息标题 */
+.msg_title {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 30px 0;
+}
+
+.msg_title p {
+	font-size: 12px;
+}
+
+.msg_title p .msg_title_txt {
+	color: rgb(63, 142, 219);
+}
+
+.user_content {
+	width: 940px;
+	padding: 20px;
+	background: #fff;
+	margin: 0 0 30px 0;
+}
+
+/* 银锭充值 */
+.web_gonggao {
+	padding: 20px;
+}
+
+.web_gonggao .gonggao_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.web_gonggao .gonggao_top {
+	padding-bottom: 10px;
+}
+
+.web_gonggao .gonggao_top a {
+	text-decoration: none;
+	padding: 8px 20px;
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 600;
+	color: #999;
+	border-top: 2px solid #fff;
+}
+
+.web_gonggao .gonggao_top .select_on {
+	border-top: 2px solid #3f8edb;
+	color: #3f8edb;
+}
+
+.box-card {
+	margin-bottom: 50px;
+}
+
+/* 数据展示1 */
+.task_name {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.task_row {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+}
+
+.task_row:nth-of-type(1) {
+	background: #f5f7fa;
+}
+
+.task_row:hover {
+	background: #f5f7fa;
+}
+
+.task_row h4 {
+	flex: 1;
+	color: #909399;
+}
+
+.task_row span {
+	flex: 1;
+}
+
+.task_row .span .el-button {
+	font-size: 16px;
+}
+
+.task_name .task_card {
+	width: 400px;
+	margin: 10px 0;
+}
+
+.task_name .task_card p {
+	margin: 10px 0;
+}
+
+.el-dialog {
+	width: 900px;
+}
+
+.el-dialog img {
+	width: 100%;
+}

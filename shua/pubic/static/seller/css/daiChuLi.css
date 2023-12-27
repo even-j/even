@@ -1,0 +1,94 @@
+.left {
+    width: 280px;
+}
+
+.right {
+    width: 910px;
+}
+
+.user_content {
+    width: 910px;
+    padding: 20px;
+    background: #fff;
+    margin: 0 0 30px 0;
+    box-sizing: border-box;
+}
+
+.line {
+    width: 100%;
+    font-size: 14px;
+}
+
+.select_entile {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.entile {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #f9f9f9;
+    margin-top: 20px;
+}
+
+.entile-top {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 56px;
+    line-height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.entile-top span {
+    display: flex;
+    align-items: center;
+}
+
+.entile-top p {
+    font-size: 14px;
+}
+
+.entile-top p b {
+    color: #f00;
+    font-weight: normal;
+}
+
+.entile-top a {
+    color: #3f8edb;
+    font-size: 14px;
+}
+
+.small {
+    width: 56px;
+    height: 28px !important;
+    margin: 0 !important;
+    line-height: 28px !important;
+    display: inline !important;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    outline: 0;
+}
+
+.entile-top strong {
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+}
+
+.entile-top strong b {
+    font-weight: normal;
+    color: #f00;
+}
+.fenye {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
