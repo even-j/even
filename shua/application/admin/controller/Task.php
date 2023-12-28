@@ -535,10 +535,10 @@ class Task extends Base
             $where = [];
             if (isset($date['task_number']) && $date['task_number']) {
                 //$where['task_number'] = $date['task_number'];
-                $where['task_number'] = ['like', '%' . trim($date['task_number']) . '%'];
+                $where['tfkz_user_task.task_number'] = ['like', '%' . trim($date['task_number']) . '%'];
             }
             if (isset($date['wangwang']) && $date['wangwang']) {
-                $where['user_buyno_wangwang'] = ['like', '%' . trim($date['wangwang']) . '%'];
+                $where['tfkz_user_task.user_buyno_wangwang'] = ['like', '%' . trim($date['wangwang']) . '%'];
                 //$where['user_buyno_wangwang'] = $date['wangwang'];
             }
 //            if (isset($date['shopname']) && $date['shopname']) {
@@ -549,32 +549,52 @@ class Task extends Base
             if (isset($date['shopname']) && $date['shopname']) {
                 $where_shopname['shop_name'] = ['like', '%' . trim($date['shopname']) . '%'];
                 $taskid=db('seller_task')->where($where_shopname)->column('id');
-                $where['seller_task_id']=['in',$taskid];
+                $where['tfkz_user_task.seller_task_id']=['in',$taskid];
             }
 
             if (isset($date['time']) && $date['time']) {
                 $time = explode(" - ", $date['time']);
                 $time1 = strtotime($time[0]);
                 $time2 = strtotime($time[1]);
-                $where['high_praise_time'] = ['between', [$time1, $time2]];
+                $where['tfkz_seller_task.create_time'] = ['between', [$time1, $time2]];
             }
-            if (isset($date['state']) && $date['state']!='') {
-                $where['state'] =$date['state'];
+            if (isset($date['state']) && $date['state']==66) {
+                //$where['principal'] =['neq',`seller_principal`];
+                $where['tfkz_user_task.state'] =['neq',2];
             }else{
-                $where['state'] =['neq',2];
+
+            if (isset($date['state']) && $date['state']!='') {
+                $where['tfkz_user_task.state'] =$date['state'];
+            }else{
+                $where['tfkz_user_task.state'] =['neq',2];
             }
 //            if (isset($date['delivery_state']) && $date['delivery_state']!='') {
 //                $where['delivery_state'] =$date['delivery_state'];
 //            }
 
             if (isset($date['state']) && $date['state']==3) {
-                $where['delivery_state'] =1;
+                $where['tfkz_user_task.delivery_state'] =1;
             }
-
-            $count = UserTask::where($where)->count('id');
-            $buyno_list = UserTask::where($where)->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
+            }
+            $count = UserTask::where($where)
+                ->join('tfkz_seller_task','tfkz_seller_task.id =tfkz_user_task.seller_task_id','left')
+                ->where(function ($query) use ($date) {
+                if (isset($date['state']) && $date['state']==66) {
+                    $query->where('principal != seller_principal');
+                }
+            })->count('tfkz_user_task.id');
+            $buyno_list = UserTask::where($where)
+                ->join('tfkz_seller_task','tfkz_seller_task.id =tfkz_user_task.seller_task_id','left')
+                ->where(function ($query) use ($date) {
+                    if (isset($date['state']) && $date['state']==66) {
+                        $query->where('principal != seller_principal');
+                    }
+                })
+                ->field('tfkz_user_task.*,tfkz_seller_task.create_time as task_time')
+                ->limit(($page - 1) * $limit, $limit)->order('id desc')->select();
             if ($buyno_list) $buyno_list = $buyno_list->toArray();
             foreach ($buyno_list as $K => &$v) {
+                $v['task_time'] =date('Y-m-d H:i:s',$v['task_time']);
                 if($v['is_shengji']==1){
                     $v['goods_num'] = array_sum(json_decode($v['goods_num']));
                     $v['goods_unit_price'] = array_sum(json_decode($v['goods_unit_price']));

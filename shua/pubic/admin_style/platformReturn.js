@@ -103,6 +103,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function ()
             { field: 'user_principal', title: '实付金额', minWidth: 50, width: 100, align: "center" ,templet: user_principal},
             { field: 'commission', title: '佣金', minWidth: 50, width: 150, align: "center" ,templet: commission},
             { field: 'high_praise_time', title: '确认收货时间', minWidth: 50, width: 80, align: "center" },
+            { field: 'task_time', title: '发布时间', minWidth: 50, width: 80, align: "center" },
+            { field: 'create_time', title: '领取时间', minWidth: 50, width: 80, align: "center" },
             { field: 'state', title: '订单状态', minWidth: 50, width: 100, align: "center" },
             // { field: 'delivery_state', title: '发货状态', minWidth: 50, width: 100, align: "center" },
             { title: '操作', minWidth: 100, width: 200, templet: userListBar, fixed: "right", align: "center" }
@@ -259,6 +261,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'laydate', 'upload'], function ()
         , range: true
         , format: 'yyyyMMdd'
     })
+/*
+    var date22 = laydate.render({
+        elem: '#application-Time1'
+        , type: 'datetime'
+        , range: true
+        , format: 'yyyyMMdd'
+    })*/
 //批量发货
     $('body').on('click','.delAll_btn',function(){
         var checkStatus = table.checkStatus('userListTable'); //idTest 即为基础参数 id 对应的值
