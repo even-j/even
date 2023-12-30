@@ -12,6 +12,65 @@ use think\Request;
 
 class Api extends Controller
 {
+
+   public function getTask(){
+       $table_order_id = input('post.table_order_id','');
+       $start_time = input('post.start_time','');
+       $end_time = input('post.end_time','');
+
+       $page = input('post.page',1);
+       $limit = input('post.limit',20);
+       $mobile = input('post.mobile','');
+       $login_pwd = input('post.login_pwd','');
+       $user = Db::name('seller')->where('mobile',$mobile)->where('login_pwd',md5($login_pwd))->find();
+       if(!$user){
+           return json(['code' => 400,  'msg' => '账密错误']);
+       }
+       $where['seller_id'] = $user['id'];
+
+       if($table_order_id){
+           $where['table_order_id'] = $table_order_id;
+       }
+
+       if($start_time){
+           $where['create_time'] =['>=',$start_time];
+       }
+       if($end_time){
+           $where['create_time'] =['<=',$end_time];
+       }
+       $count =  Db::name('user_task')->where($where)->count('id');
+       $list = Db::name('user_task')
+           ->where($where)->order('id','desc')
+           ->field('id,shop_id,seller_task_id,task_number,user_buyno_wangwang,principal,commission,user_principal,
+           seller_principal,create_time,state,table_order_id,upload_order_time,key,text_praise,img_praise,video_praise,high_praise_time')
+           ->limit(($page - 1) * $limit, $limit)
+           ->select()->toArray();
+
+       $shopIds = array_column($list,'shop_id');
+       $shopArr = Db::name('shop')->whereIn('id',$shopIds)->column('shop_name','id');
+
+       $taskIds = array_column($list,'seller_task_id');
+       $taskArr = Db::name('seller_task')->whereIn('id',$taskIds)
+           ->column('id,task_number,is_praise,is_img_praise,is_video_praise,refund_service_price,praise_fee,
+           img_praise_fee,video_praise_fee,service_price,goods_more_fee,phone_fee,pc_fee','id');
+        foreach ( $taskArr as &$task){
+            $task['goods'] =  Db::name('task_goods')
+                ->where('task_id',$task['id'])->field('')
+                ->join('tfkz_goods','tfkz_goods.id=tfkz_task_goods.goods_id','left')
+                ->field('tfkz_goods.id,tfkz_goods.name,tfkz_goods.link')
+                ->select()->toArray();
+        }
+
+       foreach ($list as $k=>&$v){
+           $v['shop_name'] =isset($shopArr[$v['shop_id']])?$shopArr[$v['shop_id']]:$v['shop_id'];
+           $v['task'] = isset($taskArr[$v['seller_task_id']])?$taskArr[$v['seller_task_id']]:$v['seller_task_id'];
+           unset($v['shop_id']);
+       }
+
+       return json(['code' => 0,  'msg' => '获取数据成功','count'=>$count, 'data' => $list]);
+   }
+
+
     public function api(Request $request)
     {
         $data = $request->param();
