@@ -306,7 +306,7 @@ class Task extends Base
             $time = explode("-", $date['time']);
             $time1 = strtotime($time[0]);
             $time2 = strtotime($time[1]);
-            $where['create_time'] = ['between', [$time1, $time2]];
+            $where['publish_time'] = ['between', [$time1, $time2]];
         }
         if (isset($date['wwid']) && $date['wwid']) {
             $where_wangwang['wangwang'] = ['like', '%' . trim($date['wwid']) . '%'];
@@ -320,7 +320,7 @@ class Task extends Base
             $where['seller_id']=['in',$seller_id];
         }
         $dd=[];
-        $count = SellerTask::where($where)->count('id');
+        //$count = SellerTask::where($where)->count('id');
         $buyno_list = SellerTask::where($where)->select();
         if ($buyno_list) $buyno_list = $buyno_list->toArray();
         foreach ($buyno_list as $k => $v) {
@@ -356,7 +356,7 @@ class Task extends Base
             $dd[$k]['union_interval'] = $v['union_interval']*$v['num'];//任务接单间隔
             $dd[$k]['phone_fee'] = $v['phone_fee']*$v['num'];//移动端加成
             $dd[$k]['is_free_shiping'] = $v['is_free_shiping'];
-            $dd[$k]['create_time'] = $v['create_time'];//发布时间
+            $dd[$k]['create_time'] = $v['publish_time'];//发布时间
             $status=array(
                 '1'=>"未支付",
                 '2'=>"已支付，待审核",
@@ -368,6 +368,7 @@ class Task extends Base
             $dd[$k]['task_status'] =$status[$v['status']];
             $dd[$k]['tjuser'] =$v['seller_id']['tjuser'];
         }
+        print_r($dd);die;
         //dump($dd);exit;
         $title = ['任务编号id','任务编号', '用户名','店铺名','商家旺旺ID','订单类型','刷单量','已接/完成','产品数量'
         ,'商品售价','基础佣金','返款服务费','图片好评','文字好评','直通车','视频好评','多件商品','加赏佣金','隔天付款','延长买手周期','定时付款','定时发布',
