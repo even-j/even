@@ -1340,19 +1340,21 @@ class Task extends Base
         $system = Db::name('system')->find();
         foreach ($list as &$item){
             $shop_id = Db::name('seller_task')->where(['id'=>$item['seller_task_id']])->value('shop_id');
+            $review_task = Db::name('review_task')->where(['task_id'=>$item['seller_task_id']])->find();
+            $seller_task_id=$review_task?$review_task['id']:0;
             $item['seller_task_id'] = Db::name('shop')->where(['id'=>$shop_id])->value('shop_name');
             $item['upload_order_time'] = $item['upload_order_time'] ? date('Y-m-d H:i:s',$item['upload_order_time']) : '';
-            $praise= Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>1])->count('id');
+            $praise= Db::name('review_task_praise')->where(['task_id'=>$seller_task_id,'type'=>1])->count('id');
             $item['praise'] =$praise?$system['praise']:0;
-            $img = Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>2])->count('id');
+            $img = Db::name('review_task_praise')->where(['task_id'=>$seller_task_id,'type'=>2])->count('id');
             $item['img'] =$img? $system['img_praise']:0;
-            $video = Db::name('review_task_praise')->where(['task_id'=>$item['seller_task_id'],'type'=>3])->count('id');
+            $video = Db::name('review_task_praise')->where(['task_id'=>$seller_task_id,'type'=>3])->count('id');
             $item['video'] =$video?$system['video_praise']:0;
         }
 
 
         $title = ['店铺名','任务编号','旺旺号','淘宝订单号','任务金额','付款金额','快递类型','快递单号','支付时间',
-            '套餐服务费','返款服务费','文字优质好评','图片优质好评','视频优质好评','6追评文字好评','追评图片好评','追评视频好评'];
+            '套餐服务费','返款服务费','文字优质好评','图片优质好评','视频优质好评','追评文字好评','追评图片好评','追评视频好评'];
         Phpexcel::exportExcel($title,$list,'发货任务导出表');
     }
 
